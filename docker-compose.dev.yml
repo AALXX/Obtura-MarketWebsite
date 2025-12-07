@@ -1,0 +1,22 @@
+version: "3.8"
+
+networks:
+  obtura_market_dev:
+    driver: bridge
+
+services:
+  frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    container_name: marketing_website
+    ports:
+      - "3000:3000"  
+    volumes:
+      - ./:/src/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - obtura_market_dev
+
