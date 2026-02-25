@@ -255,7 +255,14 @@ export default function ContactPageClient() {
                                                 <label htmlFor="preferredDate" className="mb-2 block text-sm font-medium text-gray-300">
                                                     Preferred Demo Date
                                                 </label>
-                                                <input type="date" id="preferredDate" name="preferredDate" value={formData.preferredDate} onChange={handleChange} className="h-12 w-full rounded-lg border border-white/10 bg-[#0a0a0a] px-4 text-white focus:border-transparent focus:ring-2 focus:ring-[#ff6b35] focus:outline-none" />
+                                                <input
+                                                    type="date"
+                                                    id="preferredDate"
+                                                    name="preferredDate"
+                                                    value={formData.preferredDate}
+                                                    onChange={handleChange}
+                                                    className="h-12 w-full rounded-lg border border-white/10 bg-[#0a0a0a] px-4 text-white focus:border-transparent focus:ring-2 focus:ring-[#ff6b35] focus:outline-none [&::-webkit-calendar-picker-indicator]:invert"
+                                                />
                                             </div>
                                         </>
                                     )}
@@ -302,11 +309,11 @@ export default function ContactPageClient() {
 
                                     <p className="text-center text-xs text-gray-500">
                                         By submitting, you agree to our{' '}
-                                        <a href="#" className="text-[#ff6b35] hover:underline">
+                                        <a href="/terms" className="text-[#ff6b35] hover:underline">
                                             Terms of Service
                                         </a>{' '}
                                         and{' '}
-                                        <a href="#" className="text-[#ff6b35] hover:underline">
+                                        <a href="/privacy" className="text-[#ff6b35] hover:underline">
                                             Privacy Policy
                                         </a>
                                     </p>
