@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, JSX } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, Zap, TrendingDown, Users, Clock, AlertTriangle, Rocket, BarChart3, GitBranch, Shield, UserCheck, Calculator, Lock, HardDrive, ClipboardCheck, Globe, Calendar, Terminal as TerminalIcon } from 'lucide-react'
+import { ArrowRight, Check, Zap, TrendingDown, Users, Clock, AlertTriangle, Rocket, BarChart3, GitBranch, Shield, UserCheck, Calculator, Lock, HardDrive, ClipboardCheck, Globe, Calendar, Terminal as TerminalIcon, Sparkles } from 'lucide-react'
 
 interface TerminalLine {
     text: string
@@ -324,6 +324,12 @@ export default function HomeClient() {
                                 title: 'Team Collaboration',
                                 description: 'Non-technical team members can interact with deployments safely.',
                                 features: ['PM-friendly interface', 'Designer preview sharing', 'Role-based access control']
+                            },
+                            {
+                                icon: <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />,
+                                title: 'AI Production Assistant',
+                                description: 'Your AI copilot helps you navigate production crises, analyze logs, and monitor systems in real-time.',
+                                features: ['Instant root cause analysis', 'Live log streaming & search', 'Proactive anomaly detection', 'Automated incident response']
                             }
                         ].map((feature, index) => (
                             <div key={feature.title} className="group rounded-xl border border-white/10 bg-[#1a1a1a] p-4 transition-all duration-300 hover:scale-105 hover:border-[#ff6b35]/30 sm:p-6">
