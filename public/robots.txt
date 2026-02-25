@@ -1,0 +1,36 @@
+# robots.txt for Obtura.com
+# Optimized for SEO crawlers
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://obtura.com/sitemap.xml
+
+# Crawl rate optimization
+Crawl-delay: 1
+
+# Block access to sensitive areas
+Disallow: /api/
+Disallow: /_next/
+
+# Allow images and assets
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Archive.org bot
+User-agent: ia_archiver
+Allow: /
+
+# Block unnecessary bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Crawl-delay: 10
