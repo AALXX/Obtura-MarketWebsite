@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://obtura.com/Logo2.png',
+        url: 'https://obtura.dev/Logo2.png',
         width: 1200,
         height: 630,
         alt: 'Obtura DevOps Blog',
@@ -34,10 +34,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'DevOps Blog | Expert Tips & Guides | Obtura',
     description: 'Expert DevOps articles for European SMEs. Learn about zero-DevOps deployment, GDPR compliance, and shipping code without a DevOps team.',
-    images: ['https://obtura.com/Logo2.png'],
+    images: ['https://obtura.dev/Logo2.png'],
   },
   alternates: {
-    canonical: 'https://obtura.com/blog',
+    canonical: 'https://obtura.dev/blog',
   },
 };
 
@@ -59,20 +59,20 @@ export default function BlogPage() {
     '@type': 'Blog',
     name: 'Obtura DevOps Blog',
     description: 'Expert DevOps articles for European SMEs. Learn about zero-DevOps deployment, GDPR compliance, and shipping code without a DevOps team.',
-    url: 'https://obtura.com/blog',
+    url: 'https://obtura.dev/blog',
     publisher: {
       '@type': 'Organization',
       name: 'Obtura',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://obtura.com/Logo2.png',
+        url: 'https://obtura.dev/Logo2.png',
       },
     },
     blogPost: posts.map((post) => ({
       '@type': 'BlogPosting',
       headline: post.title,
       description: post.excerpt,
-      url: `https://obtura.com/blog/${post.slug}`,
+      url: `https://obtura.dev/blog/${post.slug}`,
       datePublished: post.date,
       author: {
         '@type': 'Organization',

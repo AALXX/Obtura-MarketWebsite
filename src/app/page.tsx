@@ -11,7 +11,7 @@ export const metadata: Metadata = {
         type: 'website',
         images: [
             {
-                url: 'https://obtura.com/Logo2.png',
+                url: 'https://obtura.dev/Logo2.png',
                 width: 1200,
                 height: 630,
                 alt: 'Obtura - Zero DevOps Deployment Platform'
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'Obtura | Zero DevOps Deployment for European SMEs',
         description: 'Obtura empowers European SMEs to ship software 3x faster. GDPR-compliant with EU data residency.',
-        images: ['https://obtura.com/Logo2.png']
+        images: ['https://obtura.dev/Logo2.png']
     },
     alternates: {
-        canonical: 'https://obtura.com'
+        canonical: 'https://obtura.dev'
     }
 }
 

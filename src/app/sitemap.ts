@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/data/blog-posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://obtura.com';
+  const baseUrl = 'https://obtura.dev';
   
   const posts = getAllPosts();
   

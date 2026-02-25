@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             tags: post.tags,
             images: [
                 {
-                    url: post.image || 'https://obtura.com/Logo2.png',
+                    url: post.image || 'https://obtura.dev/Logo2.png',
                     width: 1200,
                     height: 630,
                     alt: post.title
@@ -45,10 +45,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             card: 'summary_large_image',
             title: post.title,
             description: post.excerpt,
-            images: [post.image || 'https://obtura.com/Logo2.png']
+            images: [post.image || 'https://obtura.dev/Logo2.png']
         },
         alternates: {
-            canonical: `https://obtura.com/blog/${post.slug}`
+            canonical: `https://obtura.dev/blog/${post.slug}`
         }
     }
 }
@@ -88,19 +88,19 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         '@type': 'BlogPosting',
         headline: post.title,
         description: post.excerpt,
-        image: post.image || 'https://obtura.com/Logo2.png',
+        image: post.image || 'https://obtura.dev/Logo2.png',
         datePublished: post.date,
         author: {
             '@type': 'Organization',
             name: post.author,
-            url: 'https://obtura.com'
+            url: 'https://obtura.dev'
         },
         publisher: {
             '@type': 'Organization',
             name: 'Obtura',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://obtura.com/Logo2.png'
+                url: 'https://obtura.dev/Logo2.png'
             }
         },
         keywords: post.tags.join(', '),

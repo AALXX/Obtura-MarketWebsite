@@ -1,0 +1,35 @@
+{
+    "name": "Obtura - Zero DevOps Deployment Platform",
+    "short_name": "Obtura",
+    "description": "Zero DevOps deployment platform for European SMEs. GDPR-compliant with EU data residency.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#0a0a0a",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "icons": [
+        {
+            "src": "/Logo2.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/Logo2.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable any"
+        }
+    ],
+    "categories": ["developer tools", "business", "productivity"],
+    "screenshots": [
+        {
+            "src": "/Logo2.png",
+            "sizes": "1200x630",
+            "type": "image/png",
+            "form_factor": "wide"
+        }
+    ]
+}

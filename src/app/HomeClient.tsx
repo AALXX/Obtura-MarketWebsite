@@ -507,7 +507,7 @@ export default function HomeClient() {
                         {[
                             {
                                 name: 'Starter',
-                                price: '€79',
+                                price: '€199',
                                 period: '/month',
                                 description: 'For small teams getting started',
                                 features: ['Up to 3 developers', '5 projects', 'Basic monitoring', 'Community support'],
@@ -515,7 +515,7 @@ export default function HomeClient() {
                             },
                             {
                                 name: 'Team',
-                                price: '€299',
+                                price: '€250',
                                 period: '/month',
                                 description: 'For growing development teams',
                                 features: ['Up to 10 developers', 'Unlimited projects', 'Full observability suite', 'Priority support', 'Custom domains'],
@@ -523,7 +523,7 @@ export default function HomeClient() {
                             },
                             {
                                 name: 'Business',
-                                price: '€799',
+                                price: '€650',
                                 period: '/month',
                                 description: 'For established SME teams',
                                 features: ['Up to 25 developers', 'Unlimited projects', 'Advanced security', 'SSO & SAML', 'Dedicated support', 'SLA guarantees'],
@@ -532,7 +532,7 @@ export default function HomeClient() {
                             },
                             {
                                 name: 'Enterprise',
-                                price: '€2199+',
+                                price: '€899+',
                                 period: '/month',
                                 description: 'For large organizations',
                                 features: ['Unlimited developers', 'Unlimited projects', 'On-premise option', 'Custom integrations', 'Dedicated account manager', '24/7 phone support'],
