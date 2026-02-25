@@ -93,7 +93,6 @@ export default function HomeClient() {
         return () => clearInterval(interval)
     }, [])
 
-
     const calculations: Record<string, { devopsSalary: number; setupTime: number; tools: number; devTime: number }> = {
         manual: {
             devopsSalary: developers >= 15 ? 65000 : developers >= 10 ? 32500 : 0,
@@ -285,7 +284,7 @@ export default function HomeClient() {
                 </div>
             </section>
 
-            <section className="bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
+            <section id="features" className="bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
                         <h2 className="mb-4 px-2 text-2xl font-bold sm:mb-6 sm:text-3xl md:text-4xl lg:text-5xl">
@@ -478,7 +477,7 @@ export default function HomeClient() {
 
             <section className="border-y border-white/5 bg-[#0f0f0f] py-12 sm:py-16">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
                         {[
                             { icon: <Shield className="h-5 w-5 sm:h-6 sm:w-6" />, title: 'GDPR Compliant', description: 'Built for European data protection requirements' },
                             { icon: <Lock className="h-5 w-5 sm:h-6 sm:w-6" />, title: 'SOC 2 Infrastructure', description: 'Enterprise-grade security certifications' },
@@ -494,7 +493,7 @@ export default function HomeClient() {
                 </div>
             </section>
 
-            <section className="bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
+            <section id="pricing" className="bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
                         <h2 className="mb-4 px-2 text-2xl font-bold sm:mb-6 sm:text-3xl md:text-4xl lg:text-5xl">
