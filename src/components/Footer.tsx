@@ -106,6 +106,38 @@ const Footer = () => {
                                     GDPR
                                 </Link>
                             </li>
+                            <li>
+                                <Link href="/cookies" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                    Cookie Policy
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Resources Column */}
+                    <div>
+                        <h3 className="mb-4 text-sm font-semibold text-white">Resources</h3>
+                        <ul className="space-y-3">
+                            <li>
+                                <Link href="/docs" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                    Documentation
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/security" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                    Security
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/open-source" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                    Open Source
+                                </Link>
+                            </li>
+                            <li>
+                                <a href="https://github.com/obtura" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                    GitHub
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
