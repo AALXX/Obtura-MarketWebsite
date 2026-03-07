@@ -2,26 +2,42 @@ import ContactPageClient from './ContactPageClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Contact Us | Book a Demo or Join Waitlist | Obtura',
-    description: "Book a personalized demo of Obtura's zero-DevOps platform or join our waitlist. See how European SMEs are saving €71K+ per year on DevOps costs. GDPR compliant with EU data residency.",
-    keywords: ['contact obtura', 'book demo', 'devops demo', 'zero devops demo', 'obtura waitlist', 'european sme devops', 'GDPR demo', 'devops consultation', 'cloud deployment demo', 'contact roman devops', 'bucharest tech company'],
+    title: 'Contact | Deploy Any Tech Stack in Europe | Obtura',
+    description: "Book a demo of Obtura's autonomous deployment platform. Deploy Node.js, Python, Go, PHP, React, Django & 15+ frameworks. 85%+ coverage. GDPR-compliant German hosting. No DevOps needed.",
+    keywords: [
+        'contact obtura',
+        'book demo',
+        'autonomous deployment demo',
+        'deploy nextjs demo',
+        'deploy python app demo',
+        'gdpr hosting demo germany',
+        'zero config deployment demo',
+        'deploy any tech stack demo',
+        'obtura waitlist',
+        'european deployment platform',
+        'german hosting provider',
+        'eu data residency demo',
+        'no devops deployment demo',
+        'autonomous platform demo',
+        'bucharest tech company'
+    ],
     openGraph: {
-        title: 'Contact Obtura | Book a Demo or Join Waitlist',
-        description: 'Book a personalized demo of our zero-DevOps platform. See how European SMEs save €71K+ per year.',
+        title: 'Contact Obtura | Deploy Any Tech Stack in Europe',
+        description: "Book a demo of Obtura's autonomous deployment platform. 85%+ framework coverage with GDPR-compliant German hosting. No DevOps needed.",
         type: 'website',
         images: [
             {
                 url: 'https://obtura.dev/Logo2.png',
                 width: 1200,
                 height: 630,
-                alt: 'Contact Obtura - Book a Demo'
+                alt: 'Contact Obtura - Deploy Any Tech Stack'
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Contact Obtura | Book a Demo or Join Waitlist',
-        description: 'Book a personalized demo of our zero-DevOps platform.',
+        title: 'Contact Obtura | Deploy Any Tech Stack in Europe',
+        description: "Book a demo of Obtura's autonomous deployment platform. 85%+ framework coverage.",
         images: ['https://obtura.dev/Logo2.png']
     },
     alternates: {

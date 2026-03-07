@@ -1,5 +1,8 @@
 'use client'
-import { useState, useEffect, JSX } from 'react'
+// Full homepage interactive content in the correct visual order:
+// Hero (animated) → Terminal → Problem → Features → Calculator → Trust badges → Pricing → CTA
+
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Check, Zap, TrendingDown, Users, Clock, AlertTriangle, Rocket, BarChart3, GitBranch, Shield, UserCheck, Calculator, Lock, HardDrive, ClipboardCheck, Globe, Calendar, Terminal as TerminalIcon, Sparkles } from 'lucide-react'
 
@@ -9,81 +12,39 @@ interface TerminalLine {
     type: 'command' | 'info' | 'success' | 'warning'
 }
 
+const ALL_TERMINAL_LINES: TerminalLine[] = [
+    { prefix: '>', text: 'obtura build', type: 'command' },
+    { prefix: '◆', text: 'Obtura CLI v1.0.0', type: 'info' },
+    { prefix: '✔', text: 'Validating configuration', type: 'success' },
+    { prefix: '✔', text: 'Compiling source modules', type: 'success' },
+    { prefix: ' ', text: 'Building optimized production bundles...', type: 'info' },
+    { prefix: ' ', text: '• [obtura] optimized chunk: dist/parser.js', type: 'info' },
+    { prefix: ' ', text: '• [obtura] optimized chunk: dist/ast.js', type: 'info' },
+    { prefix: ' ', text: '• [obtura] optimized chunk: dist/compiler.js', type: 'info' },
+    { prefix: ' ', text: '• [obtura] optimized chunk: dist/renderer.js', type: 'info' },
+    { prefix: '✔', text: 'Build completed successfully.', type: 'success' },
+    { prefix: '✨', text: 'Done in: 5m 03s', type: 'success' }
+]
+
 export default function HomeClient() {
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isVisible, setIsVisible] = useState<boolean>(false)
     const [developers, setDevelopers] = useState<number>(10)
     const [projects, setProjects] = useState<number>(5)
     const [setup, setSetup] = useState<string>('manual')
-    const [isVisible, setIsVisible] = useState<boolean>(false)
     const [terminalLines, setTerminalLines] = useState<TerminalLine[]>([])
+    const terminalBodyRef = useRef<HTMLDivElement>(null)
 
+    // Hero fade-in on mount
     useEffect(() => {
         setIsVisible(true)
     }, [])
 
+    // Terminal animation — fixed height body, auto-scroll to bottom
     useEffect(() => {
-        const lines: TerminalLine[] = [
-            {
-                prefix: '>',
-                text: 'obtura build',
-                type: 'command'
-            },
-            {
-                prefix: '◆',
-                text: 'Obtura CLI v1.0.0',
-                type: 'info'
-            },
-            {
-                prefix: '✔',
-                text: 'Validating configuration',
-                type: 'success'
-            },
-            {
-                prefix: '✔',
-                text: 'Compiling source modules',
-                type: 'success'
-            },
-            {
-                prefix: ' ',
-                text: 'Building optimized production bundles...',
-                type: 'info'
-            },
-            {
-                prefix: ' ',
-                text: '• [obtura] optimized chunk: dist/parser.js',
-                type: 'info'
-            },
-            {
-                prefix: ' ',
-                text: '• [obtura] optimized chunk: dist/ast.js',
-                type: 'info'
-            },
-            {
-                prefix: ' ',
-                text: '• [obtura] optimized chunk: dist/compiler.js',
-                type: 'info'
-            },
-            {
-                prefix: ' ',
-                text: '• [obtura] optimized chunk: dist/renderer.js',
-                type: 'info'
-            },
-            {
-                prefix: '✔',
-                text: 'Build completed successfully.',
-                type: 'success'
-            },
-            {
-                prefix: '✨',
-                text: 'Done in: 5m 03s',
-                type: 'success'
-            }
-        ]
-
         let currentIndex = 0
         const interval = setInterval(() => {
-            if (currentIndex < lines.length) {
-                setTerminalLines(prev => [...prev, lines[currentIndex]])
+            if (currentIndex < ALL_TERMINAL_LINES.length) {
+                setTerminalLines(prev => [...prev, ALL_TERMINAL_LINES[currentIndex]])
                 currentIndex++
             } else {
                 clearInterval(interval)
@@ -92,6 +53,13 @@ export default function HomeClient() {
 
         return () => clearInterval(interval)
     }, [])
+
+    // Scroll terminal to bottom whenever a new line appears
+    useEffect(() => {
+        if (terminalBodyRef.current) {
+            terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight
+        }
+    }, [terminalLines])
 
     const calculations: Record<string, { devopsSalary: number; setupTime: number; tools: number; devTime: number }> = {
         manual: {
@@ -122,16 +90,14 @@ export default function HomeClient() {
 
     const currentSetup = calculations[setup]
     const totalCost = Object.values(currentSetup).reduce((a, b) => a + b, 0)
-
     const obturaCost = developers <= 3 ? 948 : developers <= 10 ? 3588 : developers <= 25 ? 9588 : 26388
     const savings = totalCost - obturaCost
     const savingsPercent = totalCost > 0 ? Math.round((savings / totalCost) * 100) : 0
 
-    const features = ['5-minute deploy', 'Built-in observability', 'GDPR compliant', '€71K/year savings']
-
     return (
-        <div className="min-h-screen overflow-x-hidden bg-[#0a0a0a] font-sans text-white">
-            <section className="relative mt-12 overflow-hidden py-12 sm:py-20 lg:mt-0 lg:py-32">
+        <div className="overflow-x-hidden bg-[#0a0a0a] font-sans text-white">
+            {/* ── 1. Hero — fade-in animation on mount ── */}
+            <section className="relative mt-12 overflow-hidden bg-[#0a0a0a] py-12 sm:py-20 lg:mt-0 lg:py-32">
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#ff6b35]/5 to-transparent" />
                 <div className="pointer-events-none absolute top-1/2 left-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full bg-[#ff6b35]/10 blur-[100px] sm:h-[800px] sm:w-[800px] sm:blur-[150px]" />
 
@@ -149,7 +115,7 @@ export default function HomeClient() {
                         <p className="mx-auto mb-6 max-w-3xl px-4 text-base leading-relaxed text-gray-400 sm:mb-8 sm:text-lg lg:text-xl">Obtura eliminates the DevOps bottleneck for European SME development teams. Zero-config deployment, built-in monitoring, predictable pricing.</p>
 
                         <div className="mb-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 text-xs text-gray-400 sm:mb-10 sm:gap-6 sm:text-sm">
-                            {features.map((feature, i) => (
+                            {['5-minute deploy', 'Built-in observability', 'GDPR compliant', '€71K/year savings'].map((feature, i) => (
                                 <div key={feature} className="flex items-center gap-2 transition-all duration-300 hover:scale-110" style={{ animationDelay: `${i * 100}ms` }}>
                                     <Check className="h-3 w-3 shrink-0 text-[#ff6b35] sm:h-4 sm:w-4" />
                                     <span>{feature}</span>
@@ -159,9 +125,9 @@ export default function HomeClient() {
 
                         <div className="flex flex-col items-center gap-3">
                             <Link href="/contact">
-                                <button type="button" disabled={isLoading} className="flex h-12 items-center justify-center gap-2 rounded-lg bg-[#ff6b35] px-8 font-semibold text-black shadow-lg shadow-[#ff6b35]/20 transition-all hover:scale-105 hover:bg-[#ff7b45] disabled:cursor-not-allowed disabled:opacity-50">
-                                    {isLoading ? '...' : 'Join Waitlist'}
-                                    {!isLoading && <ArrowRight className="h-4 w-4" />}
+                                <button type="button" className="flex h-12 items-center justify-center gap-2 rounded-lg bg-[#ff6b35] px-8 font-semibold text-black shadow-lg shadow-[#ff6b35]/20 transition-all hover:scale-105 hover:bg-[#ff7b45]">
+                                    Join Waitlist
+                                    <ArrowRight className="h-4 w-4" />
                                 </button>
                             </Link>
                         </div>
@@ -169,9 +135,11 @@ export default function HomeClient() {
                 </div>
             </section>
 
+            {/* ── 2. Terminal Demo — fixed height, scrolls inside, zero layout shift ── */}
             <section className="relative container mx-auto px-4 pb-12 sm:px-6 sm:pb-20 lg:px-8">
                 <div className="mx-auto max-w-4xl">
                     <div className="overflow-hidden rounded-lg border border-[#333] bg-[#1e1e1e] shadow-2xl shadow-black/50 transition-all duration-500 hover:shadow-[#ff6b35]/5">
+                        {/* Title bar */}
                         <div className="flex items-center gap-2 border-b border-[#333] bg-[#252526] px-4 py-2">
                             <div className="flex gap-2">
                                 <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
@@ -184,17 +152,15 @@ export default function HomeClient() {
                             </div>
                         </div>
 
-                        <div className="min-h-auto space-y-1.5 overflow-x-auto p-4 font-mono text-xs text-[#d4d4d4] sm:min-h-[300px] sm:p-6 sm:text-sm">
+                        {/* Fixed height — content scrolls inside, page never shifts */}
+                        <div ref={terminalBodyRef} className="h-[300px] space-y-1.5 overflow-y-auto p-4 font-mono text-xs text-[#d4d4d4] sm:h-[340px] sm:p-6 sm:text-sm">
                             {terminalLines.map((line, index) => {
                                 if (!line) return null
-
                                 const isCommand = line.type === 'command'
                                 const isSuccess = line.type === 'success'
-
                                 return (
                                     <div key={index} className="flex animate-[fadeIn_0.1s_ease-in_forwards] items-start opacity-0">
                                         <span className={`mr-2 font-bold ${isCommand ? 'text-[#ff6b35]' : isSuccess ? 'text-green-500' : 'text-blue-400'}`}>{line.prefix || '>'}</span>
-
                                         <span className={`${isCommand ? 'font-semibold text-white' : isSuccess ? 'text-green-400' : 'text-[#d4d4d4]'}`}>{line.text}</span>
                                     </div>
                                 )
@@ -202,7 +168,7 @@ export default function HomeClient() {
                             {terminalLines.length > 0 && (
                                 <div className="mt-2 flex animate-[fadeIn_0.1s_ease-in_forwards] items-center">
                                     <span className="mr-2 font-bold text-[#ff6b35]">$</span>
-                                    <div className="h-4 w-2 animate-pulse bg-gray-500"></div>
+                                    <div className="h-4 w-2 animate-pulse bg-gray-500" />
                                 </div>
                             )}
                         </div>
@@ -210,6 +176,7 @@ export default function HomeClient() {
                 </div>
             </section>
 
+            {/* ── 2. Problem section ── */}
             <section className="bg-[#141414] py-12 sm:py-20 lg:py-32">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
@@ -284,6 +251,7 @@ export default function HomeClient() {
                 </div>
             </section>
 
+            {/* ── 3. Features ── */}
             <section id="features" className="bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
@@ -350,6 +318,7 @@ export default function HomeClient() {
                 </div>
             </section>
 
+            {/* ── 4. Interactive Cost Calculator ── */}
             <section className="bg-[#141414] py-12 sm:py-20 lg:py-32">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-12">
@@ -364,7 +333,6 @@ export default function HomeClient() {
                     </div>
 
                     <div className="mx-auto grid max-w-5xl gap-6 sm:gap-8 lg:grid-cols-2">
-                        {/* Input Panel */}
                         <div className="rounded-xl border border-white/10 bg-[#1a1a1a] p-6 transition-all duration-500 hover:border-[#ff6b35]/30 sm:p-8">
                             <h3 className="mb-4 text-base font-semibold text-white sm:mb-6 sm:text-lg">Your Team Details</h3>
 
@@ -380,6 +348,7 @@ export default function HomeClient() {
                                     value={developers}
                                     onChange={e => setDevelopers(Number(e.target.value))}
                                     className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-white/10 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ff6b35] [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:hover:scale-125"
+                                    aria-label="Number of developers"
                                 />
                             </div>
 
@@ -395,6 +364,7 @@ export default function HomeClient() {
                                     value={projects}
                                     onChange={e => setProjects(Number(e.target.value))}
                                     className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-white/10 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ff6b35] [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:hover:scale-125"
+                                    aria-label="Number of active projects"
                                 />
                             </div>
 
@@ -481,6 +451,7 @@ export default function HomeClient() {
                 </div>
             </section>
 
+            {/* ── 5. Trust badges ── */}
             <section className="border-y border-white/5 bg-[#0f0f0f] py-12 sm:py-16">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
@@ -499,6 +470,7 @@ export default function HomeClient() {
                 </div>
             </section>
 
+            {/* ── 6. Pricing ── */}
             <section id="pricing" className="bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
@@ -569,6 +541,7 @@ export default function HomeClient() {
                 </div>
             </section>
 
+            {/* ── 7. Final CTA ── */}
             <section className="relative overflow-hidden bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#ff6b35]/5 to-transparent" />
                 <div className="pointer-events-none absolute top-1/2 left-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff6b35]/10 blur-[100px] sm:h-[600px] sm:w-[600px] sm:blur-[120px]" />

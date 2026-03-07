@@ -30,11 +30,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             description: post.excerpt,
             type: 'article',
             publishedTime: post.date,
+            modifiedTime: post.dateModified || post.date,
             authors: [post.author],
             tags: post.tags,
             images: [
                 {
-                    url: post.image || 'https://obtura.dev/Logo2.png',
+                    url: post.image ? `https://obtura.dev${post.image}` : 'https://obtura.dev/og-image.png',
                     width: 1200,
                     height: 630,
                     alt: post.title
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             card: 'summary_large_image',
             title: post.title,
             description: post.excerpt,
-            images: [post.image || 'https://obtura.dev/Logo2.png']
+            images: [post.image ? `https://obtura.dev${post.image}` : 'https://obtura.dev/og-image.png']
         },
         alternates: {
             canonical: `https://obtura.dev/blog/${post.slug}`
@@ -88,12 +89,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         '@type': 'BlogPosting',
         headline: post.title,
         description: post.excerpt,
-        image: post.image || 'https://obtura.dev/Logo2.png',
+        image: post.image || 'https://obtura.dev/og-image.png',
         datePublished: post.date,
+        dateModified: post.dateModified || post.date,
         author: {
-            '@type': 'Organization',
+            '@type': 'Person',
             name: post.author,
-            url: 'https://obtura.dev'
+            url: 'https://obtura.dev/about'
         },
         publisher: {
             '@type': 'Organization',
@@ -104,7 +106,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             }
         },
         keywords: post.tags.join(', '),
-        articleSection: post.category
+        articleSection: post.category,
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `https://obtura.dev/blog/${post.slug}`
+        }
     }
 
     return (

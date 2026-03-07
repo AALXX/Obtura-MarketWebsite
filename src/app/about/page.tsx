@@ -2,26 +2,41 @@ import type { Metadata } from 'next'
 import FAQSchema from '@/components/FAQSchema'
 
 export const metadata: Metadata = {
-    title: 'About Us | Zero DevOps Platform for European SMEs',
-    description: "Meet the team behind Obtura. We're building the DevOps platform European SMEs deserve. GDPR-compliant hosting with EU data residency. Founded in Bucharest, Romania.",
-    keywords: ['about obtura', 'obtura team', 'devops platform company', 'european sme software', 'GDPR company', 'bucharest tech startup', 'roman devops', 'eu cloud company', 'zero devops team', 'software deployment company', 'eu data residency company'],
+    title: 'About Us | Autonomous Deployment Platform Team | Obtura',
+    description: "Meet the team behind Obtura. We're building the autonomous deployment platform that lets European SMEs deploy any tech stack with zero DevOps. 85%+ framework coverage with GDPR-compliant EU hosting in Germany.",
+    keywords: [
+        'about obtura',
+        'obtura team',
+        'autonomous deployment company',
+        'zero devops platform',
+        'european sme deployment',
+        'GDPR company germany',
+        'bucharest tech startup',
+        'eu deployment company',
+        'deploy any tech stack',
+        'software deployment company europe',
+        'eu data residency company',
+        'german hosting provider',
+        'tech stack deployment experts',
+        'european devops company'
+    ],
     openGraph: {
-        title: 'About Obtura | Zero DevOps Platform Team',
-        description: 'Meet the team building the DevOps platform European SMEs deserve. GDPR-compliant with EU data residency.',
+        title: 'About Obtura | Autonomous Deployment Platform Team',
+        description: 'Meet the team building the autonomous deployment platform. 85%+ tech stack coverage with GDPR-compliant EU hosting.',
         type: 'website',
         images: [
             {
                 url: 'https://obtura.dev/Logo2.png',
                 width: 1200,
                 height: 630,
-                alt: 'Obtura Team - Zero DevOps Platform'
+                alt: 'Obtura Team - Autonomous Deployment Platform'
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'About Obtura | Zero DevOps Platform Team',
-        description: 'Meet the team building the DevOps platform European SMEs deserve.',
+        title: 'About Obtura | Autonomous Deployment Platform Team',
+        description: 'Meet the team building the autonomous deployment platform with 85%+ tech stack coverage.',
         images: ['https://obtura.dev/Logo2.png']
     },
     alternates: {
@@ -44,7 +59,7 @@ const faqData = [
     },
     {
         question: 'Who are the founders of Obtura?',
-        answer: 'Obtura was founded by Alexandru-Nicolae Șerban (Founder & CEO) and Rareș Ștefan Miu (Co-Founder & Head of Marketing) in 2026.'
+        answer: 'Obtura was founded by Alexandru-Nicolae Șerban (Founder & CEO) in 2026.'
     }
 ]
 
@@ -65,11 +80,6 @@ export default function About() {
                     name: 'Alexandru-Nicolae Șerban',
                     jobTitle: 'Founder & CEO'
                 },
-                {
-                    '@type': 'Person',
-                    name: 'Rareș Ștefan Miu',
-                    jobTitle: 'Co-Founder & Head of Marketing'
-                }
             ],
             address: {
                 '@type': 'PostalAddress',
@@ -114,21 +124,7 @@ export default function About() {
                                 </p>
                             </article>
 
-                            <article className="rounded-xl border border-white/10 bg-[#1a1a1a] p-8">
-                                <h2 className="mb-6 text-2xl font-semibold text-white">The Team</h2>
-                                <div className="grid gap-6 md:grid-cols-2">
-                                    <section>
-                                        <h3 className="mb-1 text-lg font-semibold text-white">Alexandru-Nicolae Șerban</h3>
-                                        <p className="mb-2 text-sm text-[#ff6b35]">Founder & CEO</p>
-                                        <p className="text-sm text-gray-400">Full-stack developer with a vision to democratize DevOps for European SMEs. Passionate about building tools that help developers ship faster.</p>
-                                    </section>
-                                    <section>
-                                        <h3 className="mb-1 text-lg font-semibold text-white">Rareș Ștefan Miu</h3>
-                                        <p className="mb-2 text-sm text-[#ff6b35]">Co-Founder & Head of Marketing</p>
-                                        <p className="text-sm text-gray-400">Marketing strategist focused on growth and building the Obtura community. Expert in B2B SaaS marketing and European market expansion.</p>
-                                    </section>
-                                </div>
-                            </article>
+       
 
                             <article className="rounded-xl border border-white/10 bg-[#1a1a1a] p-8">
                                 <h2 className="mb-4 text-2xl font-semibold text-white">EU-First Philosophy</h2>

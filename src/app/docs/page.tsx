@@ -2,26 +2,41 @@ import type { Metadata } from 'next'
 import DocsClient from './DocsClient'
 
 export const metadata: Metadata = {
-    title: 'Documentation | Obtura API & Guides | DevOps Platform',
-    description: "Complete documentation for Obtura's zero-DevOps platform. API references, deployment guides, and tutorials for European SMEs. GDPR-compliant with EU data residency.",
-    keywords: ['obtura documentation', 'devops api', 'deployment guides', 'zero devops docs', 'cloud deployment api', 'european sme docs', 'GDPR api documentation', 'devops tutorials', 'obtura guides'],
+    title: 'Documentation | Deploy Any Framework | Obtura',
+    description: 'Complete docs for deploying Next.js, Django, React, Vue, Go, Python & 15+ frameworks autonomously. GDPR-compliant German hosting. 85%+ app coverage. Zero config required.',
+    keywords: [
+        'obtura documentation',
+        'deploy nextjs guide',
+        'deploy django guide',
+        'deploy react app docs',
+        'deploy python api guide',
+        'deploy golang app docs',
+        'autonomous deployment docs',
+        'zero config deployment guide',
+        'gdpr hosting documentation',
+        'european deployment docs',
+        'framework deployment guides',
+        'app deployment tutorials',
+        'german hosting setup',
+        'eu data residency docs'
+    ],
     openGraph: {
-        title: 'Obtura Documentation | API & DevOps Guides',
-        description: "Complete documentation for Obtura's zero-DevOps platform. API references, guides, and tutorials.",
+        title: 'Obtura Documentation | Deploy Any Framework',
+        description: 'Complete docs for deploying 15+ frameworks autonomously. GDPR-compliant German hosting. 85%+ coverage.',
         type: 'website',
         images: [
             {
                 url: 'https://obtura.dev/Logo2.png',
                 width: 1200,
                 height: 630,
-                alt: 'Obtura Documentation'
+                alt: 'Obtura Documentation - Deploy Any Framework'
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Obtura Documentation | API & DevOps Guides',
-        description: "Complete documentation for Obtura's zero-DevOps platform.",
+        title: 'Obtura Documentation | Deploy Any Framework',
+        description: 'Complete docs for deploying 15+ frameworks autonomously with GDPR-compliant German hosting.',
         images: ['https://obtura.dev/Logo2.png']
     },
     alternates: {

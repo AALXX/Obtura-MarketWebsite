@@ -88,7 +88,7 @@ export default function ContactPageClient() {
 
                     <div className={`mx-auto max-w-4xl text-center transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                         <h1 className="mb-4 px-2 text-4xl leading-tight font-bold sm:mb-6 sm:text-5xl lg:text-6xl">
-                            Let\'s <span className="bg-linear-to-r from-[#ff6b35] to-[#ff8b55] bg-clip-text text-transparent">eliminate</span> your DevOps bottleneck
+                            Let's <span className="bg-linear-to-r from-[#ff6b35] to-[#ff8b55] bg-clip-text text-transparent">eliminate</span> your DevOps bottleneck
                         </h1>
 
                         <p className="mx-auto mb-8 max-w-2xl px-4 text-base leading-relaxed text-gray-400 sm:mb-12 sm:text-lg">

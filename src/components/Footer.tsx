@@ -129,11 +129,6 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/open-source" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
-                                    Open Source
-                                </Link>
-                            </li>
-                            <li>
                                 <a href="https://github.com/obtura" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
                                     GitHub
                                 </a>

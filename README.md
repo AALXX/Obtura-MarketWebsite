@@ -33,6 +33,3 @@ The design is intentionally clean, modern, and conversion-focused.
 ## 📫 Contact
 **Alexandru-Nicolae Șerban — Founder & CEO**  
 📧 alexserbwork@gmail.com  
-
-**Rareș Ștefan Miu — Head of Marketing & CFO**  
-📧 raresmiu27@gmail.com  

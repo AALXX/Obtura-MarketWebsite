@@ -17,10 +17,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: {
-        default: 'Obtura | #1 DevOps Automation & Autonomous Deployment Platform for European SMEs',
-        template: '%s | Obtura - DevOps Automation Platform'
+        default: 'Obtura | Autonomous Deployment Platform - Deploy Any Tech Stack in Europe',
+        template: '%s | Obtura'
     },
-    description: 'Obtura is the leading autonomous deployment platform that eliminates DevOps complexity for European SMEs. Ship software 3x faster with AI-powered deployments, zero configuration CI/CD pipelines, and GDPR-compliant hosting with EU data residency. Save €71K+ annually on DevOps costs.',
+    description: 'Deploy any tech stack autonomously with Obtura. Zero-config deployment for Node.js, Python, Go, Rust, PHP & 15+ frameworks. 85%+ app coverage. GDPR-compliant EU hosting in Germany. No DevOps team required. Ship code in minutes.',
     keywords: [
         'Obtura',
         'devops',
@@ -67,7 +67,54 @@ export const metadata: Metadata = {
         'GDPR devops',
         'GDPR cloud',
         'PaaS europe',
-        'cloud hosting'
+        'cloud hosting',
+        // Long-tail keywords for tech stack deployment
+        'deploy nextjs app europe',
+        'deploy react app germany',
+        'deploy nodejs app eu',
+        'deploy python app europe',
+        'deploy django app germany',
+        'deploy flask app eu',
+        'deploy fastapi app europe',
+        'deploy golang app germany',
+        'deploy rust app eu',
+        'deploy php app europe',
+        'deploy laravel app germany',
+        'deploy ruby app eu',
+        'deploy rails app europe',
+        'deploy vue app germany',
+        'deploy svelte app eu',
+        'deploy angular app europe',
+        'deploy astro app germany',
+        'deploy remix app eu',
+        'deploy express app europe',
+        'deploy nestjs app germany',
+        'autonomous deployment platform',
+        'auto deploy any tech stack',
+        'deploy without devops team',
+        'zero config deployment europe',
+        'git push deploy europe',
+        // GDPR and hosting specific
+        'GDPR compliant hosting germany',
+        'GDPR compliant hosting europe',
+        'EU data residency hosting',
+        'GDPR cloud hosting germany',
+        'EU hosting for startups',
+        'GDPR compliant paas',
+        'european cloud hosting',
+        'EU based hosting',
+        'GDPR safe hosting',
+        'data residency germany',
+        'data residency europe',
+        // Tech stack coverage
+        'nodejs deployment europe',
+        'python deployment germany',
+        'go deployment eu',
+        'rust deployment europe',
+        'php deployment germany',
+        'java deployment eu',
+        'typescript deployment europe',
+        'javascript deployment germany'
     ],
     authors: [{ name: 'Obtura' }],
     creator: 'Obtura',
@@ -86,14 +133,13 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        alternateLocale: ['en_GB', 'de_DE', 'fr_FR'],
         url: 'https://obtura.dev',
         siteName: 'Obtura',
         title: 'Obtura | Zero DevOps Deployment Platform for European SMEs',
         description: 'Obtura empowers European SMEs to ship software 3x faster through an all-in-one zero-DevOps platform. GDPR-compliant with EU data residency.',
         images: [
             {
-                url: 'https://obtura.dev/Logo2.png',
+                url: 'https://obtura.dev/og-image.png',
                 width: 1200,
                 height: 630,
                 alt: 'Obtura - Zero DevOps Deployment Platform for European SMEs'
@@ -104,16 +150,14 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'Obtura | Zero DevOps Deployment Platform for European SMEs',
         description: 'Obtura empowers European SMEs to ship software 3x faster through an all-in-one zero-DevOps platform. GDPR-compliant with EU data residency.',
-        images: ['https://obtura.dev/Logo2.png'],
+        images: ['https://obtura.dev/og-image.png'],
         creator: '@obtura',
         site: '@obtura'
     },
     alternates: {
         canonical: 'https://obtura.dev',
         languages: {
-            en: 'https://obtura.dev',
-            'en-US': 'https://obtura.dev',
-            'en-GB': 'https://obtura.dev'
+            en: 'https://obtura.dev'
         }
     },
     verification: {
@@ -150,18 +194,13 @@ export default function RootLayout({
         alternateName: 'Obtura Platform',
         url: 'https://obtura.dev',
         logo: 'https://obtura.dev/Logo2.png',
-        description: 'Obtura empowers European SMEs to ship software 3x faster through an all-in-one zero-DevOps platform combining code editing, Git workflows, one-click deployment, and GDPR-compliant hosting with EU data residency.',
+        description: 'Obtura empowers European SMEs to deploy any tech stack autonomously with zero DevOps overhead. Supports 15+ frameworks including Node.js, Python, Go, Rust, PHP with 85%+ app coverage. GDPR-compliant with EU data residency in Germany.',
         foundingDate: '2026',
         founders: [
             {
                 '@type': 'Person',
                 name: 'Alexandru-Nicolae Șerban',
                 jobTitle: 'Founder & CEO'
-            },
-            {
-                '@type': 'Person',
-                name: 'Rareș Ștefan Miu',
-                jobTitle: 'Co-Founder & Head of Marketing'
             }
         ],
         address: {
@@ -194,7 +233,7 @@ export default function RootLayout({
             target: 'https://obtura.dev/blog?q={search_term_string}',
             'query-input': 'required name=search_term_string'
         },
-        description: 'Zero DevOps deployment platform for European SMEs',
+        description: 'Autonomous deployment platform for European SMEs. Deploy 15+ tech stacks with zero configuration. GDPR-compliant EU hosting in Germany.',
         inLanguage: 'en'
     }
 

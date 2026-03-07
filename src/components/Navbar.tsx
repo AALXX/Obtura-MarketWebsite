@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const navLinks = [
+    { name: 'Tech Stacks', href: '/tech-stacks' },
     { name: 'About', href: '/about' },
     { name: 'Blog', href: '/blog' },
     { name: 'Docs', href: '/docs' }
@@ -20,7 +21,7 @@ export function NavBar() {
             <nav className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     <div className="flex shrink-0 items-center">
-                        <a href="/" className="flex items-center ">
+                        <a href="/" className="flex items-center">
                             <Image src="/Logo_2.png" alt="Obtura Logo" width={100} height={100} className="h-16 w-16" />
                             <span className="text-xl font-bold text-white">Obtura</span>
                         </a>
