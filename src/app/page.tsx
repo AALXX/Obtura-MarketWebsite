@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         images: [
             {
                 url: 'https://obtura.dev/og-image.png',
-                width: 1200,
+                width: 1216,
                 height: 630,
                 alt: 'Obtura - Autonomous Deployment Platform for Any Tech Stack in Europe'
             }
