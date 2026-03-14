@@ -3,15 +3,22 @@
 import { useState } from 'react'
 import { ArrowRight, Check, Calendar, Mail, Users, Globe, Shield, Clock } from 'lucide-react'
 
-const inputClass = 'h-12 w-full border px-4 text-sm transition-colors focus:outline-none focus:ring-1 focus:ring-[#ff6b35]'
+const inputClass = 'h-12 w-full border px-4 text-sm transition-colors focus:outline-none focus:ring-1 focus:ring-brand'
 const inputStyle = { borderColor: 'var(--border-default)', background: 'var(--bg-base)', color: 'var(--fg-primary)' }
 const labelStyle = { color: 'var(--fg-secondary)' }
 
 export default function ContactPageClient() {
     const [formType, setFormType] = useState<'demo' | 'waitlist'>('demo')
     const [formData, setFormData] = useState({
-        name: '', email: '', company: '', teamSize: '',
-        phone: '', message: '', role: '', preferredDate: '', referral: ''
+        name: '',
+        email: '',
+        company: '',
+        teamSize: '',
+        phone: '',
+        message: '',
+        role: '',
+        preferredDate: '',
+        referral: ''
     })
     const [isLoading, setIsLoading] = useState(false)
 
@@ -21,16 +28,21 @@ export default function ContactPageClient() {
             return
         }
         setIsLoading(true)
-        await fetch('/api/send-email', {
-            method: 'POST',
-            body: JSON.stringify({ formType, formData })
-        })
-        setIsLoading(false)
-        const message = formType === 'demo'
-            ? "Thanks! We'll be in touch within 72 hours to schedule your demo."
-            : "You're on the list! We'll notify you when Obtura launches."
-        alert(message)
-        setFormData({ name: '', email: '', company: '', teamSize: '', phone: '', message: '', role: '', preferredDate: '', referral: '' })
+        try {
+            const res = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ formType, formData })
+            })
+            if (!res.ok) throw new Error(`Server error: ${res.status}`)
+            const message = formType === 'demo' ? "Thanks! We'll be in touch within 72 hours to schedule your demo." : "You're on the list! We'll notify you when Obtura launches."
+            alert(message)
+            setFormData({ name: '', email: '', company: '', teamSize: '', phone: '', message: '', role: '', preferredDate: '', referral: '' })
+        } catch {
+            alert('Something went wrong. Please try again or email us at alexserbwork@gmail.com')
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -39,52 +51,42 @@ export default function ContactPageClient() {
 
     return (
         <div className="min-h-screen pt-16" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
-
             {/* Header */}
             <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12" style={{ background: 'var(--bg-base)' }}>
                 <div className="mx-auto max-w-6xl">
-
                     <nav aria-label="Breadcrumb" className="mb-10">
                         <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
-                            <li><a href="/" className="transition-colors hover:text-[#ff6b35]">Home</a></li>
+                            <li>
+                                <a href="/" className="hover:text-brand transition-colors">
+                                    Home
+                                </a>
+                            </li>
                             <li>/</li>
                             <li>Contact</li>
                         </ol>
                     </nav>
 
                     <div className="mb-12">
-                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Get in touch</p>
-                        <h1 className="mb-6 text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl" style={{ fontFamily: 'var(--font-display)' }}>
-                            Let&apos;s eliminate your<br />
+                        <p className="mb-5 font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                            — Get in touch
+                        </p>
+                        <h1 className="mb-6 text-5xl leading-none font-black tracking-tight sm:text-6xl lg:text-7xl" style={{ fontFamily: 'var(--font-display)' }}>
+                            Let&apos;s eliminate your
+                            <br />
                             <span style={{ color: 'var(--brand)' }}>DevOps bottleneck.</span>
                         </h1>
                         <p className="max-w-xl text-lg leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
-                            Book a personalized demo or join our waitlist. See how European SMEs are saving{' '}
-                            <strong style={{ color: 'var(--fg-primary)' }}>€71K+ per year</strong> on DevOps costs.
+                            Book a personalized demo or join our waitlist. See how European SMEs are saving <strong style={{ color: 'var(--fg-primary)' }}>€71K+ per year</strong> on DevOps costs.
                         </p>
                     </div>
 
                     {/* Tab switcher */}
                     <div className="flex w-full max-w-sm gap-1 border p-1" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
-                        <button
-                            onClick={() => setFormType('demo')}
-                            className="flex h-10 flex-1 items-center justify-center gap-2 text-sm font-medium transition-colors cursor-pointer"
-                            style={formType === 'demo'
-                                ? { background: 'var(--brand)', color: '#000' }
-                                : { color: 'var(--fg-secondary)' }
-                            }
-                        >
+                        <button type="button" onClick={() => setFormType('demo')} className="flex h-10 flex-1 cursor-pointer items-center justify-center gap-2 text-sm font-medium transition-colors" style={formType === 'demo' ? { background: 'var(--brand)', color: '#000' } : { color: 'var(--fg-secondary)' }}>
                             <Calendar className="h-4 w-4" />
                             Book Demo
                         </button>
-                        <button
-                            onClick={() => setFormType('waitlist')}
-                            className="flex h-10 flex-1 items-center justify-center gap-2 text-sm font-medium transition-colors cursor-pointer"
-                            style={formType === 'waitlist'
-                                ? { background: 'var(--brand)', color: '#000' }
-                                : { color: 'var(--fg-secondary)' }
-                            }
-                        >
+                        <button type="button" onClick={() => setFormType('waitlist')} className="flex h-10 flex-1 cursor-pointer items-center justify-center gap-2 text-sm font-medium transition-colors" style={formType === 'waitlist' ? { background: 'var(--brand)', color: '#000' } : { color: 'var(--fg-secondary)' }}>
                             <Mail className="h-4 w-4" />
                             Join Waitlist
                         </button>
@@ -95,7 +97,6 @@ export default function ContactPageClient() {
             {/* Form + sidebar */}
             <section className="px-6 pb-24 sm:px-8 sm:pb-28 lg:px-12" style={{ background: 'var(--bg-base)' }}>
                 <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-3">
-
                     {/* Sidebar */}
                     <div className="space-y-5 lg:col-span-1">
                         <div className="border p-6" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-surface)' }}>
@@ -108,19 +109,25 @@ export default function ContactPageClient() {
                                     { icon: <Check className="h-4 w-4" />, text: 'No commitment required' }
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-start gap-3">
-                                        <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand)' }}>{item.icon}</div>
-                                        <span className="text-sm" style={{ color: 'var(--fg-secondary)' }}>{item.text}</span>
+                                        <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand)' }}>
+                                            {item.icon}
+                                        </div>
+                                        <span className="text-sm" style={{ color: 'var(--fg-secondary)' }}>
+                                            {item.text}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
 
-                        <div className="border p-5" style={{ borderColor: 'var(--brand-border)', background: 'var(--brand-dim)' }}>
+                        <div className="border p-5" style={{ borderColor: 'var(--brand-secondary-border)', background: 'var(--brand-secondary-dim)' }}>
                             <div className="mb-2 flex items-center gap-2">
-                                <Shield className="h-4 w-4" style={{ color: 'var(--brand)' }} />
+                                <Shield className="h-4 w-4" style={{ color: 'var(--brand-secondary)' }} />
                                 <h3 className="text-sm font-semibold">Security &amp; Compliance</h3>
                             </div>
-                            <p className="text-xs" style={{ color: 'var(--fg-secondary)' }}>GDPR compliant, EU data residency, SOC 2 infrastructure. Your data never leaves Europe.</p>
+                            <p className="text-xs" style={{ color: 'var(--fg-secondary)' }}>
+                                GDPR compliant, EU data residency, SOC 2 infrastructure. Your data never leaves Europe.
+                            </p>
                         </div>
 
                         {/* Contact info */}
@@ -131,10 +138,14 @@ export default function ContactPageClient() {
                                 { icon: <Clock className="h-4 w-4" />, label: 'Response Time', value: 'Within 72 hours' }
                             ].map(item => (
                                 <div key={item.label} className="flex items-start gap-3 border p-4" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-surface)' }}>
-                                    <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand)' }}>{item.icon}</div>
+                                    <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand)' }}>
+                                        {item.icon}
+                                    </div>
                                     <div>
                                         <div className="text-xs font-medium">{item.label}</div>
-                                        <div className="text-xs" style={{ color: 'var(--fg-secondary)' }}>{item.value}</div>
+                                        <div className="text-xs" style={{ color: 'var(--fg-secondary)' }}>
+                                            {item.value}
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -145,42 +156,45 @@ export default function ContactPageClient() {
                     <div className="lg:col-span-2">
                         <div className="border p-6 sm:p-8" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
                             <header className="mb-6">
-                                <h2 className="mb-1 text-2xl font-semibold">
-                                    {formType === 'demo' ? 'Book Your Demo' : 'Join the Waitlist'}
-                                </h2>
+                                <h2 className="mb-1 text-2xl font-semibold">{formType === 'demo' ? 'Book Your Demo' : 'Join the Waitlist'}</h2>
                                 <p className="text-sm" style={{ color: 'var(--fg-secondary)' }}>
-                                    {formType === 'demo'
-                                        ? "We'll reach out within 72 hours to schedule a time that works for you."
-                                        : 'Be the first to know when Obtura launches. Get exclusive early access pricing.'}
+                                    {formType === 'demo' ? "We'll reach out within 72 hours to schedule a time that works for you." : 'Be the first to know when Obtura launches. Get exclusive early access pricing.'}
                                 </p>
                             </header>
 
-                            <form className="space-y-5" onSubmit={e => { e.preventDefault(); handleSubmit() }}>
+                            <form
+                                className="space-y-5"
+                                onSubmit={e => {
+                                    e.preventDefault()
+                                    handleSubmit()
+                                }}
+                            >
                                 <div>
-                                    <label htmlFor="name" className="mb-2 block text-sm font-medium" style={labelStyle}>Full Name *</label>
-                                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}
-                                        className={inputClass} style={inputStyle}
-                                        placeholder="John Smith" required />
+                                    <label htmlFor="name" className="mb-2 block text-sm font-medium" style={labelStyle}>
+                                        Full Name *
+                                    </label>
+                                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className={inputClass} style={inputStyle} placeholder="John Smith" required />
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email" className="mb-2 block text-sm font-medium" style={labelStyle}>Work Email *</label>
-                                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange}
-                                        className={inputClass} style={inputStyle}
-                                        placeholder="john@company.com" required />
+                                    <label htmlFor="email" className="mb-2 block text-sm font-medium" style={labelStyle}>
+                                        Work Email *
+                                    </label>
+                                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className={inputClass} style={inputStyle} placeholder="john@company.com" required />
                                 </div>
 
                                 <div className="grid gap-5 sm:grid-cols-2">
                                     <div>
-                                        <label htmlFor="company" className="mb-2 block text-sm font-medium" style={labelStyle}>Company *</label>
-                                        <input type="text" id="company" name="company" value={formData.company} onChange={handleChange}
-                                            className={inputClass} style={inputStyle}
-                                            placeholder="Acme Corp" required />
+                                        <label htmlFor="company" className="mb-2 block text-sm font-medium" style={labelStyle}>
+                                            Company *
+                                        </label>
+                                        <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} className={inputClass} style={inputStyle} placeholder="Acme Corp" required />
                                     </div>
                                     <div>
-                                        <label htmlFor="teamSize" className="mb-2 block text-sm font-medium" style={labelStyle}>Team Size *</label>
-                                        <select id="teamSize" name="teamSize" value={formData.teamSize} onChange={handleChange}
-                                            className={inputClass} style={inputStyle} required>
+                                        <label htmlFor="teamSize" className="mb-2 block text-sm font-medium" style={labelStyle}>
+                                            Team Size *
+                                        </label>
+                                        <select id="teamSize" name="teamSize" value={formData.teamSize} onChange={handleChange} className={inputClass} style={inputStyle} required>
                                             <option value="">Select team size</option>
                                             <option value="1-3">1-3 developers</option>
                                             <option value="4-10">4-10 developers</option>
@@ -195,9 +209,10 @@ export default function ContactPageClient() {
                                     <>
                                         <div className="grid gap-5 sm:grid-cols-2">
                                             <div>
-                                                <label htmlFor="role" className="mb-2 block text-sm font-medium" style={labelStyle}>Your Role *</label>
-                                                <select id="role" name="role" value={formData.role} onChange={handleChange}
-                                                    className={inputClass} style={inputStyle} required={formType === 'demo'}>
+                                                <label htmlFor="role" className="mb-2 block text-sm font-medium" style={labelStyle}>
+                                                    Your Role *
+                                                </label>
+                                                <select id="role" name="role" value={formData.role} onChange={handleChange} className={inputClass} style={inputStyle} required={formType === 'demo'}>
                                                     <option value="">Select your role</option>
                                                     <option value="cto">CTO</option>
                                                     <option value="engineering-manager">Engineering Manager</option>
@@ -208,16 +223,17 @@ export default function ContactPageClient() {
                                                 </select>
                                             </div>
                                             <div>
-                                                <label htmlFor="phone" className="mb-2 block text-sm font-medium" style={labelStyle}>Phone Number</label>
-                                                <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange}
-                                                    className={inputClass} style={inputStyle}
-                                                    placeholder="+40 722 230 456" />
+                                                <label htmlFor="phone" className="mb-2 block text-sm font-medium" style={labelStyle}>
+                                                    Phone Number
+                                                </label>
+                                                <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} className={inputClass} style={inputStyle} placeholder="+40 722 230 456" />
                                             </div>
                                         </div>
                                         <div>
-                                            <label htmlFor="preferredDate" className="mb-2 block text-sm font-medium" style={labelStyle}>Preferred Demo Date</label>
-                                            <input type="date" id="preferredDate" name="preferredDate" value={formData.preferredDate} onChange={handleChange}
-                                                className={`${inputClass} [&::-webkit-calendar-picker-indicator]:invert`} style={inputStyle} />
+                                            <label htmlFor="preferredDate" className="mb-2 block text-sm font-medium" style={labelStyle}>
+                                                Preferred Demo Date
+                                            </label>
+                                            <input type="date" id="preferredDate" name="preferredDate" value={formData.preferredDate} onChange={handleChange} className={`${inputClass} [&::-webkit-calendar-picker-indicator]:invert`} style={inputStyle} />
                                         </div>
                                     </>
                                 )}
@@ -226,18 +242,23 @@ export default function ContactPageClient() {
                                     <label htmlFor="message" className="mb-2 block text-sm font-medium" style={labelStyle}>
                                         {formType === 'demo' ? 'What are your main DevOps challenges?' : 'Anything you want to share?'}
                                     </label>
-                                    <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={4}
-                                        className="w-full border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#ff6b35]"
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        rows={4}
+                                        className="focus:ring-brand w-full border px-4 py-3 text-sm focus:ring-1 focus:outline-none"
                                         style={{ ...inputStyle, resize: 'vertical' }}
-                                        placeholder={formType === 'demo'
-                                            ? "e.g., We're spending too much time on infrastructure setup..."
-                                            : "Tell us about your team and what you're building..."} />
+                                        placeholder={formType === 'demo' ? "e.g., We're spending too much time on infrastructure setup..." : "Tell us about your team and what you're building..."}
+                                    />
                                 </div>
 
                                 <div>
-                                    <label htmlFor="referral" className="mb-2 block text-sm font-medium" style={labelStyle}>How did you hear about us?</label>
-                                    <select id="referral" name="referral" value={formData.referral} onChange={handleChange}
-                                        className={inputClass} style={inputStyle}>
+                                    <label htmlFor="referral" className="mb-2 block text-sm font-medium" style={labelStyle}>
+                                        How did you hear about us?
+                                    </label>
+                                    <select id="referral" name="referral" value={formData.referral} onChange={handleChange} className={inputClass} style={inputStyle}>
                                         <option value="">Select an option</option>
                                         <option value="search">Search Engine (Google)</option>
                                         <option value="social">Social Media</option>
@@ -247,9 +268,10 @@ export default function ContactPageClient() {
                                     </select>
                                 </div>
 
-                                <button type="submit" disabled={isLoading}
-                                    className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 bg-[#ff6b35] text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45] disabled:cursor-not-allowed disabled:opacity-50">
-                                    {isLoading ? 'Submitting...' : (
+                                <button type="submit" disabled={isLoading} className="bg-brand hover:bg-brand-hover flex h-12 w-full cursor-pointer items-center justify-center gap-2 text-sm font-semibold text-black transition-colors disabled:cursor-not-allowed disabled:opacity-50">
+                                    {isLoading ? (
+                                        'Submitting...'
+                                    ) : (
                                         <>
                                             {formType === 'demo' ? 'Book Demo' : 'Join Waitlist'}
                                             <ArrowRight className="h-4 w-4" />
@@ -259,28 +281,31 @@ export default function ContactPageClient() {
 
                                 <p className="text-center text-xs" style={{ color: 'var(--fg-tertiary)' }}>
                                     By submitting, you agree to our{' '}
-                                    <a href="/terms" className="text-[#ff6b35] hover:underline">Terms of Service</a>
-                                    {' '}and{' '}
-                                    <a href="/privacy" className="text-[#ff6b35] hover:underline">Privacy Policy</a>
+                                    <a href="/terms" className="text-brand hover:underline">
+                                        Terms of Service
+                                    </a>{' '}
+                                    and{' '}
+                                    <a href="/privacy" className="text-brand hover:underline">
+                                        Privacy Policy
+                                    </a>
                                 </p>
                             </form>
                         </div>
                     </div>
                 </div>
             </section>
-
-            {/* Trust strip */}
             <section className="border-y px-6 py-12 sm:px-8 sm:py-14 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
                 <div className="mx-auto max-w-6xl">
-                    <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
+                    <div className="flex flex-wrap justify-center gap-6 sm:gap-10">
                         {[
-                            { icon: <Globe className="h-4 w-4" />, text: 'EU Data Residency' },
-                            { icon: <Shield className="h-4 w-4" />, text: 'GDPR Compliant' },
-                            { icon: <Check className="h-4 w-4" />, text: 'SOC 2 Infrastructure' },
-                            { icon: <Check className="h-4 w-4" />, text: 'No Credit Card Required' }
+                            { icon: <Globe className="h-4 w-4" />, text: 'EU Data Residency', color: 'var(--brand-secondary)' },
+                            { icon: <Shield className="h-4 w-4" />, text: 'GDPR Compliant', color: 'var(--brand-secondary)' },
+                            { icon: <Check className="h-4 w-4" />, text: 'SOC 2 Infrastructure', color: 'var(--brand-secondary)' }
                         ].map((badge, i) => (
                             <div key={i} className="flex items-center gap-3">
-                                <div className="shrink-0" style={{ color: 'var(--brand)' }}>{badge.icon}</div>
+                                <div className="shrink-0" style={{ color: badge.color }}>
+                                    {badge.icon}
+                                </div>
                                 <p className="text-xs font-medium sm:text-sm">{badge.text}</p>
                             </div>
                         ))}

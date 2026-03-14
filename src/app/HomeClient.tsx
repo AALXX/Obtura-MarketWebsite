@@ -151,9 +151,9 @@ export default function HomeClient() {
                     <div
                         className="mb-8"
                         style={{
-                            height: '1px',
-                            width: '64px',
-                            background: 'var(--border-default)',
+                            height: '2px',
+                            width: '48px',
+                            background: 'var(--brand)',
                             animation: 'heroReveal 0.5s ease-out 160ms both'
                         }}
                     />
@@ -174,13 +174,11 @@ export default function HomeClient() {
                         className="mb-16 flex flex-wrap items-center gap-5"
                         style={{ animation: 'heroReveal 0.6s ease-out 260ms both' }}
                     >
-                        <Link href="/contact">
-                            <button type="button" className="inline-flex h-12 items-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
-                                Join Waitlist
-                                <ArrowRight className="h-4 w-4" />
-                            </button>
+                        <Link href="/contact" className="inline-flex h-12 items-center gap-2 bg-brand px-8 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
+                            Join Waitlist
+                            <ArrowRight className="h-4 w-4" />
                         </Link>
-                        <Link href="/contact" className="text-sm font-medium transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
+                        <Link href="/contact" className="text-sm font-medium transition-colors hover:text-brand" style={{ color: 'var(--fg-secondary)' }}>
                             Book a demo →
                         </Link>
                     </div>
@@ -195,7 +193,7 @@ export default function HomeClient() {
                     >
                         {['5-minute deploy', 'Built-in observability', 'GDPR compliant', '€71K/year savings'].map(f => (
                             <div key={f} className="flex items-center gap-2 text-xs" style={{ color: 'var(--fg-secondary)' }}>
-                                <Check className="h-3 w-3 text-[#ff6b35]" />
+                                <Check className="h-3 w-3 text-brand" />
                                 {f}
                             </div>
                         ))}
@@ -209,8 +207,8 @@ export default function HomeClient() {
                     <p className="mb-6 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
                         — See it work
                     </p>
-                    <div className="overflow-hidden rounded-lg border shadow-2xl shadow-black/50" style={{ borderColor: 'oklch(100% 0 0 / 0.12)', background: '#1a1714' }}>
-                        <div className="flex items-center gap-2 border-b px-4 py-2.5" style={{ borderColor: 'oklch(100% 0 0 / 0.10)', background: '#201d1a' }}>
+                    <div className="overflow-hidden border" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
+                        <div className="flex items-center gap-2 border-b px-4 py-2.5" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-surface)' }}>
                             <div className="flex gap-1.5">
                                 <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
                                 <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
@@ -232,15 +230,15 @@ export default function HomeClient() {
                                 const isSuccess = line.type === 'success'
                                 return (
                                     <div key={index} className="flex items-start" style={{ animation: 'terminalLine 0.15s ease-out forwards', opacity: 0 }}>
-                                        <span className={`mr-2 font-bold ${isCommand ? 'text-[#ff6b35]' : isSuccess ? 'text-green-400' : 'text-blue-400'}`}>{line.prefix || '>'}</span>
-                                        <span className={`${isCommand ? 'font-semibold text-[#eae9e7]' : isSuccess ? 'text-green-300' : ''}`}>{line.text}</span>
+                                        <span className={`mr-2 font-bold ${isCommand ? 'text-brand' : isSuccess ? 'text-[#4ade80]' : 'text-(--brand-secondary)'}`}>{line.prefix || '>'}</span>
+                                        <span className={`${isCommand ? 'font-semibold' : isSuccess ? 'text-[#86efac]' : ''}`} style={isCommand ? { color: 'var(--fg-primary)' } : {}}>{line.text}</span>
                                     </div>
                                 )
                             })}
                             {terminalLines.length > 0 && (
                                 <div className="mt-2 flex items-center" style={{ animation: 'terminalLine 0.15s ease-out forwards', opacity: 0 }}>
-                                    <span className="mr-2 font-bold text-[#ff6b35]">$</span>
-                                    <div className="h-4 w-2 bg-[#8a8784] opacity-70" />
+                                    <span className="mr-2 font-bold text-brand">$</span>
+                                    <div className="h-4 w-2 opacity-70" style={{ background: 'var(--fg-secondary)' }} />
                                 </div>
                             )}
                         </div>
@@ -349,7 +347,7 @@ export default function HomeClient() {
 
                                 {/* Title + description */}
                                 <div>
-                                    <div className="mb-0.5 flex items-center gap-2" style={{ color: 'var(--fg-tertiary)' }}>
+                                    <div className="mb-1.5 flex items-center gap-2" style={{ color: 'var(--brand)' }}>
                                         {feature.icon}
                                     </div>
                                     <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
@@ -358,7 +356,7 @@ export default function HomeClient() {
                                     <ul className="mt-4 space-y-1.5 sm:hidden">
                                         {feature.items.map(item => (
                                             <li key={item} className="flex items-start gap-2 text-xs" style={{ color: 'var(--fg-secondary)' }}>
-                                                <Check className="mt-0.5 h-3 w-3 shrink-0 text-[#ff6b35]" />
+                                                <Check className="mt-0.5 h-3 w-3 shrink-0 text-brand" />
                                                 {item}
                                             </li>
                                         ))}
@@ -369,7 +367,7 @@ export default function HomeClient() {
                                 <ul className="hidden space-y-1.5 sm:block">
                                     {feature.items.map(item => (
                                         <li key={item} className="flex items-start gap-2 text-sm" style={{ color: 'var(--fg-secondary)' }}>
-                                            <Check className="mt-0.5 h-3 w-3 shrink-0 text-[#ff6b35]" />
+                                            <Check className="mt-0.5 h-3 w-3 shrink-0 text-brand" />
                                             {item}
                                         </li>
                                     ))}
@@ -401,12 +399,12 @@ export default function HomeClient() {
                             <div>
                                 <div className="mb-3 flex justify-between">
                                     <label className="text-sm" style={{ color: 'var(--fg-secondary)' }}>Developers on your team</label>
-                                    <span className="text-sm font-semibold text-[#ff6b35]">{developers}</span>
+                                    <span className="text-sm font-semibold text-brand">{developers}</span>
                                 </div>
                                 <input
                                     type="range" min="1" max="50" value={developers}
                                     onChange={e => setDevelopers(Number(e.target.value))}
-                                    className="h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ff6b35]"
+                                    className="h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand"
                                     style={{ background: 'var(--border-default)' }}
                                     aria-label="Number of developers"
                                 />
@@ -415,12 +413,12 @@ export default function HomeClient() {
                             <div>
                                 <div className="mb-3 flex justify-between">
                                     <label className="text-sm" style={{ color: 'var(--fg-secondary)' }}>Active projects</label>
-                                    <span className="text-sm font-semibold text-[#ff6b35]">{projects}</span>
+                                    <span className="text-sm font-semibold text-brand">{projects}</span>
                                 </div>
                                 <input
                                     type="range" min="1" max="20" value={projects}
                                     onChange={e => setProjects(Number(e.target.value))}
-                                    className="h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ff6b35]"
+                                    className="h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand"
                                     style={{ background: 'var(--border-default)' }}
                                     aria-label="Number of active projects"
                                 />
@@ -430,7 +428,7 @@ export default function HomeClient() {
                                 <label className="mb-3 block text-sm" style={{ color: 'var(--fg-secondary)' }}>Current DevOps setup</label>
                                 <select
                                     value={setup} onChange={e => setSetup(e.target.value)}
-                                    className="h-11 w-full border px-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#ff6b35]"
+                                    className="h-11 w-full border px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand"
                                     style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)', color: 'var(--fg-primary)' }}
                                 >
                                     <option value="manual">Manual DevOps</option>
@@ -459,7 +457,7 @@ export default function HomeClient() {
                                     ))}
                                     <div className="flex items-center justify-between border-t pt-2 text-sm font-semibold" style={{ borderColor: 'var(--border-subtle)' }}>
                                         <span>Total</span>
-                                        <span className="text-red-400">€{totalCost.toLocaleString()}/yr</span>
+                                        <span style={{ color: 'var(--color-danger)' }}>€{totalCost.toLocaleString()}/yr</span>
                                     </div>
                                 </div>
                             </div>
@@ -487,11 +485,9 @@ export default function HomeClient() {
 
                             <div className="mt-10">
                                 <div className="mb-4 h-px" style={{ background: 'var(--border-subtle)' }} />
-                                <Link href="/contact">
-                                    <button className="inline-flex h-12 items-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
-                                        Contact Sales
-                                        <ArrowRight className="h-4 w-4" />
-                                    </button>
+                                <Link href="/contact" className="inline-flex h-12 items-center gap-2 bg-brand px-8 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
+                                    Contact Sales
+                                    <ArrowRight className="h-4 w-4" />
                                 </Link>
                             </div>
                         </div>
@@ -509,7 +505,7 @@ export default function HomeClient() {
                             { icon: <HardDrive className="h-4 w-4" />, title: 'Daily Backups', description: '30-day retention with tested recovery' }
                         ].map(badge => (
                             <div key={badge.title} className="flex items-start gap-4">
-                                <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand)' }}>{badge.icon}</div>
+                                <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand-secondary)' }}>{badge.icon}</div>
                                 <div>
                                     <h3 className="text-sm font-semibold">{badge.title}</h3>
                                     <p className="mt-0.5 text-sm" style={{ color: 'var(--fg-secondary)' }}>{badge.description}</p>
@@ -578,7 +574,7 @@ export default function HomeClient() {
                                 <div className="mb-2 flex items-baseline gap-1">
                                     <span
                                         className="text-3xl font-black leading-none"
-                                        style={{ fontFamily: 'var(--font-display)' }}
+                                        style={{ fontFamily: 'var(--font-display)', color: plan.highlighted ? 'var(--brand)' : 'var(--fg-primary)' }}
                                     >{plan.price}</span>
                                     <span className="text-sm" style={{ color: 'var(--fg-secondary)' }}>{plan.period}</span>
                                 </div>
@@ -586,18 +582,16 @@ export default function HomeClient() {
                                 <ul className="mb-5 flex flex-col gap-2">
                                     {plan.features.map(feature => (
                                         <li key={feature} className="flex items-center gap-2 text-xs" style={{ color: 'var(--fg-secondary)' }}>
-                                            <Check className="h-3 w-3 shrink-0 text-[#ff6b35]" />
+                                            <Check className="h-3 w-3 shrink-0 text-brand" />
                                             {feature}
                                         </li>
                                     ))}
                                 </ul>
-                                <Link href="/contact" className="mt-auto">
-                                    <button
-                                        className={`h-10 w-full text-sm font-medium transition-colors cursor-pointer ${plan.highlighted ? 'bg-[#ff6b35] text-black hover:bg-[#ff7b45]' : 'border text-white hover:bg-white/[0.06]'}`}
-                                        style={plan.highlighted ? {} : { borderColor: 'var(--border-default)' }}
-                                    >
-                                        Contact Sales
-                                    </button>
+                                <Link href="/contact"
+                                    className={`mt-auto inline-flex h-10 w-full items-center justify-center text-sm font-medium transition-colors ${plan.highlighted ? 'bg-brand text-black hover:bg-brand-hover' : 'border hover:bg-white/6'}`}
+                                    style={plan.highlighted ? {} : { borderColor: 'var(--border-default)', color: 'var(--fg-primary)' }}
+                                >
+                                    Contact Sales
                                 </Link>
                             </div>
                         ))}
@@ -623,11 +617,9 @@ export default function HomeClient() {
                         </p>
 
                         <div className="flex flex-wrap items-center gap-5">
-                            <Link href="/contact">
-                                <button className="inline-flex h-12 items-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
-                                    <Calendar className="h-4 w-4" />
-                                    Book a Demo
-                                </button>
+                            <Link href="/contact" className="inline-flex h-12 items-center gap-2 bg-brand px-8 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
+                                <Calendar className="h-4 w-4" />
+                                Book a Demo
                             </Link>
                             <div className="flex flex-wrap items-center gap-4 text-xs" style={{ color: 'var(--fg-tertiary)' }}>
                                 <span className="flex items-center gap-1.5"><Globe className="h-3 w-3" /> EU-first platform</span>

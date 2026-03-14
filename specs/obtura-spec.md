@@ -338,7 +338,6 @@ FOOTER_TAGLINE     = "Built in Europe, for Europe."
 ### Trust Signals (distributed throughout page)
 - GDPR badge
 - EU flag / "Built in Europe"
-- "No credit card required" near CTAs
 - Founder names + LinkedIn links (humans behind the product)
 - GitHub link (open development)
 

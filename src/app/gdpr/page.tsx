@@ -10,26 +10,23 @@ export const metadata: Metadata = {
 
 export default function GDPRPage() {
     return (
-        <div className="min-h-screen bg-[#0a0a0a] pt-20 font-sans text-white">
-            <div className="container mx-auto max-w-4xl px-4 py-16">
+        <div className="min-h-screen pt-16" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
+            <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 lg:px-12">
 
                 {/* Breadcrumb */}
-                <nav aria-label="Breadcrumb" className="mb-8">
-                    <ol className="flex items-center gap-2 text-sm text-gray-400">
-                        <li><a href="/" className="transition-colors hover:text-[#ff6b35]">Home</a></li>
-                        <li><span>/</span></li>
-                        <li className="text-white">GDPR Compliance</li>
+                <nav aria-label="Breadcrumb" className="mb-10">
+                    <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
+                        <li><a href="/" className="transition-colors hover:text-brand">Home</a></li>
+                        <li>/</li>
+                        <li>GDPR Compliance</li>
                     </ol>
                 </nav>
 
                 {/* Header */}
-                <header className="mb-12 border-b border-white/10 pb-10">
-                    <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#ff6b35]/30 bg-[#ff6b35]/10 px-3 py-1 text-xs font-medium text-[#ff6b35]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#ff6b35]" />
-                        GDPR (EU) 2016/679 · EU Data Residency · SOC 2 Type II
-                    </div>
-                    <h1 className="mb-3 text-4xl font-bold tracking-tight">GDPR Compliance</h1>
-                    <p className="mt-6 text-gray-400 leading-relaxed max-w-2xl">
+                <header className="mb-12 border-b pb-10" style={{ borderColor: 'var(--border-subtle)' }}>
+                    <p className="mb-4 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— GDPR (EU) 2016/679 · EU Data Residency · SOC 2 Type II</p>
+                    <h1 className="mb-3 text-4xl font-black tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>GDPR Compliance</h1>
+                    <p className="mt-6 max-w-2xl leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
                         Obtura is built from the ground up as a GDPR-first platform. As a Romanian company operating within the European Union, GDPR compliance is not a checkbox for us — it is a core architectural and operational principle. This page explains how we protect your data and support your own GDPR obligations.
                     </p>
                 </header>
@@ -37,24 +34,23 @@ export default function GDPRPage() {
                 {/* Key commitments at-a-glance */}
                 <div className="mb-12 grid gap-4 sm:grid-cols-3">
                     {[
-                        { icon: '🇪🇺', title: 'EU Data Residency', desc: '100% of customer data stored in EU data centers (Frankfurt & Amsterdam). Data never leaves the EEA.' },
-                        { icon: '🔒', title: 'SOC 2 Type II', desc: 'Infrastructure certified to SOC 2 Type II standards, audited annually by independent third parties.' },
-                        { icon: '📋', title: 'DPA Included', desc: 'GDPR-compliant Data Processing Agreement included with all plans. Available upon request.' },
-                    ].map(({ icon, title, desc }) => (
-                        <div key={title} className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-                            <div className="mb-3 text-2xl">{icon}</div>
-                            <h3 className="mb-2 font-semibold text-white">{title}</h3>
-                            <p className="text-sm text-gray-400 leading-relaxed">{desc}</p>
+                        { title: 'EU Data Residency', desc: '100% of customer data stored in EU data centers (Frankfurt & Amsterdam). Data never leaves the EEA.' },
+                        { title: 'SOC 2 Type II', desc: 'Infrastructure certified to SOC 2 Type II standards, audited annually by independent third parties.' },
+                        { title: 'DPA Included', desc: 'GDPR-compliant Data Processing Agreement included with all plans. Available upon request.' },
+                    ].map(({ title, desc }) => (
+                        <div key={title} className="border p-6" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+                            <h3 className="mb-2 font-semibold" style={{ color: 'var(--fg-primary)' }}>{title}</h3>
+                            <p className="text-sm leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>{desc}</p>
                         </div>
                     ))}
                 </div>
 
-                <div className="space-y-12 text-gray-400">
+                <div className="space-y-12" style={{ color: 'var(--fg-secondary)' }}>
 
                     {/* EU Data Residency */}
                     <Section title="EU Data Residency">
-                        <div className="rounded-xl border border-[#ff6b35]/20 bg-[#ff6b35]/5 p-5 mb-5">
-                            <p className="font-semibold text-white">All customer data is stored exclusively within European Union territory. Your data never leaves the EEA.</p>
+                        <div className="border p-5 mb-5" style={{ borderColor: 'var(--brand-border)', background: 'var(--brand-dim)' }}>
+                            <p className="font-semibold" style={{ color: 'var(--fg-primary)' }}>All customer data is stored exclusively within European Union territory. Your data never leaves the EEA.</p>
                         </div>
                         <p>Obtura operates its entire infrastructure within EU-based data centers. Our primary region is Frankfurt, Germany (eu-central-1), with failover capacity in Amsterdam, Netherlands (eu-west-1). We do not route, process, or replicate customer data outside the European Economic Area.</p>
                         <p className="mt-4">This matters because many competing DevOps platforms are US-headquartered and operate under US law — including the CLOUD Act — which may require them to disclose your data to US government agencies regardless of where the data is stored. As a fully European company, Obtura is not subject to US data access laws.</p>
@@ -67,9 +63,9 @@ export default function GDPRPage() {
                                 ['Data Sovereignty', 'Romanian & EU law exclusively'],
                                 ['US CLOUD Act', 'Not applicable — EU company'],
                             ].map(([label, value]) => (
-                                <div key={label} className="flex justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 text-sm">
-                                    <span className="text-gray-500">{label}</span>
-                                    <span className="font-medium text-white">{value}</span>
+                                <div key={label} className="flex justify-between border px-4 py-3 text-sm" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
+                                    <span style={{ color: 'var(--fg-tertiary)' }}>{label}</span>
+                                    <span className="font-medium" style={{ color: 'var(--fg-primary)' }}>{value}</span>
                                 </div>
                             ))}
                         </div>
@@ -87,12 +83,12 @@ export default function GDPRPage() {
                                 'Is provided as a standalone executed document upon request for customers who require it for compliance or audit purposes.',
                             ].map(item => (
                                 <li key={item} className="flex gap-3">
-                                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#ff6b35]/60" />
+                                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: 'var(--brand)', opacity: 0.6 }} />
                                     {item}
                                 </li>
                             ))}
                         </ul>
-                        <p className="mt-4">To request a signed DPA, contact <a href="mailto:dpo@obtura.dev" className="text-[#ff6b35] hover:underline">dpo@obtura.dev</a>.</p>
+                        <p className="mt-4">To request a signed DPA, contact <a href="mailto:dpo@obtura.dev" className="hover:underline" style={{ color: 'var(--brand)' }}>dpo@obtura.dev</a>.</p>
                     </Section>
 
                     {/* Your Rights */}
@@ -133,13 +129,13 @@ export default function GDPRPage() {
                                     how: 'Lodge a complaint with ANSPDCP (Romania) at dataprotection.ro or with your local EU supervisory authority.',
                                 },
                             ].map(({ right, how }) => (
-                                <div key={right} className="rounded-lg border border-white/10 bg-white/[0.02] p-4">
-                                    <h4 className="mb-2 font-semibold text-white text-sm">{right}</h4>
+                                <div key={right} className="border p-4" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+                                    <h4 className="mb-2 text-sm font-semibold" style={{ color: 'var(--fg-primary)' }}>{right}</h4>
                                     <p className="text-sm leading-relaxed">{how}</p>
                                 </div>
                             ))}
                         </div>
-                        <p className="mt-6 text-sm">We respond to all rights requests within <strong className="text-white">30 days</strong>. Identity verification is required. There is <strong className="text-white">no charge</strong> for exercising your rights.</p>
+                        <p className="mt-6 text-sm">We respond to all rights requests within <strong style={{ color: 'var(--fg-primary)' }}>30 days</strong>. Identity verification is required. There is <strong style={{ color: 'var(--fg-primary)' }}>no charge</strong> for exercising your rights.</p>
                     </Section>
 
                     {/* Security */}
@@ -198,11 +194,11 @@ export default function GDPRPage() {
                                 },
                             ].map(({ category, items }) => (
                                 <div key={category}>
-                                    <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-300">{category}</h3>
+                                    <h3 className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>{category}</h3>
                                     <div className="grid gap-2 sm:grid-cols-2">
                                         {items.map(item => (
-                                            <div key={item} className="flex items-start gap-2 rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-sm">
-                                                <span className="mt-0.5 shrink-0 text-[#ff6b35]">✓</span>
+                                            <div key={item} className="flex items-start gap-2 border px-3 py-2 text-sm" style={{ borderColor: 'var(--border-subtle)' }}>
+                                                <span className="mt-0.5 shrink-0" style={{ color: 'var(--brand)' }}>✓</span>
                                                 {item}
                                             </div>
                                         ))}
@@ -218,13 +214,13 @@ export default function GDPRPage() {
                         <p className="mt-4">Categories of sub-processors we use:</p>
                         <table className="mt-4 w-full border-collapse text-sm">
                             <thead>
-                                <tr className="border-b border-white/10">
-                                    <th className="py-3 pr-4 text-left font-semibold text-white">Category</th>
-                                    <th className="py-3 pr-4 text-left font-semibold text-white">Location</th>
-                                    <th className="py-3 text-left font-semibold text-white">Safeguard</th>
+                                <tr className="border-b" style={{ borderColor: 'var(--border-default)' }}>
+                                    <th className="py-3 pr-4 text-left font-semibold" style={{ color: 'var(--fg-primary)' }}>Category</th>
+                                    <th className="py-3 pr-4 text-left font-semibold" style={{ color: 'var(--fg-primary)' }}>Location</th>
+                                    <th className="py-3 text-left font-semibold" style={{ color: 'var(--fg-primary)' }}>Safeguard</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/5">
+                            <tbody>
                                 {[
                                     ['Cloud Infrastructure (compute/storage)', 'EU (Germany, Netherlands)', 'EU-based, contractual'],
                                     ['Payment Processing', 'EU / EEA', 'SCCs + adequacy decision'],
@@ -232,15 +228,15 @@ export default function GDPRPage() {
                                     ['Customer Support Platform', 'EU', 'Contractual + EU data residency'],
                                     ['Application Error Monitoring', 'EU', 'EU hosted, contractual'],
                                 ].map(([category, location, safeguard]) => (
-                                    <tr key={category}>
-                                        <td className="py-3 pr-4 text-gray-400">{category}</td>
-                                        <td className="py-3 pr-4 text-gray-300 text-xs">{location}</td>
-                                        <td className="py-3 text-gray-300 text-xs">{safeguard}</td>
+                                    <tr key={category} className="border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+                                        <td className="py-3 pr-4">{category}</td>
+                                        <td className="py-3 pr-4 text-xs" style={{ color: 'var(--fg-primary)' }}>{location}</td>
+                                        <td className="py-3 text-xs" style={{ color: 'var(--fg-primary)' }}>{safeguard}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                        <p className="mt-4 text-sm">We will notify customers of any material changes to our sub-processor list at least <strong className="text-white">30 days in advance</strong>. The complete, up-to-date sub-processor list with named entities is available upon request at <a href="mailto:dpo@obtura.dev" className="text-[#ff6b35] hover:underline">dpo@obtura.dev</a>.</p>
+                        <p className="mt-4 text-sm">We will notify customers of any material changes to our sub-processor list at least <strong style={{ color: 'var(--fg-primary)' }}>30 days in advance</strong>. The complete, up-to-date sub-processor list with named entities is available upon request at <a href="mailto:dpo@obtura.dev" className="hover:underline" style={{ color: 'var(--brand)' }}>dpo@obtura.dev</a>.</p>
                     </Section>
 
                     {/* Breach Notification */}
@@ -252,10 +248,10 @@ export default function GDPRPage() {
                                 { time: '< 24 hours', label: 'Customer notification', desc: 'Affected customers notified with available details, even if investigation is ongoing.' },
                                 { time: '< 72 hours', label: 'Authority notification', desc: 'ANSPDCP (supervisory authority) notified as required by GDPR Art. 33.' },
                             ].map(({ time, label, desc }) => (
-                                <div key={time} className="rounded-lg border border-white/10 bg-white/[0.02] p-4">
-                                    <div className="mb-2 font-mono text-lg font-bold text-[#ff6b35]">{time}</div>
-                                    <div className="mb-1 text-sm font-semibold text-white">{label}</div>
-                                    <p className="text-xs text-gray-500">{desc}</p>
+                                <div key={time} className="border p-4" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+                                    <div className="mb-2 font-mono text-lg font-bold" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)' }}>{time}</div>
+                                    <div className="mb-1 text-sm font-semibold" style={{ color: 'var(--fg-primary)' }}>{label}</div>
+                                    <p className="text-xs">{desc}</p>
                                 </div>
                             ))}
                         </div>
@@ -266,20 +262,20 @@ export default function GDPRPage() {
                     <Section title="Data Protection Officer">
                         <p>Obtura has appointed a Data Protection Officer (DPO) as required under GDPR Article 37. Our DPO is responsible for overseeing compliance with GDPR, advising on data protection obligations, and acting as the point of contact for supervisory authorities and data subjects.</p>
                         <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-                                <p className="mb-3 text-sm font-semibold text-white">Data Protection Officer</p>
+                            <div className="border p-5" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+                                <p className="mb-3 text-sm font-semibold" style={{ color: 'var(--fg-primary)' }}>Data Protection Officer</p>
                                 <dl className="space-y-2 text-sm">
-                                    <div className="flex gap-3"><dt className="text-gray-500 shrink-0">Email:</dt><dd><a href="mailto:dpo@obtura.dev" className="text-[#ff6b35] hover:underline">dpo@obtura.dev</a></dd></div>
-                                    <div className="flex gap-3"><dt className="text-gray-500 shrink-0">Scope:</dt><dd className="text-gray-400">GDPR rights requests, DPA inquiries, regulatory matters</dd></div>
-                                    <div className="flex gap-3"><dt className="text-gray-500 shrink-0">Response:</dt><dd className="text-gray-400">Within 5 business days</dd></div>
+                                    <div className="flex gap-3"><dt style={{ color: 'var(--fg-tertiary)' }} className="shrink-0">Email:</dt><dd><a href="mailto:dpo@obtura.dev" className="hover:underline" style={{ color: 'var(--brand)' }}>dpo@obtura.dev</a></dd></div>
+                                    <div className="flex gap-3"><dt style={{ color: 'var(--fg-tertiary)' }} className="shrink-0">Scope:</dt><dd>GDPR rights requests, DPA inquiries, regulatory matters</dd></div>
+                                    <div className="flex gap-3"><dt style={{ color: 'var(--fg-tertiary)' }} className="shrink-0">Response:</dt><dd>Within 5 business days</dd></div>
                                 </dl>
                             </div>
-                            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-                                <p className="mb-3 text-sm font-semibold text-white">Supervisory Authority</p>
+                            <div className="border p-5" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+                                <p className="mb-3 text-sm font-semibold" style={{ color: 'var(--fg-primary)' }}>Supervisory Authority</p>
                                 <dl className="space-y-2 text-sm">
-                                    <div className="flex gap-3"><dt className="text-gray-500 shrink-0">Name:</dt><dd className="text-gray-400">ANSPDCP</dd></div>
-                                    <div className="flex gap-3"><dt className="text-gray-500 shrink-0">Website:</dt><dd><a href="https://www.dataprotection.ro" target="_blank" rel="noopener noreferrer" className="text-[#ff6b35] hover:underline">dataprotection.ro</a></dd></div>
-                                    <div className="flex gap-3"><dt className="text-gray-500 shrink-0">Right to complain:</dt><dd className="text-gray-400">Available to all EU residents</dd></div>
+                                    <div className="flex gap-3"><dt style={{ color: 'var(--fg-tertiary)' }} className="shrink-0">Name:</dt><dd>ANSPDCP</dd></div>
+                                    <div className="flex gap-3"><dt style={{ color: 'var(--fg-tertiary)' }} className="shrink-0">Website:</dt><dd><a href="https://www.dataprotection.ro" target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: 'var(--brand)' }}>dataprotection.ro</a></dd></div>
+                                    <div className="flex gap-3"><dt style={{ color: 'var(--fg-tertiary)' }} className="shrink-0">Right to complain:</dt><dd>Available to all EU residents</dd></div>
                                 </dl>
                             </div>
                         </div>
@@ -299,17 +295,17 @@ export default function GDPRPage() {
                                 ['Secrets Management', 'Encrypted environment variables and secrets vault — no plaintext credentials stored.'],
                                 ['Access Controls', 'Granular RBAC so only authorized team members can access production data.'],
                             ].map(([title, desc]) => (
-                                <div key={title} className="rounded-lg border border-white/10 bg-white/[0.02] p-4">
-                                    <h4 className="mb-1 text-sm font-semibold text-white">{title}</h4>
-                                    <p className="text-xs text-gray-400 leading-relaxed">{desc}</p>
+                                <div key={title} className="border p-4" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+                                    <h4 className="mb-1 text-sm font-semibold" style={{ color: 'var(--fg-primary)' }}>{title}</h4>
+                                    <p className="text-xs leading-relaxed">{desc}</p>
                                 </div>
                             ))}
                         </div>
                     </Section>
 
                     {/* Related Links */}
-                    <div className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-                        <h2 className="mb-4 text-lg font-semibold text-white">Related Legal Documents</h2>
+                    <div className="border p-6" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+                        <h2 className="mb-4 text-lg font-semibold" style={{ color: 'var(--fg-primary)' }}>Related Legal Documents</h2>
                         <div className="flex flex-wrap gap-3">
                             {[
                                 { label: 'Privacy Policy', href: '/privacy' },
@@ -321,10 +317,11 @@ export default function GDPRPage() {
                                 <a
                                     key={label}
                                     href={href}
-                                    className="inline-flex items-center gap-1 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-300 transition-colors hover:border-[#ff6b35]/30 hover:text-[#ff6b35]"
+                                    className="inline-flex items-center gap-1 border px-4 py-2 text-sm transition-colors hover:text-brand"
+                                    style={{ borderColor: 'var(--border-default)', color: 'var(--fg-secondary)' }}
                                 >
                                     {label}
-                                    {note && <span className="text-xs text-gray-500">{note}</span>}
+                                    {note && <span className="text-xs" style={{ color: 'var(--fg-tertiary)' }}>{note}</span>}
                                 </a>
                             ))}
                         </div>
@@ -341,7 +338,7 @@ export default function GDPRPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
     return (
         <section>
-            <h2 className="mb-5 text-2xl font-bold text-white">{title}</h2>
+            <h2 className="mb-5 text-2xl font-semibold" style={{ color: 'var(--fg-primary)' }}>{title}</h2>
             <div className="space-y-4 leading-relaxed">{children}</div>
         </section>
     )

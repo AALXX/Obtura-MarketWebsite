@@ -79,7 +79,7 @@ const techStacks = [
     {
         category: 'JavaScript / TypeScript',
         Icon: Code2,
-        iconColor: '#F7DF1E',
+        iconColor: 'var(--fg-secondary)',
         frameworks: [
             { name: 'Next.js', description: 'React framework for production' },
             { name: 'React', description: 'Library for web user interfaces' },
@@ -96,7 +96,7 @@ const techStacks = [
     {
         category: 'Python',
         Icon: Terminal,
-        iconColor: '#3776AB',
+        iconColor: 'var(--fg-secondary)',
         frameworks: [
             { name: 'Django', description: 'High-level Python web framework' },
             { name: 'Flask', description: 'Lightweight WSGI web application framework' },
@@ -109,7 +109,7 @@ const techStacks = [
     {
         category: 'Go',
         Icon: Cpu,
-        iconColor: '#00ADD8',
+        iconColor: 'var(--fg-secondary)',
         frameworks: [
             { name: 'Gin', description: 'High-performance HTTP web framework' },
             { name: 'Echo', description: 'High performance, minimalist Go web framework' },
@@ -120,7 +120,7 @@ const techStacks = [
     {
         category: 'Rust',
         Icon: Settings,
-        iconColor: '#DEA584',
+        iconColor: 'var(--fg-secondary)',
         frameworks: [
             { name: 'Actix', description: 'Actor framework and powerful web server' },
             { name: 'Axum', description: 'Ergonomic and modular web framework' },
@@ -131,7 +131,7 @@ const techStacks = [
     {
         category: 'PHP',
         Icon: Globe,
-        iconColor: '#777BB4',
+        iconColor: 'var(--fg-secondary)',
         frameworks: [
             { name: 'Laravel', description: 'PHP web application framework' },
             { name: 'Symfony', description: 'PHP framework for web applications' },
@@ -142,7 +142,7 @@ const techStacks = [
     {
         category: 'Ruby',
         Icon: Gem,
-        iconColor: '#CC342D',
+        iconColor: 'var(--fg-secondary)',
         frameworks: [
             { name: 'Rails', description: 'Web-application framework' },
             { name: 'Sinatra', description: 'DSL for quickly creating web applications' },
@@ -152,7 +152,7 @@ const techStacks = [
     {
         category: 'Java',
         Icon: Coffee,
-        iconColor: '#007396',
+        iconColor: 'var(--fg-secondary)',
         frameworks: [
             { name: 'Spring Boot', description: 'Framework for production-grade apps' },
             { name: 'Quarkus', description: 'Kubernetes native Java stack' },
@@ -162,7 +162,7 @@ const techStacks = [
     {
         category: 'Other',
         Icon: Layers,
-        iconColor: '#ff6b35',
+        iconColor: 'var(--brand)',
         frameworks: [
             { name: 'Static Sites', description: 'HTML, CSS, JavaScript' },
             { name: 'Docker', description: 'Custom container images' },
@@ -200,7 +200,7 @@ export default function TechStacksPage() {
 
                         <nav aria-label="Breadcrumb" className="mb-10">
                             <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
-                                <li><a href="/" className="transition-colors hover:text-[#ff6b35]">Home</a></li>
+                                <li><a href="/" className="transition-colors hover:text-brand">Home</a></li>
                                 <li>/</li>
                                 <li>Tech Stacks</li>
                             </ol>
@@ -215,7 +215,7 @@ export default function TechStacksPage() {
                             <p className="mb-8 max-w-xl text-lg leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
                                 Zero configuration required. Push your code — we auto-detect your framework, provision the right infrastructure, and deploy to GDPR-compliant EU servers in Germany.
                             </p>
-                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
+                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 bg-brand px-8 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
                                 Start Deploying
                             </Link>
                         </div>
@@ -249,7 +249,7 @@ export default function TechStacksPage() {
                                 { step: '04', title: 'Live in Germany', desc: 'Deployed to GDPR-compliant EU infrastructure.' }
                             ].map(item => (
                                 <div key={item.step} className="flex items-start gap-8 border-b py-6" style={{ borderColor: 'var(--border-subtle)' }}>
-                                    <span className="w-8 shrink-0 font-mono text-xs" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>{item.step}</span>
+                                    <span className="w-8 shrink-0 font-mono text-xs" style={{ color: 'var(--brand-secondary)', fontFamily: 'var(--font-mono)' }}>{item.step}</span>
                                     <div>
                                         <h3 className="mb-1 font-semibold">{item.title}</h3>
                                         <p className="text-sm" style={{ color: 'var(--fg-secondary)' }}>{item.desc}</p>
@@ -270,17 +270,17 @@ export default function TechStacksPage() {
                             {techStacks.map(stack => {
                                 const IconComponent = stack.Icon
                                 return (
-                                    <div key={stack.category} className="border p-6 transition-colors hover:border-[#ff6b35]"
+                                    <div key={stack.category} className="border p-6 transition-colors hover:border-brand"
                                         style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
                                         <div className="mb-4 flex items-center gap-3">
                                             <IconComponent className="h-5 w-5 shrink-0" style={{ color: stack.iconColor }} />
                                             <h3 className="font-semibold">{stack.category}</h3>
                                         </div>
-                                        <ul className="space-y-2">
+                                        <ul className="space-y-3">
                                             {stack.frameworks.map(framework => (
-                                                <li key={framework.name} className="flex items-start justify-between gap-2">
+                                                <li key={framework.name}>
                                                     <span className="text-sm font-medium">{framework.name}</span>
-                                                    <span className="text-right text-xs" style={{ color: 'var(--fg-tertiary)' }}>{framework.description}</span>
+                                                    <p className="text-xs leading-snug" style={{ color: 'var(--fg-tertiary)' }}>{framework.description}</p>
                                                 </li>
                                             ))}
                                         </ul>
@@ -300,7 +300,7 @@ export default function TechStacksPage() {
                             <p className="mb-8 max-w-xl" style={{ color: 'var(--fg-secondary)' }}>
                                 Join European teams shipping code without DevOps overhead.
                             </p>
-                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
+                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 bg-brand px-8 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
                                 Get Early Access
                             </Link>
                         </div>

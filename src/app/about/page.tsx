@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Check } from 'lucide-react'
 import FAQSchema from '@/components/FAQSchema'
 
 export const metadata: Metadata = {
@@ -79,7 +80,7 @@ export default function About() {
 
                         <nav aria-label="Breadcrumb" className="mb-10">
                             <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
-                                <li><a href="/" className="transition-colors hover:text-[#ff6b35]">Home</a></li>
+                                <li><a href="/" className="transition-colors hover:text-brand">Home</a></li>
                                 <li>/</li>
                                 <li>About</li>
                             </ol>
@@ -112,7 +113,8 @@ export default function About() {
                                 <ul className="space-y-2">
                                     {['GDPR compliant by design', 'EU data residency guaranteed', 'Local European support', 'Pricing in Euros'].map(item => (
                                         <li key={item} className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-secondary)' }}>
-                                            <span style={{ color: 'var(--brand)' }}>✓</span> {item}
+                                            <Check className="h-3 w-3 shrink-0" style={{ color: 'var(--brand)' }} />
+                                            {item}
                                         </li>
                                     ))}
                                 </ul>

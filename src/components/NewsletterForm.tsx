@@ -64,7 +64,7 @@ export default function NewsletterForm() {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="h-12 flex-1 border px-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#ff6b35]"
+                className="h-12 flex-1 border px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand"
                 style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)', color: 'var(--fg-primary)' }}
                 required
                 disabled={status === 'loading'}
@@ -73,7 +73,7 @@ export default function NewsletterForm() {
             <button
                 type="submit"
                 disabled={status === 'loading' || !email}
-                className="h-12 bg-[#ff6b35] px-8 text-sm font-semibold whitespace-nowrap text-black transition-colors hover:bg-[#ff7b45] disabled:cursor-not-allowed disabled:opacity-50"
+                className="h-12 bg-brand px-8 text-sm font-semibold whitespace-nowrap text-black transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
             >
                 {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
             </button>

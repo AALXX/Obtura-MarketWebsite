@@ -270,8 +270,8 @@ export default function RootLayout({
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="shortcut icon" href="/favicon.ico" />
                 <link rel="apple-touch-icon" href="/Logo2.png" />
-                <meta name="theme-color" content="#0a0a0a" />
-                <meta name="msapplication-TileColor" content="#0a0a0a" />
+                <meta name="theme-color" content="#0d0c0b" />
+                <meta name="msapplication-TileColor" content="#0d0c0b" />
                 <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

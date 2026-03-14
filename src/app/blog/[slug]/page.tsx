@@ -64,16 +64,16 @@ function formatDate(dateString: string) {
 
 function renderMarkdown(content: string) {
     return content
-        .replace(/^# (.*$)/gim, '<h1 class="text-4xl font-bold text-white mb-6 mt-8">$1</h1>')
-        .replace(/^## (.*$)/gim, '<h2 class="text-3xl font-bold text-white mb-4 mt-8">$1</h2>')
-        .replace(/^### (.*$)/gim, '<h3 class="text-2xl font-bold text-white mb-3 mt-6">$1</h3>')
-        .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+        .replace(/^# (.*$)/gim, '<h1 class="text-4xl font-bold mb-6 mt-8" style="color:var(--fg-primary)">$1</h1>')
+        .replace(/^## (.*$)/gim, '<h2 class="text-3xl font-bold mb-4 mt-8" style="color:var(--fg-primary)">$1</h2>')
+        .replace(/^### (.*$)/gim, '<h3 class="text-2xl font-bold mb-3 mt-6" style="color:var(--fg-primary)">$1</h3>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--fg-primary)">$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/^\* (.*$)/gim, '<li class="ml-6 mb-2 text-gray-300">$1</li>')
-        .replace(/<li.*<\/li>/g, match => `<ul class="mb-4">${match}</ul>`)
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-[#ff6b35] hover:underline">$1</a>')
-        .replace(/\n\n/g, '</p><p class="mb-4 text-gray-300 leading-relaxed">')
-        .replace(/^(.+)$/gim, '<p class="mb-4 text-gray-300 leading-relaxed">$1</p>')
+        .replace(/^\* (.*$)/gim, '<li class="ml-6 mb-2" style="color:var(--fg-secondary)">$1</li>')
+        .replace(/(<li[^>]*>.*?<\/li>\n?)+/g, match => `<ul class="mb-4">${match}</ul>`)
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="hover:underline" style="color:var(--brand)">$1</a>')
+        .replace(/\n\n/g, `</p><p class="mb-4 leading-relaxed" style="color:var(--fg-secondary)">`)
+        .replace(/^(.+)$/gim, `<p class="mb-4 leading-relaxed" style="color:var(--fg-secondary)">$1</p>`)
 }
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
@@ -117,71 +117,68 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-            <article className="min-h-screen bg-[#0a0a0a] font-sans text-white">
-                {/* Hero Section */}
-                <div className="relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#ff6b35]/5 to-transparent" />
+            <article className="min-h-screen pt-16" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
+                {/* Header */}
+                <div className="mx-auto max-w-4xl px-6 pt-12 pb-16 sm:px-8 lg:px-12">
+                    <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm transition-colors hover:text-brand" style={{ color: 'var(--fg-secondary)' }}>
+                        <ArrowLeft className="h-4 w-4" />
+                        Back to Blog
+                    </Link>
 
-                    <div className="relative mx-auto max-w-4xl px-4 pt-24 pb-16 sm:px-6 lg:px-8">
-                        <Link href="/blog" className="mb-8 inline-flex items-center text-gray-400 transition-colors hover:text-[#ff6b35]">
-                            <ArrowLeft className="mr-2 h-4 w-4" />
-                            Back to Blog
-                        </Link>
+                    {/* Category label */}
+                    <p className="mb-5 mt-6 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)' }}>
+                        — {post.category}
+                    </p>
 
-                        {/* Category Badge */}
-                        <div className="mb-6 inline-block">
-                            <span className="rounded-full bg-[#ff6b35]/10 px-4 py-2 text-sm font-medium text-[#ff6b35]">{post.category}</span>
+                    {/* Title */}
+                    <h1 className="mb-6 text-4xl font-black leading-tight tracking-tight sm:text-5xl" style={{ fontFamily: 'var(--font-display)' }}>{post.title}</h1>
+
+                    {/* Excerpt */}
+                    <p className="mb-8 text-xl leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>{post.excerpt}</p>
+
+                    {/* Meta Info */}
+                    <div className="mb-8 flex flex-wrap items-center gap-6 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
+                        <div className="flex items-center gap-2">
+                            <Calendar className="h-4 w-4" />
+                            {formatDate(post.date)}
                         </div>
-
-                        {/* Title */}
-                        <h1 className="mb-6 text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">{post.title}</h1>
-
-                        {/* Excerpt */}
-                        <p className="mb-8 text-xl leading-relaxed text-gray-400">{post.excerpt}</p>
-
-                        {/* Meta Info */}
-                        <div className="mb-8 flex flex-wrap items-center gap-6 text-sm text-gray-500">
-                            <div className="flex items-center">
-                                <Calendar className="mr-2 h-4 w-4" />
-                                {formatDate(post.date)}
-                            </div>
-                            <div className="flex items-center">
-                                <Clock className="mr-2 h-4 w-4" />
-                                {post.readTime}
-                            </div>
-                            <div className="flex items-center">
-                                <span className="text-gray-400">By {post.author}</span>
-                            </div>
+                        <div className="flex items-center gap-2">
+                            <Clock className="h-4 w-4" />
+                            {post.readTime}
                         </div>
+                        <div>By {post.author}</div>
+                    </div>
 
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2">
-                            {post.tags.map(tag => (
-                                <span key={tag} className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-sm text-gray-400 transition-colors hover:bg-white/10">
-                                    <Tag className="mr-1 h-3 w-3" />
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                        {post.tags.map(tag => (
+                            <span key={tag} className="inline-flex items-center gap-1 border px-3 py-1 text-sm transition-colors" style={{ borderColor: 'var(--border-default)', color: 'var(--fg-secondary)' }}>
+                                <Tag className="h-3 w-3" />
+                                {tag}
+                            </span>
+                        ))}
                     </div>
                 </div>
 
                 {/* Content */}
-                <div className="mx-auto max-w-4xl px-4 pb-24 sm:px-6 lg:px-8">
-                    <div className="prose prose-invert prose-lg prose-headings:text-white prose-p:text-gray-300 prose-a:text-[#ff6b35] prose-strong:text-white prose-li:text-gray-300 max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }} />
+                <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+                    <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 lg:px-12">
+                        <div className="prose prose-invert prose-lg prose-headings:font-black prose-a:text-brand max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }} />
+                    </div>
                 </div>
 
                 {/* CTA Section */}
-                <div className="border-t border-white/10">
-                    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-                        <div className="rounded-2xl bg-gradient-to-r from-[#ff6b35]/10 to-transparent p-8 sm:p-12">
-                            <h2 className="mb-4 text-2xl font-bold text-white sm:text-3xl">Ready to simplify your DevOps?</h2>
-                            <p className="mb-6 text-lg text-gray-400">Join European SMEs shipping code 3x faster with Obtura's zero-DevOps platform.</p>
+                <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+                    <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 lg:px-12">
+                        <div className="border p-8 sm:p-12" style={{ borderColor: 'var(--brand-border)', background: 'var(--brand-dim)' }}>
+                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Get started</p>
+                            <h2 className="mb-4 text-2xl font-black sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>Ready to simplify your DevOps?</h2>
+                            <p className="mb-8 text-lg" style={{ color: 'var(--fg-secondary)' }}>Join European SMEs shipping code 3x faster with Obtura&apos;s zero-DevOps platform.</p>
                             <div className="flex flex-col gap-4 sm:flex-row">
-                                <Link href="/contact" className="inline-flex h-12 items-center justify-center rounded-lg bg-[#ff6b35] px-8 font-semibold text-black shadow-lg shadow-[#ff6b35]/20 transition-all hover:bg-[#ff7b45]">
+                                <Link href="/contact" className="inline-flex h-12 items-center justify-center bg-brand px-8 font-semibold text-black transition-colors hover:bg-brand-hover">
                                     Get Early Access
                                 </Link>
-                                <Link href="/" className="inline-flex h-12 items-center justify-center rounded-lg border border-white/20 px-8 font-semibold text-white transition-all hover:bg-white/5">
+                                <Link href="/" className="inline-flex h-12 items-center justify-center border px-8 font-semibold transition-colors hover:text-brand" style={{ borderColor: 'var(--border-default)', color: 'var(--fg-primary)' }}>
                                     Learn More
                                 </Link>
                             </div>

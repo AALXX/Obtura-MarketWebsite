@@ -87,7 +87,7 @@ export default function BlogPage() {
 
                         <nav aria-label="Breadcrumb" className="mb-10">
                             <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
-                                <li><a href="/" className="transition-colors hover:text-[#ff6b35]">Home</a></li>
+                                <li><a href="/" className="transition-colors hover:text-brand">Home</a></li>
                                 <li>/</li>
                                 <li>Blog</li>
                             </ol>
@@ -105,15 +105,15 @@ export default function BlogPage() {
 
                         <div className="flex items-baseline gap-8">
                             <div>
-                                <span className="text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>{posts.length}</span>
+                                <span className="text-2xl font-black" style={{ fontFamily: 'var(--font-display)', color: 'var(--brand)' }}>{posts.length}</span>
                                 <span className="ml-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>Articles</span>
                             </div>
                             <div>
-                                <span className="text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>{categories.length}</span>
+                                <span className="text-2xl font-black" style={{ fontFamily: 'var(--font-display)', color: 'var(--brand)' }}>{categories.length}</span>
                                 <span className="ml-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>Categories</span>
                             </div>
                             <div>
-                                <span className="text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>{allTags.length}</span>
+                                <span className="text-2xl font-black" style={{ fontFamily: 'var(--font-display)', color: 'var(--brand)' }}>{allTags.length}</span>
                                 <span className="ml-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>Topics</span>
                             </div>
                         </div>
@@ -123,12 +123,12 @@ export default function BlogPage() {
                 {/* Categories filter */}
                 <section className="border-y px-6 py-5 sm:px-8 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
                     <div className="mx-auto max-w-6xl flex flex-wrap items-center gap-3">
-                        <span className="text-xs font-mono uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>Filter:</span>
+                        <span className="text-xs font-mono uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>Categories:</span>
                         {categories.map(category => (
-                            <button key={category} className="border px-3 py-1 text-sm transition-colors hover:text-[#ff6b35]"
-                                style={{ borderColor: 'var(--border-default)', color: 'var(--fg-secondary)', background: 'transparent' }}>
+                            <span key={category} className="border px-3 py-1 text-sm"
+                                style={{ borderColor: 'var(--border-default)', color: 'var(--fg-secondary)' }}>
                                 {category}
-                            </button>
+                            </span>
                         ))}
                     </div>
                 </section>
@@ -154,7 +154,7 @@ export default function BlogPage() {
                                             </div>
                                         </div>
 
-                                        <h2 className="mb-3 text-2xl font-black leading-tight tracking-tight transition-colors group-hover:text-[#ff6b35] sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
+                                        <h2 className="mb-3 text-2xl font-black leading-tight tracking-tight transition-colors group-hover:text-brand sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
                                             {post.title}
                                         </h2>
 
@@ -190,7 +190,7 @@ export default function BlogPage() {
                         <h2 className="mb-8 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Popular Topics</h2>
                         <div className="flex flex-wrap gap-2">
                             {allTags.map(tag => (
-                                <span key={tag} className="cursor-pointer border px-3 py-1 text-sm transition-colors hover:text-[#ff6b35]"
+                                <span key={tag} className="border px-3 py-1 text-sm"
                                     style={{ borderColor: 'var(--border-default)', color: 'var(--fg-secondary)' }}>
                                     #{tag}
                                 </span>

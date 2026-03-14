@@ -29,7 +29,7 @@ export default function DocsClient() {
 
                     <nav aria-label="Breadcrumb" className="mb-10">
                         <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
-                            <li><a href="/" className="transition-colors hover:text-[#ff6b35]">Home</a></li>
+                            <li><a href="/" className="transition-colors hover:text-brand">Home</a></li>
                             <li>/</li>
                             <li>Docs</li>
                         </ol>
@@ -51,19 +51,21 @@ export default function DocsClient() {
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="flex max-w-md flex-col gap-3 sm:flex-row">
+                            <label htmlFor="notify-email" className="sr-only">Email address</label>
                             <input
+                                id="notify-email"
                                 type="email"
                                 placeholder="your@email.com"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
-                                className="h-12 flex-1 border px-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#ff6b35]"
+                                className="h-12 flex-1 border px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand"
                                 style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)', color: 'var(--fg-primary)' }}
                                 required
                             />
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="h-12 bg-[#ff6b35] px-6 text-sm font-semibold whitespace-nowrap text-black transition-colors hover:bg-[#ff7b45] disabled:cursor-not-allowed disabled:opacity-50"
+                                className="h-12 bg-brand px-6 text-sm font-semibold whitespace-nowrap text-black transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 {isLoading ? '...' : 'Notify Me'}
                             </button>
@@ -71,6 +73,7 @@ export default function DocsClient() {
                     )}
 
                     <div className="mt-16 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+                        <h2 className="sr-only">Upcoming Documentation</h2>
                         {[
                             { title: 'API Reference', desc: 'Complete REST API documentation' },
                             { title: 'Deployment Guides', desc: 'Step-by-step deployment tutorials' },

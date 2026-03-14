@@ -30,39 +30,39 @@ export function NavBar() {
 
                     <div className="absolute left-1/2 hidden -translate-x-1/2 transform items-center gap-8 md:flex">
                         {navLinks.map(link => (
-                            <a key={link.name} href={link.href} className="text-sm font-medium transition-colors hover:text-white" style={{ color: pathname === link.href ? 'var(--fg-primary)' : 'var(--fg-secondary)' }}>
+                            <a key={link.name} href={link.href} className="text-sm font-medium transition-colors hover:text-(--fg-primary)" style={{ color: pathname === link.href ? 'var(--fg-primary)' : 'var(--fg-secondary)' }}>
                                 {link.name}
                             </a>
                         ))}
                     </div>
 
                     <div className="hidden shrink-0 items-center gap-4 md:flex">
-                        <Link href="/contact" className="text-sm font-medium transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
+                        <Link href="/contact" className="text-sm font-medium transition-colors hover:text-brand" style={{ color: 'var(--fg-secondary)' }}>
                             Book a Demo
                         </Link>
-                        <Link href="/contact" className="inline-flex h-10 items-center justify-center gap-2 bg-[#ff6b35] px-6 text-sm font-semibold whitespace-nowrap text-black transition-colors hover:bg-[#ff7b45]">
+                        <Link href="/contact" className="inline-flex h-10 items-center justify-center gap-2 bg-brand px-6 text-sm font-semibold whitespace-nowrap text-black transition-colors hover:bg-brand-hover">
                             Join Waitlist
                         </Link>
                     </div>
 
-                    <button type="button" className="p-2 transition-colors hover:text-white md:hidden" style={{ color: 'var(--fg-secondary)' }} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                    <button type="button" className="p-2 transition-colors hover:text-(--fg-primary) md:hidden" style={{ color: 'var(--fg-secondary)' }} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileMenuOpen} aria-controls="mobile-menu">
                         {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                     </button>
                 </div>
 
                 {mobileMenuOpen && (
-                    <div className="border-t py-4 md:hidden" style={{ borderColor: 'var(--border-subtle)' }}>
+                    <div id="mobile-menu" className="border-t py-4 md:hidden" style={{ borderColor: 'var(--border-subtle)' }}>
                         <div className="flex flex-col gap-4">
                             {navLinks.map(link => (
-                                <a key={link.name} href={link.href} className="px-2 py-1 text-sm font-medium transition-colors hover:text-white" style={{ color: pathname === link.href ? 'var(--fg-primary)' : 'var(--fg-secondary)' }} onClick={() => setMobileMenuOpen(false)}>
+                                <a key={link.name} href={link.href} className="px-2 py-1 text-sm font-medium transition-colors hover:text-(--fg-primary)" style={{ color: pathname === link.href ? 'var(--fg-primary)' : 'var(--fg-secondary)' }} onClick={() => setMobileMenuOpen(false)}>
                                     {link.name}
                                 </a>
                             ))}
                             <div className="flex flex-col gap-2 border-t pt-4" style={{ borderColor: 'var(--border-subtle)' }}>
-                                <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="px-2 py-1 text-sm font-medium transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
+                                <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="px-2 py-1 text-sm font-medium transition-colors hover:text-brand" style={{ color: 'var(--fg-secondary)' }}>
                                     Book a Demo
                                 </a>
-                                <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="inline-flex h-10 w-full items-center justify-center gap-2 bg-[#ff6b35] px-6 text-sm font-semibold whitespace-nowrap text-black transition-colors hover:bg-[#ff7b45]">
+                                <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="inline-flex h-10 w-full items-center justify-center gap-2 bg-brand px-6 text-sm font-semibold whitespace-nowrap text-black transition-colors hover:bg-brand-hover">
                                     Join Waitlist
                                 </a>
                             </div>
