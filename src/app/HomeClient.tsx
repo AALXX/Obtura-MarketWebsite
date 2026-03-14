@@ -120,7 +120,7 @@ export default function HomeClient() {
 
     const currentSetup = calculations[setup]
     const totalCost = Object.values(currentSetup).reduce((a, b) => a + b, 0)
-    const obturaCost = developers <= 3 ? 948 : developers <= 10 ? 3588 : developers <= 25 ? 9588 : 26388
+    const obturaCost = developers <= 3 ? 948 : developers <= 10 ? 2388 : developers <= 25 ? 5988 : 10788
     const savings = totalCost - obturaCost
     const savingsPercent = totalCost > 0 ? Math.round((savings / totalCost) * 100) : 0
     const planName = developers <= 3 ? 'Starter' : developers <= 10 ? 'Team' : developers <= 25 ? 'Business' : 'Enterprise'
@@ -535,27 +535,27 @@ export default function HomeClient() {
                     <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
                         {[
                             {
-                                name: 'Starter', price: '€199', period: '/month',
-                                description: 'For small teams getting started',
-                                features: ['Up to 3 developers', '5 projects', 'Basic monitoring', 'Community support'],
+                                name: 'Starter', price: '€79', period: '/month',
+                                description: '1–3 devs · 3 services',
+                                features: ['Zero-config deployment', 'AI DevOps Agent', 'Error tracking & alerts', 'Custom domains + SSL', '2 team seats', '7-day log retention'],
                                 highlighted: false
                             },
                             {
-                                name: 'Team', price: '€250', period: '/month',
-                                description: 'For growing development teams',
-                                features: ['Up to 10 developers', 'Unlimited projects', 'Full observability suite', 'Priority support', 'Custom domains'],
+                                name: 'Team', price: '€199', period: '/month',
+                                description: '5–10 devs · 15 services',
+                                features: ['Everything in Starter', 'Preview environments per PR', 'APM + uptime monitoring', '10 team seats · full RBAC', '30-day log retention', 'Onboarding call included'],
                                 highlighted: false
                             },
                             {
-                                name: 'Business', price: '€650', period: '/month',
-                                description: 'For established SME teams',
-                                features: ['Up to 25 developers', 'Unlimited projects', 'Advanced security', 'SSO & SAML', 'Dedicated support', 'SLA guarantees'],
+                                name: 'Business', price: '€499', period: '/month',
+                                description: '10–25 devs · unlimited services',
+                                features: ['Everything in Team', 'Deployment approval workflows', 'Distributed tracing', 'Live chat support', '25 team seats', '90-day log retention'],
                                 highlighted: true, badge: 'Most popular'
                             },
                             {
-                                name: 'Enterprise', price: '€899+', period: '/month',
-                                description: 'For large organizations',
-                                features: ['Unlimited developers', 'Unlimited projects', 'On-premise option', 'Custom integrations', 'Dedicated account manager', '24/7 phone support'],
+                                name: 'Enterprise', price: '€899', period: '/month',
+                                description: '25–50 devs · unlimited everything',
+                                features: ['Everything in Business', 'Custom AI remediation playbooks', 'Unlimited team seats', '1-year log retention', 'Dedicated account manager', 'Phone/WhatsApp for P1s'],
                                 highlighted: false
                             }
                         ].map(plan => (
