@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Check } from 'lucide-react'
 
 export default function NewsletterForm() {
     const [email, setEmail] = useState('')
@@ -39,20 +40,20 @@ export default function NewsletterForm() {
 
     if (status === 'success') {
         return (
-            <div className="flex flex-col items-center gap-3 py-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
-                    <svg className="h-6 w-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+            <div className="flex items-start gap-3 py-2">
+                <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand)' }}>
+                    <Check className="h-4 w-4" />
                 </div>
-                <p className="font-semibold text-white">You're subscribed!</p>
-                <p className="text-sm text-gray-400">Thanks for joining. We'll send you DevOps tips and Obtura updates.</p>
+                <div>
+                    <p className="font-semibold text-sm">You&apos;re subscribed!</p>
+                    <p className="text-sm" style={{ color: 'var(--fg-secondary)' }}>Thanks for joining. We&apos;ll send you DevOps tips and Obtura updates.</p>
+                </div>
             </div>
         )
     }
 
     return (
-        <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row" noValidate>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row" noValidate>
             <label htmlFor="newsletter-email" className="sr-only">
                 Email address
             </label>
@@ -63,16 +64,21 @@ export default function NewsletterForm() {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="h-12 flex-1 rounded-lg border border-white/10 bg-[#2a2a2a] px-4 text-white placeholder:text-gray-500 focus:border-transparent focus:ring-2 focus:ring-[#ff6b35] focus:outline-none"
+                className="h-12 flex-1 border px-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#ff6b35]"
+                style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)', color: 'var(--fg-primary)' }}
                 required
                 disabled={status === 'loading'}
                 aria-describedby={status === 'error' ? 'newsletter-error' : undefined}
             />
-            <button type="submit" disabled={status === 'loading' || !email} className="h-12 rounded-lg bg-[#ff6b35] px-8 font-semibold whitespace-nowrap text-black shadow-lg shadow-[#ff6b35]/20 transition-all hover:bg-[#ff7b45] disabled:cursor-not-allowed disabled:opacity-50">
+            <button
+                type="submit"
+                disabled={status === 'loading' || !email}
+                className="h-12 bg-[#ff6b35] px-8 text-sm font-semibold whitespace-nowrap text-black transition-colors hover:bg-[#ff7b45] disabled:cursor-not-allowed disabled:opacity-50"
+            >
                 {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
             </button>
             {status === 'error' && (
-                <p id="newsletter-error" role="alert" className="w-full text-center text-sm text-red-400">
+                <p id="newsletter-error" role="alert" className="w-full text-sm" style={{ color: 'var(--fg-secondary)' }}>
                     {errorMsg}
                 </p>
             )}

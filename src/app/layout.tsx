@@ -1,13 +1,20 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Fraunces, DM_Sans, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { NavBar } from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema'
 
-const geistSans = Geist({
-    variable: '--font-geist-sans',
-    subsets: ['latin']
+const fraunces = Fraunces({
+    variable: '--font-fraunces',
+    subsets: ['latin'],
+    weight: ['300', '400', '700', '900']
+})
+
+const dmSans = DM_Sans({
+    variable: '--font-dm-sans',
+    subsets: ['latin'],
+    weight: ['300', '400', '500', '600']
 })
 
 const geistMono = Geist_Mono({
@@ -274,7 +281,7 @@ export default function RootLayout({
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd) }} />
             </head>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${fraunces.variable} ${dmSans.variable} ${geistMono.variable} antialiased`}>
                 <NavBar />
                 {children}
                 <Footer />

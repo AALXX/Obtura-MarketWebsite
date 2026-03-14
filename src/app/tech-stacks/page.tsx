@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import FAQSchema from '@/components/FAQSchema'
-import { Code2, Terminal, Braces, Settings, Globe, Gem, Coffee, Package, Layers, Cpu } from 'lucide-react'
+import { Code2, Terminal, Settings, Globe, Gem, Coffee, Layers, Cpu } from 'lucide-react'
 
 export const metadata: Metadata = {
     title: 'Deploy Any Tech Stack Autonomously | 85%+ Framework Coverage | Obtura',
@@ -41,14 +41,7 @@ export const metadata: Metadata = {
         title: 'Deploy Any Tech Stack Autonomously | Obtura',
         description: 'Autonomous deployment for 15+ tech stacks. Zero configuration required. GDPR-compliant EU hosting.',
         type: 'website',
-        images: [
-            {
-                url: 'https://obtura.dev/Logo2.png',
-                width: 1200,
-                height: 630,
-                alt: 'Obtura - Deploy Any Tech Stack Autonomously'
-            }
-        ]
+        images: [{ url: 'https://obtura.dev/Logo2.png', width: 1200, height: 630, alt: 'Obtura - Deploy Any Tech Stack Autonomously' }]
     },
     twitter: {
         card: 'summary_large_image',
@@ -56,9 +49,7 @@ export const metadata: Metadata = {
         description: 'Autonomous deployment for 15+ tech stacks with zero configuration.',
         images: ['https://obtura.dev/Logo2.png']
     },
-    alternates: {
-        canonical: 'https://obtura.dev/tech-stacks'
-    }
+    alternates: { canonical: 'https://obtura.dev/tech-stacks' }
 }
 
 const faqData = [
@@ -194,83 +185,102 @@ export default function TechStacksPage() {
             applicationCategory: 'DeveloperApplication',
             applicationSubCategory: 'Deployment Platform',
             featureList: techStacks.flatMap(stack => stack.frameworks.map(f => f.name)),
-            offers: {
-                '@type': 'Offer',
-                price: '0',
-                priceCurrency: 'EUR'
-            }
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }
         }
     }
 
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <div className="min-h-screen bg-[#0a0a0a] pt-16 font-sans text-white">
-                <section className="py-20 lg:py-32">
-                    <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                        <nav aria-label="Breadcrumb" className="mb-8">
-                            <ol className="flex items-center gap-2 text-sm text-gray-400">
-                                <li>
-                                    <a href="/" className="transition-colors hover:text-[#ff6b35]">
-                                        Home
-                                    </a>
-                                </li>
-                                <li>
-                                    <span>/</span>
-                                </li>
-                                <li className="text-white">Tech Stacks</li>
+            <div className="min-h-screen pt-16" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
+
+                {/* Header */}
+                <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12">
+                    <div className="mx-auto max-w-6xl">
+
+                        <nav aria-label="Breadcrumb" className="mb-10">
+                            <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
+                                <li><a href="/" className="transition-colors hover:text-[#ff6b35]">Home</a></li>
+                                <li>/</li>
+                                <li>Tech Stacks</li>
                             </ol>
                         </nav>
 
-                        <header className="mb-16 text-center">
-                            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#ff6b35]/30 bg-[#ff6b35]/10 px-4 py-2 text-sm font-medium text-[#ff6b35]">
-                                <span>85%+ App Coverage</span>
-                            </div>
-                            <h1 className="mb-6 text-4xl font-bold sm:text-5xl lg:text-6xl">
-                                Deploy Any Tech Stack <span className="text-[#ff6b35]">Autonomously</span>
+                        <div className="mb-12">
+                            <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— 85%+ app coverage</p>
+                            <h1 className="mb-6 text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl" style={{ fontFamily: 'var(--font-display)' }}>
+                                Deploy any<br />
+                                <span style={{ color: 'var(--brand)' }}>tech stack.</span>
                             </h1>
-                            <p className="mx-auto mb-8 max-w-3xl text-lg text-gray-400">Zero configuration required. Just push your code, and we handle the rest. Auto-detection, smart provisioning, and GDPR-compliant EU hosting in Germany.</p>
-                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#ff6b35] px-8 font-semibold text-black shadow-lg shadow-[#ff6b35]/20 transition-all hover:bg-[#ff7b45]">
+                            <p className="mb-8 max-w-xl text-lg leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
+                                Zero configuration required. Push your code — we auto-detect your framework, provision the right infrastructure, and deploy to GDPR-compliant EU servers in Germany.
+                            </p>
+                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
                                 Start Deploying
                             </Link>
-                        </header>
-
-                        {/* How it Works */}
-                        <div className="mb-16 rounded-2xl border border-white/10 bg-[#1a1a1a] p-8">
-                            <h2 className="mb-8 text-center text-2xl font-bold">How Autonomous Deployment Works</h2>
-                            <div className="grid gap-6 sm:grid-cols-4">
-                                {[
-                                    { step: '1', title: 'Push Code', desc: 'Push to your Git repository' },
-                                    { step: '2', title: 'Auto-Detect', desc: 'We identify your framework' },
-                                    { step: '3', title: 'Configure', desc: 'Smart build configuration' },
-                                    { step: '4', title: 'Live', desc: 'Deployed to Germany 🇩🇪' }
-                                ].map(item => (
-                                    <div key={item.step} className="text-center">
-                                        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#ff6b35]/20 text-xl font-bold text-[#ff6b35]">{item.step}</div>
-                                        <h3 className="mb-1 font-semibold text-white">{item.title}</h3>
-                                        <p className="text-sm text-gray-400">{item.desc}</p>
-                                    </div>
-                                ))}
-                            </div>
                         </div>
 
-                        {/* Tech Stack Grid */}
+                        {/* Stats */}
+                        <div className="flex items-baseline gap-10 border-t pt-8" style={{ borderColor: 'var(--border-subtle)' }}>
+                            {[
+                                { value: '15+', label: 'Framework Categories' },
+                                { value: '85%+', label: 'App Coverage' },
+                                { value: '0', label: 'Config Files Required' }
+                            ].map(stat => (
+                                <div key={stat.label}>
+                                    <span className="text-3xl font-black" style={{ color: 'var(--brand)', fontFamily: 'var(--font-display)' }}>{stat.value}</span>
+                                    <span className="ml-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>{stat.label}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* How it works */}
+                <section className="border-y px-6 py-16 sm:px-8 sm:py-20 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
+                    <div className="mx-auto max-w-6xl">
+                        <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— How it works</p>
+                        <h2 className="mb-10 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Autonomous Deployment</h2>
+                        <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+                            {[
+                                { step: '01', title: 'Push Code', desc: 'Push to your Git repository as usual.' },
+                                { step: '02', title: 'Auto-Detect', desc: 'We identify your framework and dependencies.' },
+                                { step: '03', title: 'Configure', desc: 'Smart build configuration — no YAML required.' },
+                                { step: '04', title: 'Live in Germany', desc: 'Deployed to GDPR-compliant EU infrastructure.' }
+                            ].map(item => (
+                                <div key={item.step} className="flex items-start gap-8 border-b py-6" style={{ borderColor: 'var(--border-subtle)' }}>
+                                    <span className="w-8 shrink-0 font-mono text-xs" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>{item.step}</span>
+                                    <div>
+                                        <h3 className="mb-1 font-semibold">{item.title}</h3>
+                                        <p className="text-sm" style={{ color: 'var(--fg-secondary)' }}>{item.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Tech Stack Grid */}
+                <section className="px-6 py-16 sm:px-8 sm:py-20 lg:px-12">
+                    <div className="mx-auto max-w-6xl">
+                        <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Supported stacks</p>
+                        <h2 className="mb-10 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Every Framework You Need</h2>
+
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             {techStacks.map(stack => {
                                 const IconComponent = stack.Icon
                                 return (
-                                    <div key={stack.category} className="rounded-xl border border-white/10 bg-[#1a1a1a] p-6 transition-all hover:border-[#ff6b35]/30">
+                                    <div key={stack.category} className="border p-6 transition-colors hover:border-[#ff6b35]"
+                                        style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
                                         <div className="mb-4 flex items-center gap-3">
-                                            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white/5">
-                                                <IconComponent className="h-6 w-6" style={{ color: stack.iconColor }} />
-                                            </div>
-                                            <h2 className="text-xl font-semibold text-white">{stack.category}</h2>
+                                            <IconComponent className="h-5 w-5 shrink-0" style={{ color: stack.iconColor }} />
+                                            <h3 className="font-semibold">{stack.category}</h3>
                                         </div>
-                                        <ul className="space-y-3">
+                                        <ul className="space-y-2">
                                             {stack.frameworks.map(framework => (
                                                 <li key={framework.name} className="flex items-start justify-between gap-2">
-                                                    <span className="font-medium text-white">{framework.name}</span>
-                                                    <span className="text-right text-xs text-gray-500">{framework.description}</span>
+                                                    <span className="text-sm font-medium">{framework.name}</span>
+                                                    <span className="text-right text-xs" style={{ color: 'var(--fg-tertiary)' }}>{framework.description}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -278,35 +288,31 @@ export default function TechStacksPage() {
                                 )
                             })}
                         </div>
+                    </div>
+                </section>
 
-                        {/* Stats */}
-                        <div className="mt-16 grid gap-6 sm:grid-cols-3">
-                            {[
-                                { value: '15+', label: 'Framework Categories' },
-                                { value: '85%+', label: 'App Coverage' },
-                                { value: '0', label: 'Config Files Required' }
-                            ].map(stat => (
-                                <div key={stat.label} className="rounded-xl border border-white/10 bg-[#1a1a1a] p-6 text-center">
-                                    <div className="mb-2 text-4xl font-bold text-[#ff6b35]">{stat.value}</div>
-                                    <div className="text-gray-400">{stat.label}</div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* CTA */}
-                        <div className="mt-16 rounded-2xl border border-[#ff6b35]/30 bg-gradient-to-r from-[#ff6b35]/20 to-[#ff6b35]/5 p-8 text-center">
-                            <h2 className="mb-4 text-2xl font-bold">Ready to deploy your stack?</h2>
-                            <p className="mb-6 text-gray-400">Join European teams shipping code without DevOps overhead.</p>
-                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#ff6b35] px-8 font-semibold text-black shadow-lg shadow-[#ff6b35]/20 transition-all hover:bg-[#ff7b45]">
+                {/* CTA */}
+                <section className="border-y px-6 py-20 sm:px-8 sm:py-24 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
+                    <div className="mx-auto max-w-6xl">
+                        <div className="border p-8 sm:p-12" style={{ borderColor: 'var(--brand-border)', background: 'var(--brand-dim)' }}>
+                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Get started</p>
+                            <h2 className="mb-3 text-3xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Ready to deploy your stack?</h2>
+                            <p className="mb-8 max-w-xl" style={{ color: 'var(--fg-secondary)' }}>
+                                Join European teams shipping code without DevOps overhead.
+                            </p>
+                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
                                 Get Early Access
                             </Link>
                         </div>
+                    </div>
+                </section>
 
-                        {/* FAQ */}
-                        <div className="mt-16">
-                            <h2 className="mb-8 text-center text-2xl font-bold">Frequently Asked Questions</h2>
-                            <FAQSchema faqs={faqData} />
-                        </div>
+                {/* FAQ */}
+                <section className="px-6 py-16 sm:px-8 sm:py-20 lg:px-12">
+                    <div className="mx-auto max-w-6xl">
+                        <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— FAQ</p>
+                        <h2 className="mb-8 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Frequently Asked Questions</h2>
+                        <FAQSchema faqs={faqData} />
                     </div>
                 </section>
             </div>

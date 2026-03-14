@@ -1,10 +1,10 @@
 'use client'
-// Full homepage interactive content in the correct visual order:
-// Hero (animated) → Terminal → Problem → Features → Calculator → Trust badges → Pricing → CTA
+// Full homepage — editorial / confident direction
+// Hero → Terminal → Problem → Features → Calculator → Trust → Pricing → CTA
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, Zap, TrendingDown, Users, Clock, AlertTriangle, Rocket, BarChart3, GitBranch, Shield, UserCheck, Calculator, Lock, HardDrive, ClipboardCheck, Globe, Calendar, Terminal as TerminalIcon, Sparkles } from 'lucide-react'
+import { ArrowRight, Check, Zap, Users, Clock, AlertTriangle, TrendingDown, Rocket, BarChart3, GitBranch, Shield, UserCheck, Lock, HardDrive, ClipboardCheck, Globe, Calendar, Terminal as TerminalIcon, Sparkles } from 'lucide-react'
 
 interface TerminalLine {
     text: string
@@ -26,20 +26,52 @@ const ALL_TERMINAL_LINES: TerminalLine[] = [
     { prefix: '✨', text: 'Done in: 5m 03s', type: 'success' }
 ]
 
+const FEATURES = [
+    {
+        icon: <Rocket className="h-4 w-4" />,
+        title: 'Zero-Config Deployment',
+        description: 'Push code, infrastructure happens automatically. Smart framework detection configures everything.',
+        items: ['Auto-detect Node.js, Python, Go, PHP', 'Auto-provision databases & Redis', 'Auto-configure SSL & health checks']
+    },
+    {
+        icon: <BarChart3 className="h-4 w-4" />,
+        title: 'Built-in Observability',
+        description: 'No more paying for Sentry, Datadog, and Logtail separately. Everything included.',
+        items: ['Real-time error tracking', 'Performance metrics & APM', 'Log aggregation with search']
+    },
+    {
+        icon: <GitBranch className="h-4 w-4" />,
+        title: 'Git-Native Workflow',
+        description: 'Automatic staging, production, and preview environments for every branch.',
+        items: ['Preview URLs per branch', 'Auto-deploy on merge', 'One-click rollback']
+    },
+    {
+        icon: <Shield className="h-4 w-4" />,
+        title: 'Compliance by Default',
+        description: 'Every app is production-ready with enterprise features out-of-the-box.',
+        items: ['SSL certificates auto-renewed', 'Daily backups with 30-day retention', 'GDPR-compliant EU hosting']
+    },
+    {
+        icon: <UserCheck className="h-4 w-4" />,
+        title: 'Team Collaboration',
+        description: 'Non-technical team members can interact with deployments safely.',
+        items: ['PM-friendly interface', 'Designer preview sharing', 'Role-based access control']
+    },
+    {
+        icon: <Sparkles className="h-4 w-4" />,
+        title: 'AI Production Assistant',
+        description: 'Your AI copilot navigates production crises, analyzes logs, and monitors systems in real-time.',
+        items: ['Instant root cause analysis', 'Live log streaming & search', 'Proactive anomaly detection', 'Automated incident response']
+    }
+]
+
 export default function HomeClient() {
-    const [isVisible, setIsVisible] = useState<boolean>(false)
     const [developers, setDevelopers] = useState<number>(10)
     const [projects, setProjects] = useState<number>(5)
     const [setup, setSetup] = useState<string>('manual')
     const [terminalLines, setTerminalLines] = useState<TerminalLine[]>([])
     const terminalBodyRef = useRef<HTMLDivElement>(null)
 
-    // Hero fade-in on mount
-    useEffect(() => {
-        setIsVisible(true)
-    }, [])
-
-    // Terminal animation — fixed height body, auto-scroll to bottom
     useEffect(() => {
         let currentIndex = 0
         const interval = setInterval(() => {
@@ -50,11 +82,9 @@ export default function HomeClient() {
                 clearInterval(interval)
             }
         }, 600)
-
         return () => clearInterval(interval)
     }, [])
 
-    // Scroll terminal to bottom whenever a new line appears
     useEffect(() => {
         if (terminalBodyRef.current) {
             terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight
@@ -93,82 +123,124 @@ export default function HomeClient() {
     const obturaCost = developers <= 3 ? 948 : developers <= 10 ? 3588 : developers <= 25 ? 9588 : 26388
     const savings = totalCost - obturaCost
     const savingsPercent = totalCost > 0 ? Math.round((savings / totalCost) * 100) : 0
+    const planName = developers <= 3 ? 'Starter' : developers <= 10 ? 'Team' : developers <= 25 ? 'Business' : 'Enterprise'
 
     return (
-        <div className="overflow-x-hidden bg-[#0a0a0a] font-sans text-white">
-            {/* ── 1. Hero — fade-in animation on mount ── */}
-            <section className="relative mt-12 overflow-hidden bg-[#0a0a0a] py-12 sm:py-20 lg:mt-0 lg:py-32">
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#ff6b35]/5 to-transparent" />
-                <div className="pointer-events-none absolute top-1/2 left-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full bg-[#ff6b35]/10 blur-[100px] sm:h-[800px] sm:w-[800px] sm:blur-[150px]" />
+        <div className="overflow-x-hidden" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
 
-                <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className={`mx-auto max-w-5xl text-center transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                        <div className="mb-6 inline-flex animate-bounce items-center gap-2 rounded-full border border-[#ff6b35]/30 bg-[#ff6b35]/10 px-3 py-2 text-xs font-medium text-[#ff6b35] backdrop-blur-sm sm:mb-8 sm:px-4 sm:text-sm">
-                            <Zap className="h-3 w-3 sm:h-4 sm:w-4" />
-                            Now accepting early access signups
-                        </div>
+            {/* ── 1. Hero — editorial left-aligned ── */}
+            <section className="mt-16 px-6 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-32 lg:mt-0 lg:px-12 lg:pb-32 lg:pt-44" style={{ background: 'var(--bg-base)' }}>
+                <div className="mx-auto max-w-6xl">
 
-                        <h1 className="mb-4 px-2 text-4xl leading-tight font-bold sm:mb-6 sm:text-4xl md:text-5xl lg:text-7xl">
-                            Ship code without a <span className="block bg-linear-to-r from-[#ff6b35] to-[#ff8b55] bg-clip-text text-transparent sm:inline">DevOps team</span>
-                        </h1>
+ 
 
-                        <p className="mx-auto mb-6 max-w-3xl px-4 text-base leading-relaxed text-gray-400 sm:mb-8 sm:text-lg lg:text-xl">Obtura eliminates the DevOps bottleneck for European SME development teams. Zero-config deployment, built-in monitoring, predictable pricing.</p>
+                    {/* Display headline */}
+                    <h1
+                        className="mb-8 text-6xl font-black leading-none tracking-tight sm:text-7xl lg:text-9xl"
+                        style={{
+                            fontFamily: 'var(--font-display)',
+                            animation: 'heroReveal 0.6s ease-out 80ms both'
+                        }}
+                    >
+                        Ship code.
+                        <br />
+                        <span style={{ color: 'var(--brand)' }}>Not infrastructure.</span>
+                    </h1>
 
-                        <div className="mb-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 text-xs text-gray-400 sm:mb-10 sm:gap-6 sm:text-sm">
-                            {['5-minute deploy', 'Built-in observability', 'GDPR compliant', '€71K/year savings'].map((feature, i) => (
-                                <div key={feature} className="flex items-center gap-2 transition-all duration-300 hover:scale-110" style={{ animationDelay: `${i * 100}ms` }}>
-                                    <Check className="h-3 w-3 shrink-0 text-[#ff6b35] sm:h-4 sm:w-4" />
-                                    <span>{feature}</span>
-                                </div>
-                            ))}
-                        </div>
+                    {/* Horizontal rule — editorial separator */}
+                    <div
+                        className="mb-8"
+                        style={{
+                            height: '1px',
+                            width: '64px',
+                            background: 'var(--border-default)',
+                            animation: 'heroReveal 0.5s ease-out 160ms both'
+                        }}
+                    />
 
-                        <div className="flex flex-col items-center gap-3">
-                            <Link href="/contact">
-                                <button type="button" className="flex h-12 items-center justify-center gap-2 rounded-lg bg-[#ff6b35] px-8 font-semibold text-black shadow-lg shadow-[#ff6b35]/20 transition-all hover:scale-105 hover:bg-[#ff7b45]">
-                                    Join Waitlist
-                                    <ArrowRight className="h-4 w-4" />
-                                </button>
-                            </Link>
-                        </div>
+                    {/* Body copy */}
+                    <p
+                        className="mb-10 max-w-lg text-lg leading-relaxed sm:text-xl"
+                        style={{
+                            color: 'var(--fg-secondary)',
+                            animation: 'heroReveal 0.6s ease-out 200ms both'
+                        }}
+                    >
+                        Obtura eliminates the DevOps bottleneck for European SME teams. Zero-config deployment, built-in monitoring, predictable flat pricing.
+                    </p>
+
+                    {/* CTAs */}
+                    <div
+                        className="mb-16 flex flex-wrap items-center gap-5"
+                        style={{ animation: 'heroReveal 0.6s ease-out 260ms both' }}
+                    >
+                        <Link href="/contact">
+                            <button type="button" className="inline-flex h-12 items-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
+                                Join Waitlist
+                                <ArrowRight className="h-4 w-4" />
+                            </button>
+                        </Link>
+                        <Link href="/contact" className="text-sm font-medium transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
+                            Book a demo →
+                        </Link>
+                    </div>
+
+                    {/* Feature strip */}
+                    <div
+                        className="flex flex-wrap gap-x-8 gap-y-3 border-t pt-8"
+                        style={{
+                            borderColor: 'var(--border-subtle)',
+                            animation: 'heroReveal 0.5s ease-out 320ms both'
+                        }}
+                    >
+                        {['5-minute deploy', 'Built-in observability', 'GDPR compliant', '€71K/year savings'].map(f => (
+                            <div key={f} className="flex items-center gap-2 text-xs" style={{ color: 'var(--fg-secondary)' }}>
+                                <Check className="h-3 w-3 text-[#ff6b35]" />
+                                {f}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* ── 2. Terminal Demo — fixed height, scrolls inside, zero layout shift ── */}
-            <section className="relative container mx-auto px-4 pb-12 sm:px-6 sm:pb-20 lg:px-8">
-                <div className="mx-auto max-w-4xl">
-                    <div className="overflow-hidden rounded-lg border border-[#333] bg-[#1e1e1e] shadow-2xl shadow-black/50 transition-all duration-500 hover:shadow-[#ff6b35]/5">
-                        {/* Title bar */}
-                        <div className="flex items-center gap-2 border-b border-[#333] bg-[#252526] px-4 py-2">
-                            <div className="flex gap-2">
+            {/* ── 2. Terminal ── */}
+            <section className="px-6 pb-24 sm:px-8 sm:pb-28 lg:px-12 lg:pb-32" style={{ background: 'var(--bg-base)' }}>
+                <div className="mx-auto max-w-6xl">
+                    <p className="mb-6 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                        — See it work
+                    </p>
+                    <div className="overflow-hidden rounded-lg border shadow-2xl shadow-black/50" style={{ borderColor: 'oklch(100% 0 0 / 0.12)', background: '#1a1714' }}>
+                        <div className="flex items-center gap-2 border-b px-4 py-2.5" style={{ borderColor: 'oklch(100% 0 0 / 0.10)', background: '#201d1a' }}>
+                            <div className="flex gap-1.5">
                                 <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
                                 <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
                                 <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
                             </div>
-                            <div className="ml-2 flex items-center gap-2 font-mono text-xs text-gray-400">
+                            <div className="ml-2 flex items-center gap-2 text-xs" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
                                 <TerminalIcon className="h-3 w-3" />
-                                <span>user — -zsh — 80x24</span>
+                                <span>user — zsh — 80×24</span>
                             </div>
                         </div>
-
-                        {/* Fixed height — content scrolls inside, page never shifts */}
-                        <div ref={terminalBodyRef} className="h-[300px] space-y-1.5 overflow-y-auto p-4 font-mono text-xs text-[#d4d4d4] sm:h-[340px] sm:p-6 sm:text-sm">
+                        <div
+                            ref={terminalBodyRef}
+                            className="h-[300px] space-y-1.5 overflow-y-auto p-4 text-xs sm:h-[340px] sm:p-6 sm:text-sm"
+                            style={{ color: '#ccc8c2', fontFamily: 'var(--font-mono)' }}
+                        >
                             {terminalLines.map((line, index) => {
                                 if (!line) return null
                                 const isCommand = line.type === 'command'
                                 const isSuccess = line.type === 'success'
                                 return (
-                                    <div key={index} className="flex animate-[fadeIn_0.1s_ease-in_forwards] items-start opacity-0">
-                                        <span className={`mr-2 font-bold ${isCommand ? 'text-[#ff6b35]' : isSuccess ? 'text-green-500' : 'text-blue-400'}`}>{line.prefix || '>'}</span>
-                                        <span className={`${isCommand ? 'font-semibold text-white' : isSuccess ? 'text-green-400' : 'text-[#d4d4d4]'}`}>{line.text}</span>
+                                    <div key={index} className="flex items-start" style={{ animation: 'terminalLine 0.15s ease-out forwards', opacity: 0 }}>
+                                        <span className={`mr-2 font-bold ${isCommand ? 'text-[#ff6b35]' : isSuccess ? 'text-green-400' : 'text-blue-400'}`}>{line.prefix || '>'}</span>
+                                        <span className={`${isCommand ? 'font-semibold text-[#eae9e7]' : isSuccess ? 'text-green-300' : ''}`}>{line.text}</span>
                                     </div>
                                 )
                             })}
                             {terminalLines.length > 0 && (
-                                <div className="mt-2 flex animate-[fadeIn_0.1s_ease-in_forwards] items-center">
+                                <div className="mt-2 flex items-center" style={{ animation: 'terminalLine 0.15s ease-out forwards', opacity: 0 }}>
                                     <span className="mr-2 font-bold text-[#ff6b35]">$</span>
-                                    <div className="h-4 w-2 animate-pulse bg-gray-500" />
+                                    <div className="h-4 w-2 bg-[#8a8784] opacity-70" />
                                 </div>
                             )}
                         </div>
@@ -176,139 +248,129 @@ export default function HomeClient() {
                 </div>
             </section>
 
-            {/* ── 2. Problem section ── */}
-            <section className="bg-[#141414] py-12 sm:py-20 lg:py-32">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
-                        <h2 className="mb-4 px-2 text-2xl font-bold sm:mb-6 sm:text-3xl md:text-4xl lg:text-5xl">
-                            The €76K <span className="text-[#ff6b35]">DevOps Tax</span> on SMEs
+            {/* ── 3. Problem — editorial stat layout ── */}
+            <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32" style={{ background: 'var(--bg-subtle)' }}>
+                <div className="mx-auto max-w-6xl">
+
+                    <div className="mb-16">
+                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— The problem</p>
+                        <h2
+                            className="text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl"
+                            style={{ fontFamily: 'var(--font-display)' }}
+                        >
+                            The €76K<br />
+                            <span style={{ color: 'var(--brand)' }}>DevOps Tax</span><br />
+                            on SMEs.
                         </h2>
-                        <p className="px-4 text-base text-gray-400 sm:text-lg">European SMEs with 5-25 person development teams face a critical bottleneck. The numbers don't lie.</p>
                     </div>
 
-                    <div className="mb-12 grid gap-4 sm:mb-20 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+                    {/* Stats grid — editorial numbers as focal point */}
+                    <div
+                        className="mb-20 grid gap-px sm:grid-cols-2 lg:grid-cols-4"
+                        style={{ background: 'var(--border-subtle)' }}
+                    >
                         {[
-                            {
-                                icon: <TrendingDown className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: '€60-85K/year',
-                                description: "Cost of a DevOps engineer in Western Europe. Most SMEs can't justify this for 5-15 developers."
-                            },
-                            {
-                                icon: <Clock className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: '40+ hours',
-                                description: 'Time spent setting up CI/CD, monitoring, and logging per project. Repeated for every new project.'
-                            },
-                            {
-                                icon: <Users className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: '20-30%',
-                                description: 'Developer time wasted on infrastructure instead of building features that matter.'
-                            },
-                            {
-                                icon: <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: 'Unpredictable costs',
-                                description: 'Usage-based platforms like Replit report $350+ daily spikes. No budget certainty.'
-                            }
-                        ].map((problem, index) => (
-                            <div key={problem.title} className="group rounded-xl border border-white/10 bg-[#1a1a1a] p-4 transition-all duration-300 hover:-translate-y-2 hover:border-[#ff6b35]/30 hover:shadow-lg hover:shadow-[#ff6b35]/10 sm:p-6" style={{ animationDelay: `${index * 100}ms` }}>
-                                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-[#ff6b35]/10 text-[#ff6b35] transition-transform duration-300 group-hover:scale-110 sm:mb-4 sm:h-12 sm:w-12">{problem.icon}</div>
-                                <h3 className="mb-2 text-xl font-bold text-white sm:text-2xl">{problem.title}</h3>
-                                <p className="text-sm text-gray-400">{problem.description}</p>
+                            { stat: '€60–85K', label: '/year', description: "Cost of a DevOps engineer in Western Europe. Most SMEs can't justify this for 5–15 developers." },
+                            { stat: '40+', label: 'hours', description: 'Setup time per project for CI/CD, monitoring, and logging. Repeated for every new project.' },
+                            { stat: '20–30%', label: 'of dev time', description: 'Wasted on infrastructure instead of features that actually ship.' },
+                            { stat: '∞', label: 'surprises', description: 'Usage-based platforms like Replit report $350+ daily spikes. No budget certainty.' }
+                        ].map(item => (
+                            <div key={item.stat} className="p-8" style={{ background: 'var(--bg-subtle)' }}>
+                                <div
+                                    className="mb-1 text-4xl font-black leading-none tracking-tight lg:text-5xl"
+                                    style={{ fontFamily: 'var(--font-display)' }}
+                                >
+                                    {item.stat}
+                                </div>
+                                <div className="mb-3 text-xs font-medium" style={{ color: 'var(--brand)' }}>{item.label}</div>
+                                <p className="text-sm leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>{item.description}</p>
                             </div>
                         ))}
                     </div>
 
-                    <div className="mx-auto max-w-2xl">
-                        <div className="overflow-hidden rounded-xl border border-white/10 bg-[#1a1a1a] transition-all duration-500 hover:border-[#ff6b35]/30">
-                            <div className="border-b border-white/10 px-4 py-3 sm:px-6 sm:py-4">
-                                <h3 className="text-sm font-semibold text-white sm:text-base">The Real Cost for a 10-Person Team</h3>
+                    {/* Cost comparison — split editorial */}
+                    <div className="grid gap-16 border-t pt-16 lg:grid-cols-2" style={{ borderColor: 'var(--border-subtle)' }}>
+                        <div>
+                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>Without Obtura — 10 person team</p>
+                            <div
+                                className="text-6xl font-black leading-none tracking-tight lg:text-7xl"
+                                style={{ fontFamily: 'var(--font-display)', color: 'var(--fg-tertiary)' }}
+                            >
+                                €76,300
                             </div>
-                            <div className="divide-y divide-white/10">
-                                {[
-                                    { item: 'Junior DevOps Engineer (50% time)', cost: '€32,500' },
-                                    { item: 'Infrastructure setup time (200h @ €65/h)', cost: '€13,000' },
-                                    { item: 'DevOps tools (Sentry, Datadog, etc.)', cost: '€4,800' },
-                                    { item: 'Developer time on infrastructure (400h)', cost: '€26,000' }
-                                ].map(row => (
-                                    <div key={row.item} className="flex justify-between gap-4 px-4 py-3 transition-colors duration-200 hover:bg-white/5 sm:px-6 sm:py-4">
-                                        <span className="text-xs text-gray-400 sm:text-sm">{row.item}</span>
-                                        <span className="shrink-0 text-xs font-medium text-white sm:text-sm">{row.cost}</span>
-                                    </div>
-                                ))}
-                                <div className="flex animate-pulse justify-between gap-4 bg-red-500/10 px-4 py-3 sm:px-6 sm:py-4">
-                                    <span className="text-sm font-semibold text-white sm:text-base">Total DevOps Tax</span>
-                                    <span className="shrink-0 text-sm font-bold text-red-400 sm:text-base">€76,300/year</span>
-                                </div>
-                                <div className="flex justify-between gap-4 bg-[#ff6b35]/10 px-4 py-3 sm:px-6 sm:py-4">
-                                    <span className="text-sm font-semibold text-white sm:text-base">With Obtura Business Plan</span>
-                                    <span className="shrink-0 text-sm font-bold text-[#ff6b35] sm:text-base">€4,788/year</span>
-                                </div>
-                            </div>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--fg-tertiary)' }}>per year</p>
                         </div>
-                        <p className="mt-4 px-4 text-center text-xs text-gray-400 sm:text-sm">
-                            <span className="font-semibold text-[#ff6b35]">94% cost reduction</span> — That's €71,512 back in your budget every year.
-                        </p>
+                        <div>
+                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>With Obtura Business plan</p>
+                            <div
+                                className="text-6xl font-black leading-none tracking-tight lg:text-7xl"
+                                style={{ fontFamily: 'var(--font-display)', color: 'var(--brand)' }}
+                            >
+                                €4,788
+                            </div>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--fg-secondary)' }}>
+                                per year — <span className="font-semibold" style={{ color: 'var(--brand)' }}>94% less</span>. That's €71,512 back in your budget.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* ── 3. Features ── */}
-            <section id="features" className="bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
-                        <h2 className="mb-4 px-2 text-2xl font-bold sm:mb-6 sm:text-3xl md:text-4xl lg:text-5xl">
-                            True <span className="text-[#ff6b35]">Zero-DevOps</span> Platform
+            {/* ── 4. Features — numbered editorial index ── */}
+            <section id="features" className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32" style={{ background: 'var(--bg-base)' }}>
+                <div className="mx-auto max-w-6xl">
+
+                    <div className="mb-16">
+                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— The platform</p>
+                        <h2
+                            className="text-5xl font-black leading-none tracking-tight sm:text-6xl"
+                            style={{ fontFamily: 'var(--font-display)' }}
+                        >
+                            True Zero-DevOps<br />
+                            <span style={{ color: 'var(--brand)' }}>Platform.</span>
                         </h2>
-                        <p className="px-4 text-base text-gray-400 sm:text-lg">Developers should never think about infrastructure. We automate 95% of DevOps tasks so you can focus on features.</p>
                     </div>
 
-                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-                        {[
-                            {
-                                icon: <Rocket className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: 'Zero-Config Deployment',
-                                description: 'Push code, infrastructure happens automatically. Smart framework detection configures everything.',
-                                features: ['Auto-detect Node.js, Python, Go, PHP', 'Auto-provision databases & Redis', 'Auto-configure SSL & health checks']
-                            },
-                            {
-                                icon: <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: 'Built-in Observability',
-                                description: 'No more paying for Sentry, Datadog, and Logtail separately. Everything included.',
-                                features: ['Real-time error tracking', 'Performance metrics & APM', 'Log aggregation with search']
-                            },
-                            {
-                                icon: <GitBranch className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: 'Git-Native Workflow',
-                                description: 'Automatic staging, production, and preview environments for every branch.',
-                                features: ['Preview URLs per branch', 'Auto-deploy on merge', 'One-click rollback']
-                            },
-                            {
-                                icon: <Shield className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: 'Compliance by Default',
-                                description: 'Every app is production-ready with enterprise features out-of-the-box.',
-                                features: ['SSL certificates auto-renewed', 'Daily backups with 30-day retention', 'GDPR-compliant EU hosting']
-                            },
-                            {
-                                icon: <UserCheck className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: 'Team Collaboration',
-                                description: 'Non-technical team members can interact with deployments safely.',
-                                features: ['PM-friendly interface', 'Designer preview sharing', 'Role-based access control']
-                            },
-                            {
-                                icon: <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />,
-                                title: 'AI Production Assistant',
-                                description: 'Your AI copilot helps you navigate production crises, analyze logs, and monitor systems in real-time.',
-                                features: ['Instant root cause analysis', 'Live log streaming & search', 'Proactive anomaly detection', 'Automated incident response']
-                            }
-                        ].map((feature, index) => (
-                            <div key={feature.title} className="group rounded-xl border border-white/10 bg-[#1a1a1a] p-4 transition-all duration-300 hover:scale-105 hover:border-[#ff6b35]/30 sm:p-6">
-                                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-[#ff6b35]/10 text-[#ff6b35] transition-transform duration-300 group-hover:rotate-6 sm:mb-4 sm:h-12 sm:w-12">{feature.icon}</div>
-                                <h3 className="mb-2 text-lg font-semibold text-white sm:text-xl">{feature.title}</h3>
-                                <p className="mb-3 text-xs text-gray-400 sm:mb-4 sm:text-sm">{feature.description}</p>
-                                <ul className="space-y-2">
-                                    {feature.features.map(item => (
-                                        <li key={item} className="flex items-start gap-2 text-xs text-gray-400 sm:text-sm">
-                                            <span className="mt-0.5 shrink-0 text-[#ff6b35]">•</span>
-                                            <span>{item}</span>
+                    {/* Numbered feature list */}
+                    <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+                        {FEATURES.map((feature, i) => (
+                            <div
+                                key={feature.title}
+                                className="grid grid-cols-[2.5rem_1fr] gap-6 border-b py-8 sm:grid-cols-[2.5rem_1fr_1fr] sm:gap-10"
+                                style={{ borderColor: 'var(--border-subtle)' }}
+                            >
+                                {/* Number */}
+                                <span
+                                    className="pt-0.5 text-sm font-semibold tabular-nums"
+                                    style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)' }}
+                                >
+                                    0{i + 1}
+                                </span>
+
+                                {/* Title + description */}
+                                <div>
+                                    <div className="mb-0.5 flex items-center gap-2" style={{ color: 'var(--fg-tertiary)' }}>
+                                        {feature.icon}
+                                    </div>
+                                    <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
+                                    <p className="text-sm leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>{feature.description}</p>
+                                    {/* Sub-features on mobile */}
+                                    <ul className="mt-4 space-y-1.5 sm:hidden">
+                                        {feature.items.map(item => (
+                                            <li key={item} className="flex items-start gap-2 text-xs" style={{ color: 'var(--fg-secondary)' }}>
+                                                <Check className="mt-0.5 h-3 w-3 shrink-0 text-[#ff6b35]" />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {/* Sub-features on desktop */}
+                                <ul className="hidden space-y-1.5 sm:block">
+                                    {feature.items.map(item => (
+                                        <li key={item} className="flex items-start gap-2 text-sm" style={{ color: 'var(--fg-secondary)' }}>
+                                            <Check className="mt-0.5 h-3 w-3 shrink-0 text-[#ff6b35]" />
+                                            {item}
                                         </li>
                                     ))}
                                 </ul>
@@ -318,222 +380,224 @@ export default function HomeClient() {
                 </div>
             </section>
 
-            {/* ── 4. Interactive Cost Calculator ── */}
-            <section className="bg-[#141414] py-12 sm:py-20 lg:py-32">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-12">
-                        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#ff6b35]/20 bg-[#ff6b35]/10 px-3 py-2 text-xs font-medium text-[#ff6b35] sm:mb-6 sm:px-4 sm:text-sm">
-                            <Calculator className="h-3 w-3 sm:h-4 sm:w-4" />
-                            Interactive Calculator
-                        </div>
-                        <h2 className="mb-4 px-2 text-2xl font-bold sm:mb-6 sm:text-3xl md:text-4xl lg:text-5xl">
-                            Calculate Your <span className="text-[#ff6b35]">DevOps Savings</span>
+            {/* ── 5. Calculator ── */}
+            <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32" style={{ background: 'var(--bg-subtle)' }}>
+                <div className="mx-auto max-w-6xl">
+
+                    <div className="mb-16">
+                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Your numbers</p>
+                        <h2
+                            className="text-5xl font-black leading-none tracking-tight sm:text-6xl"
+                            style={{ fontFamily: 'var(--font-display)' }}
+                        >
+                            Calculate your<br />
+                            <span style={{ color: 'var(--brand)' }}>DevOps savings.</span>
                         </h2>
-                        <p className="px-4 text-base text-gray-400 sm:text-lg">See how much you could save by switching to Obtura. Adjust the sliders to match your team.</p>
                     </div>
 
-                    <div className="mx-auto grid max-w-5xl gap-6 sm:gap-8 lg:grid-cols-2">
-                        <div className="rounded-xl border border-white/10 bg-[#1a1a1a] p-6 transition-all duration-500 hover:border-[#ff6b35]/30 sm:p-8">
-                            <h3 className="mb-4 text-base font-semibold text-white sm:mb-6 sm:text-lg">Your Team Details</h3>
-
-                            <div className="mb-6 sm:mb-8">
+                    <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+                        {/* Left: Inputs */}
+                        <div className="space-y-8">
+                            <div>
                                 <div className="mb-3 flex justify-between">
-                                    <label className="text-xs text-gray-400 sm:text-sm">Number of developers</label>
-                                    <span className="text-xs font-medium text-[#ff6b35] sm:text-sm">{developers} developers</span>
+                                    <label className="text-sm" style={{ color: 'var(--fg-secondary)' }}>Developers on your team</label>
+                                    <span className="text-sm font-semibold text-[#ff6b35]">{developers}</span>
                                 </div>
                                 <input
-                                    type="range"
-                                    min="1"
-                                    max="50"
-                                    value={developers}
+                                    type="range" min="1" max="50" value={developers}
                                     onChange={e => setDevelopers(Number(e.target.value))}
-                                    className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-white/10 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ff6b35] [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:hover:scale-125"
+                                    className="h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ff6b35]"
+                                    style={{ background: 'var(--border-default)' }}
                                     aria-label="Number of developers"
                                 />
                             </div>
 
-                            <div className="mb-6 sm:mb-8">
+                            <div>
                                 <div className="mb-3 flex justify-between">
-                                    <label className="text-xs text-gray-400 sm:text-sm">Number of active projects</label>
-                                    <span className="text-xs font-medium text-[#ff6b35] sm:text-sm">{projects} projects</span>
+                                    <label className="text-sm" style={{ color: 'var(--fg-secondary)' }}>Active projects</label>
+                                    <span className="text-sm font-semibold text-[#ff6b35]">{projects}</span>
                                 </div>
                                 <input
-                                    type="range"
-                                    min="1"
-                                    max="20"
-                                    value={projects}
+                                    type="range" min="1" max="20" value={projects}
                                     onChange={e => setProjects(Number(e.target.value))}
-                                    className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-white/10 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ff6b35] [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:hover:scale-125"
+                                    className="h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ff6b35]"
+                                    style={{ background: 'var(--border-default)' }}
                                     aria-label="Number of active projects"
                                 />
                             </div>
 
-                            <div className="mb-6 sm:mb-8">
-                                <label className="mb-3 block text-xs text-gray-400 sm:text-sm">Current DevOps setup</label>
-                                <select value={setup} onChange={e => setSetup(e.target.value)} className="h-12 w-full rounded-lg border border-white/10 bg-[#0a0a0a] px-4 text-sm text-white transition-all focus:border-transparent focus:ring-2 focus:ring-[#ff6b35]">
+                            <div>
+                                <label className="mb-3 block text-sm" style={{ color: 'var(--fg-secondary)' }}>Current DevOps setup</label>
+                                <select
+                                    value={setup} onChange={e => setSetup(e.target.value)}
+                                    className="h-11 w-full border px-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#ff6b35]"
+                                    style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)', color: 'var(--fg-primary)' }}
+                                >
                                     <option value="manual">Manual DevOps</option>
                                     <option value="vercel">Vercel / Netlify</option>
                                     <option value="aws">AWS / GCP / Azure</option>
                                     <option value="replit">Replit / Railway</option>
                                 </select>
                             </div>
+
+                            {/* Cost breakdown */}
+                            <div className="border-t pt-6" style={{ borderColor: 'var(--border-subtle)' }}>
+                                <p className="mb-3 text-xs" style={{ color: 'var(--fg-tertiary)' }}>Current annual spend:</p>
+                                <div className="space-y-2">
+                                    {[
+                                        { icon: <Users className="h-3 w-3" />, label: 'DevOps salary', value: currentSetup.devopsSalary },
+                                        { icon: <Clock className="h-3 w-3" />, label: 'Setup time', value: currentSetup.setupTime },
+                                        { icon: <TrendingDown className="h-3 w-3" />, label: 'Tools', value: currentSetup.tools },
+                                        { icon: <AlertTriangle className="h-3 w-3" />, label: 'Dev time on infra', value: currentSetup.devTime },
+                                    ].map(row => (
+                                        <div key={row.label} className="flex items-center justify-between text-sm">
+                                            <span className="flex items-center gap-2" style={{ color: 'var(--fg-secondary)' }}>
+                                                {row.icon} {row.label}
+                                            </span>
+                                            <span className="font-medium">€{row.value.toLocaleString()}</span>
+                                        </div>
+                                    ))}
+                                    <div className="flex items-center justify-between border-t pt-2 text-sm font-semibold" style={{ borderColor: 'var(--border-subtle)' }}>
+                                        <span>Total</span>
+                                        <span className="text-red-400">€{totalCost.toLocaleString()}/yr</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="rounded-xl border border-[#ff6b35]/30 bg-[#1a1a1a] p-6 transition-all duration-500 hover:shadow-xl hover:shadow-[#ff6b35]/20 sm:p-8">
-                            <h3 className="mb-4 text-base font-semibold text-white sm:mb-6 sm:text-lg">Your Savings Analysis</h3>
-
-                            <div className="mb-6 space-y-3">
-                                <div className="text-xs text-gray-400 sm:text-sm">You're currently spending:</div>
-                                <div className="space-y-2 text-xs sm:text-sm">
-                                    <div className="flex justify-between gap-2 rounded p-2 transition-colors hover:bg-white/5">
-                                        <span className="flex items-center gap-2 text-gray-400">
-                                            <Users className="h-3 w-3 shrink-0" />
-                                            DevOps engineer salary
-                                        </span>
-                                        <span className="shrink-0 font-medium text-white">€{currentSetup.devopsSalary.toLocaleString()}/year</span>
-                                    </div>
-                                    <div className="flex justify-between gap-2 rounded p-2 transition-colors hover:bg-white/5">
-                                        <span className="flex items-center gap-2 text-gray-400">
-                                            <Clock className="h-3 w-3 shrink-0" />
-                                            Infrastructure setup time
-                                        </span>
-                                        <span className="shrink-0 font-medium text-white">€{currentSetup.setupTime.toLocaleString()}/year</span>
-                                    </div>
-                                    <div className="flex justify-between gap-2 rounded p-2 transition-colors hover:bg-white/5">
-                                        <span className="flex items-center gap-2 text-gray-400">
-                                            <BarChart3 className="h-3 w-3 shrink-0" />
-                                            DevOps tools
-                                        </span>
-                                        <span className="shrink-0 font-medium text-white">€{currentSetup.tools.toLocaleString()}/year</span>
-                                    </div>
-                                    <div className="flex justify-between gap-2 rounded p-2 transition-colors hover:bg-white/5">
-                                        <span className="flex items-center gap-2 text-gray-400">
-                                            <UserCheck className="h-3 w-3 shrink-0" />
-                                            Developer time on infrastructure
-                                        </span>
-                                        <span className="shrink-0 font-medium text-white">€{currentSetup.devTime.toLocaleString()}/year</span>
-                                    </div>
+                        {/* Right: Savings — editorial focal point */}
+                        <div className="flex flex-col justify-between">
+                            <div>
+                                <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                                    With Obtura {planName}
+                                </p>
+                                <div
+                                    className="text-7xl font-black leading-none tracking-tight sm:text-8xl"
+                                    style={{ fontFamily: 'var(--font-display)', color: 'var(--brand)' }}
+                                >
+                                    €{savings.toLocaleString()}
                                 </div>
-                                <div className="border-t border-white/10 pt-3">
-                                    <div className="flex justify-between gap-2 p-2">
-                                        <span className="text-sm font-semibold text-white sm:text-base">Total cost</span>
-                                        <span className="shrink-0 text-base font-bold text-red-400 sm:text-lg">€{totalCost.toLocaleString()}/year</span>
-                                    </div>
-                                </div>
+                                <p className="mt-4 text-lg" style={{ color: 'var(--fg-secondary)' }}>
+                                    saved per year — <span className="font-semibold" style={{ color: 'var(--fg-primary)' }}>{savingsPercent}% reduction</span>
+                                </p>
+                                <p className="mt-1 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
+                                    vs. €{obturaCost.toLocaleString()}/yr with Obtura
+                                </p>
                             </div>
 
-                            <div className="mb-6 rounded-lg border border-[#ff6b35]/20 bg-[#ff6b35]/10 p-4 transition-all hover:bg-[#ff6b35]/15">
-                                <div className="flex items-center justify-between gap-2">
-                                    <div>
-                                        <span className="text-xs text-gray-400 sm:text-sm">With Obtura </span>
-                                        <span className="text-xs font-medium text-[#ff6b35] sm:text-sm">{developers <= 3 ? 'Starter' : developers <= 10 ? 'Team' : developers <= 25 ? 'Business' : 'Enterprise'}</span>
-                                    </div>
-                                    <span className="shrink-0 text-base font-bold text-[#ff6b35] sm:text-lg">€{obturaCost.toLocaleString()}/year</span>
-                                </div>
+                            <div className="mt-10">
+                                <div className="mb-4 h-px" style={{ background: 'var(--border-subtle)' }} />
+                                <Link href="/contact">
+                                    <button className="inline-flex h-12 items-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
+                                        Contact Sales
+                                        <ArrowRight className="h-4 w-4" />
+                                    </button>
+                                </Link>
                             </div>
-
-                            <div className="mb-6 animate-pulse rounded-lg border border-[#ff6b35]/30 bg-linear-to-r from-[#ff6b35]/20 to-[#ff6b35]/10 p-4 text-center transition-transform duration-300 hover:scale-105 sm:p-6">
-                                <div className="mb-1 text-xs text-gray-400 sm:text-sm">Your annual savings</div>
-                                <div className="mb-1 text-3xl font-bold text-[#ff6b35] sm:text-4xl">€{savings.toLocaleString()}</div>
-                                <div className="text-xs text-gray-400 sm:text-sm">
-                                    That's a <span className="font-semibold text-[#ff6b35]">{savingsPercent}% cost reduction</span>
-                                </div>
-                            </div>
-
-                            <Link href="/contact">
-                                <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#ff6b35] text-sm font-semibold text-black shadow-lg shadow-[#ff6b35]/20 transition-all hover:scale-105 hover:bg-[#ff7b45] hover:shadow-[#ff6b35]/40 sm:text-base">
-                                    Contact Sales
-                                    <ArrowRight className="h-4 w-4" />
-                                </button>
-                            </Link>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ── 5. Trust badges ── */}
-            <section className="border-y border-white/5 bg-[#0f0f0f] py-12 sm:py-16">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
+            {/* ── 6. Trust — editorial inline strip ── */}
+            <section className="border-y px-6 py-12 sm:px-8 sm:py-14 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
+                <div className="mx-auto max-w-6xl">
+                    <div className="grid gap-8 sm:grid-cols-3">
                         {[
-                            { icon: <Shield className="h-5 w-5 sm:h-6 sm:w-6" />, title: 'GDPR Compliant', description: 'Built for European data protection requirements' },
-                            { icon: <Lock className="h-5 w-5 sm:h-6 sm:w-6" />, title: 'SOC 2 Infrastructure', description: 'Enterprise-grade security certifications' },
-                            { icon: <HardDrive className="h-5 w-5 sm:h-6 sm:w-6" />, title: 'Daily Backups', description: '30-day retention with tested recovery' }
+                            { icon: <Shield className="h-4 w-4" />, title: 'GDPR Compliant', description: 'Built for European data protection requirements' },
+                            { icon: <Lock className="h-4 w-4" />, title: 'SOC 2 Infrastructure', description: 'Enterprise-grade security certifications' },
+                            { icon: <HardDrive className="h-4 w-4" />, title: 'Daily Backups', description: '30-day retention with tested recovery' }
                         ].map(badge => (
-                            <div key={badge.title} className="flex flex-col items-center text-center">
-                                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#ff6b35]/10 text-[#ff6b35] sm:h-12 sm:w-12">{badge.icon}</div>
-                                <h3 className="mb-1 text-xs font-semibold text-white sm:text-sm">{badge.title}</h3>
-                                <p className="text-xs text-gray-400">{badge.description}</p>
+                            <div key={badge.title} className="flex items-start gap-4">
+                                <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand)' }}>{badge.icon}</div>
+                                <div>
+                                    <h3 className="text-sm font-semibold">{badge.title}</h3>
+                                    <p className="mt-0.5 text-sm" style={{ color: 'var(--fg-secondary)' }}>{badge.description}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* ── 6. Pricing ── */}
-            <section id="pricing" className="bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
-                        <h2 className="mb-4 px-2 text-2xl font-bold sm:mb-6 sm:text-3xl md:text-4xl lg:text-5xl">
-                            Predictable <span className="text-[#ff6b35]">Flat Pricing</span>
+            {/* ── 7. Pricing ── */}
+            <section id="pricing" className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32" style={{ background: 'var(--bg-base)' }}>
+                <div className="mx-auto max-w-6xl">
+
+                    <div className="mb-16">
+                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Pricing</p>
+                        <h2
+                            className="text-5xl font-black leading-none tracking-tight sm:text-6xl"
+                            style={{ fontFamily: 'var(--font-display)' }}
+                        >
+                            Predictable<br />
+                            <span style={{ color: 'var(--brand)' }}>flat pricing.</span>
                         </h2>
-                        <p className="px-4 text-base text-gray-400 sm:text-lg">No usage surprises. No hidden fees. Just simple, predictable pricing that scales with your team.</p>
+                        <p className="mt-5 max-w-md text-base" style={{ color: 'var(--fg-secondary)' }}>No usage surprises. No hidden fees. Scales with your team.</p>
                     </div>
 
-                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
                         {[
                             {
-                                name: 'Starter',
-                                price: '€199',
-                                period: '/month',
+                                name: 'Starter', price: '€199', period: '/month',
                                 description: 'For small teams getting started',
                                 features: ['Up to 3 developers', '5 projects', 'Basic monitoring', 'Community support'],
                                 highlighted: false
                             },
                             {
-                                name: 'Team',
-                                price: '€250',
-                                period: '/month',
+                                name: 'Team', price: '€250', period: '/month',
                                 description: 'For growing development teams',
                                 features: ['Up to 10 developers', 'Unlimited projects', 'Full observability suite', 'Priority support', 'Custom domains'],
                                 highlighted: false
                             },
                             {
-                                name: 'Business',
-                                price: '€650',
-                                period: '/month',
+                                name: 'Business', price: '€650', period: '/month',
                                 description: 'For established SME teams',
                                 features: ['Up to 25 developers', 'Unlimited projects', 'Advanced security', 'SSO & SAML', 'Dedicated support', 'SLA guarantees'],
-                                highlighted: true,
-                                badge: 'MOST POPULAR'
+                                highlighted: true, badge: 'Most popular'
                             },
                             {
-                                name: 'Enterprise',
-                                price: '€899+',
-                                period: '/month',
+                                name: 'Enterprise', price: '€899+', period: '/month',
                                 description: 'For large organizations',
                                 features: ['Unlimited developers', 'Unlimited projects', 'On-premise option', 'Custom integrations', 'Dedicated account manager', '24/7 phone support'],
                                 highlighted: false
                             }
                         ].map(plan => (
-                            <div key={plan.name} className={`flex flex-col rounded-xl border p-4 transition-all duration-300 sm:p-6 ${plan.highlighted ? 'border-[#ff6b35] bg-[#ff6b35]/5 shadow-lg shadow-[#ff6b35]/20' : 'border-white/10 bg-[#1a1a1a] hover:border-[#ff6b35]/50'}`}>
-                                {plan.badge && <div className="mb-3 text-xs font-medium text-[#ff6b35] sm:mb-4">{plan.badge}</div>}
-                                <h3 className="mb-1 text-lg font-semibold text-white sm:text-xl">{plan.name}</h3>
+                            <div
+                                key={plan.name}
+                                className="flex flex-col border p-5 sm:p-6"
+                                style={plan.highlighted
+                                    ? { borderColor: 'var(--brand-border)', background: 'var(--bg-elevated)' }
+                                    : { borderColor: 'var(--border-subtle)', background: 'var(--bg-surface)' }
+                                }
+                            >
+                                {plan.badge && (
+                                    <div className="mb-3 text-xs font-medium" style={{ color: 'var(--brand)' }}>{plan.badge}</div>
+                                )}
+                                <h3 className="mb-1 text-lg font-semibold">{plan.name}</h3>
                                 <div className="mb-2 flex items-baseline gap-1">
-                                    <span className="text-2xl font-bold text-white sm:text-3xl">{plan.price}</span>
-                                    <span className="text-sm text-gray-400">{plan.period}</span>
+                                    <span
+                                        className="text-3xl font-black leading-none"
+                                        style={{ fontFamily: 'var(--font-display)' }}
+                                    >{plan.price}</span>
+                                    <span className="text-sm" style={{ color: 'var(--fg-secondary)' }}>{plan.period}</span>
                                 </div>
-                                <p className="mb-4 text-xs text-gray-400 sm:mb-6 sm:text-sm">{plan.description}</p>
-                                <ul className="mb-4 flex flex-col gap-2 sm:mb-6 sm:gap-3">
+                                <p className="mb-5 text-xs" style={{ color: 'var(--fg-secondary)' }}>{plan.description}</p>
+                                <ul className="mb-5 flex flex-col gap-2">
                                     {plan.features.map(feature => (
-                                        <li key={feature} className="flex items-center gap-2 text-xs text-gray-400 sm:text-sm">
-                                            <Check className="h-3 w-3 shrink-0 text-[#ff6b35] sm:h-4 sm:w-4" />
-                                            <span>{feature}</span>
+                                        <li key={feature} className="flex items-center gap-2 text-xs" style={{ color: 'var(--fg-secondary)' }}>
+                                            <Check className="h-3 w-3 shrink-0 text-[#ff6b35]" />
+                                            {feature}
                                         </li>
                                     ))}
                                 </ul>
                                 <Link href="/contact" className="mt-auto">
-                                    <button className={`mt-auto h-10 w-full rounded-lg text-sm font-medium transition-all ${plan.highlighted ? 'bg-[#ff6b35] text-black shadow-lg shadow-[#ff6b35]/20 hover:bg-[#ff7b45]' : 'border border-white/10 bg-white/5 text-white hover:bg-white/10'} cursor-pointer`}>Contact Sales</button>
+                                    <button
+                                        className={`h-10 w-full text-sm font-medium transition-colors cursor-pointer ${plan.highlighted ? 'bg-[#ff6b35] text-black hover:bg-[#ff7b45]' : 'border text-white hover:bg-white/[0.06]'}`}
+                                        style={plan.highlighted ? {} : { borderColor: 'var(--border-default)' }}
+                                    >
+                                        Contact Sales
+                                    </button>
                                 </Link>
                             </div>
                         ))}
@@ -541,56 +605,40 @@ export default function HomeClient() {
                 </div>
             </section>
 
-            {/* ── 7. Final CTA ── */}
-            <section className="relative overflow-hidden bg-[#0a0a0a] py-12 sm:py-20 lg:py-32">
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#ff6b35]/5 to-transparent" />
-                <div className="pointer-events-none absolute top-1/2 left-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff6b35]/10 blur-[100px] sm:h-[600px] sm:w-[600px] sm:blur-[120px]" />
-
-                <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="mx-auto max-w-3xl text-center">
-                        <h2 className="mb-4 px-2 text-2xl font-bold sm:mb-6 sm:text-3xl md:text-4xl lg:text-5xl">
-                            Ready to eliminate your <span className="text-[#ff6b35]">DevOps bottleneck</span>?
+            {/* ── 8. CTA — editorial statement ── */}
+            <section className="px-6 py-32 sm:px-8 sm:py-40 lg:px-12 lg:py-52" style={{ background: 'var(--bg-subtle)' }}>
+                <div className="mx-auto max-w-6xl">
+                    <div className="max-w-5xl">
+                        <p className="mb-8 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Get started</p>
+                        <h2
+                            className="mb-10 text-6xl font-black leading-none tracking-tight sm:text-7xl lg:text-9xl"
+                            style={{ fontFamily: 'var(--font-display)' }}
+                        >
+                            Eliminate your<br />
+                            <span style={{ color: 'var(--brand)' }}>DevOps bottleneck.</span>
                         </h2>
-                        <p className="mb-8 px-4 text-base text-gray-400 sm:mb-10 sm:text-lg">Join European SMEs saving €71K+ per year on DevOps costs. Get early access when we launch.</p>
 
-                        <a href="/contact" className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-6 text-sm text-white transition-all hover:bg-white/10 sm:text-base">
-                            <Calendar className="h-4 w-4" />
-                            Book a Demo
-                            <ArrowRight className="h-4 w-4" />
-                        </a>
-
-                        <p className="mt-6 flex flex-wrap items-center justify-center gap-2 px-4 text-xs text-gray-500">
-                            <span className="flex items-center gap-1.5">
-                                <Globe className="h-3 w-3 shrink-0" />
-                                <span>EU-first platform</span>
-                            </span>
-                            <span className="text-gray-600">•</span>
-                            <span className="flex items-center gap-1.5">
-                                <Shield className="h-3 w-3 shrink-0" />
-                                <span>GDPR compliant</span>
-                            </span>
-                            <span className="text-gray-600">•</span>
-                            <span className="flex items-center gap-1.5">
-                                <ClipboardCheck className="h-3 w-3 shrink-0" />
-                                <span>No credit card required</span>
-                            </span>
+                        <p className="mb-12 max-w-lg text-lg" style={{ color: 'var(--fg-secondary)' }}>
+                            Join European SMEs saving €71K+ per year. Get early access when we launch.
                         </p>
+
+                        <div className="flex flex-wrap items-center gap-5">
+                            <Link href="/contact">
+                                <button className="inline-flex h-12 items-center gap-2 bg-[#ff6b35] px-8 text-sm font-semibold text-black transition-colors hover:bg-[#ff7b45]">
+                                    <Calendar className="h-4 w-4" />
+                                    Book a Demo
+                                </button>
+                            </Link>
+                            <div className="flex flex-wrap items-center gap-4 text-xs" style={{ color: 'var(--fg-tertiary)' }}>
+                                <span className="flex items-center gap-1.5"><Globe className="h-3 w-3" /> EU-first platform</span>
+                                <span className="flex items-center gap-1.5"><Shield className="h-3 w-3" /> GDPR compliant</span>
+                                <span className="flex items-center gap-1.5"><ClipboardCheck className="h-3 w-3" /> No credit card</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <style jsx>{`
-                @keyframes fadeIn {
-                    from {
-                        opacity: 0;
-                        transform: translateY(10px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-            `}</style>
         </div>
     )
 }

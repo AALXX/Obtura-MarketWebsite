@@ -26,14 +26,14 @@ export default function FAQSchema({ faqs }: FAQSchemaProps) {
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <div className="space-y-4">
+            <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
                 {faqs.map((faq, index) => (
-                    <details key={index} className="group rounded-lg border border-white/10 bg-[#0a0a0a] p-4">
-                        <summary className="flex cursor-pointer items-center justify-between font-medium text-white">
+                    <details key={index} className="group border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+                        <summary className="flex cursor-pointer items-center justify-between gap-4 py-5 text-sm font-medium" style={{ color: 'var(--fg-primary)', listStyle: 'none' }}>
                             {faq.question}
-                            <span className="ml-2 text-[#ff6b35] transition-transform group-open:rotate-180">▼</span>
+                            <span className="shrink-0 transition-transform group-open:rotate-180" style={{ color: 'var(--brand)' }}>▼</span>
                         </summary>
-                        <p className="mt-4 leading-relaxed text-gray-400">{faq.answer}</p>
+                        <p className="pb-5 text-sm leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>{faq.answer}</p>
                     </details>
                 ))}
             </div>

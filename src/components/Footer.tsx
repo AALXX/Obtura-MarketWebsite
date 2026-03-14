@@ -11,16 +11,16 @@ const Footer = () => {
     const githubUrl = process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/obtura'
 
     return (
-        <footer className="border-t border-white/5 bg-[#141414]">
+        <footer className="border-t" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-subtle)' }}>
             <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
                 <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12">
                     {/* Brand Column */}
                     <div className="col-span-2 md:col-span-1">
                         <Link href="/" className="mb-4 flex items-center">
                             <Image src="/Logo_2.png" alt="Obtura Logo" width={100} height={100} className="h-16 w-16" />
-                            <span className="ml-2 text-xl font-bold text-white">Obtura</span>
+                            <span className="ml-2 text-xl font-black" style={{ fontFamily: 'var(--font-display)', color: 'var(--fg-primary)' }}>Obtura</span>
                         </Link>
-                        <p className="mb-4 text-sm text-gray-400">Ship code without a DevOps team. The zero-configuration deployment platform for European SMEs.</p>
+                        <p className="mb-4 text-sm" style={{ color: 'var(--fg-secondary)' }}>Ship code without a DevOps team. The zero-configuration deployment platform for European SMEs.</p>
                         <div className="flex gap-4">
                             {/* Twitter/X */}
                             <a href={twitterUrl} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter" className="text-gray-400 transition-colors hover:text-[#ff6b35]">
@@ -45,20 +45,20 @@ const Footer = () => {
 
                     {/* Product Column */}
                     <div>
-                        <h3 className="mb-4 text-sm font-semibold text-white">Product</h3>
+                        <h3 className="mb-4 text-sm font-semibold">Product</h3>
                         <ul className="space-y-3">
                             <li>
-                                <Link href="/#features" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/#features" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Features
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/#pricing" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/#pricing" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Pricing
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/docs" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/docs" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Documentation
                                 </Link>
                             </li>
@@ -67,20 +67,20 @@ const Footer = () => {
 
                     {/* Company Column */}
                     <div>
-                        <h3 className="mb-4 text-sm font-semibold text-white">Company</h3>
+                        <h3 className="mb-4 text-sm font-semibold">Company</h3>
                         <ul className="space-y-3">
                             <li>
-                                <Link href="/about" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/about" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     About
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/blog" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/blog" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Blog
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/contact" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/contact" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Contact
                                 </Link>
                             </li>
@@ -89,25 +89,25 @@ const Footer = () => {
 
                     {/* Legal Column */}
                     <div>
-                        <h3 className="mb-4 text-sm font-semibold text-white">Legal</h3>
+                        <h3 className="mb-4 text-sm font-semibold">Legal</h3>
                         <ul className="space-y-3">
                             <li>
-                                <Link href="/privacy" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/privacy" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Privacy Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/terms" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/terms" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Terms of Service
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/gdpr" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/gdpr" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     GDPR
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/cookies" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/cookies" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Cookie Policy
                                 </Link>
                             </li>
@@ -116,20 +116,20 @@ const Footer = () => {
 
                     {/* Resources Column */}
                     <div>
-                        <h3 className="mb-4 text-sm font-semibold text-white">Resources</h3>
+                        <h3 className="mb-4 text-sm font-semibold">Resources</h3>
                         <ul className="space-y-3">
                             <li>
-                                <Link href="/docs" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/docs" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Documentation
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/security" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <Link href="/security" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     Security
                                 </Link>
                             </li>
                             <li>
-                                <a href="https://github.com/obtura" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 transition-colors hover:text-[#ff6b35]">
+                                <a href="https://github.com/obtura" target="_blank" rel="noopener noreferrer" className="text-sm transition-colors hover:text-[#ff6b35]" style={{ color: 'var(--fg-secondary)' }}>
                                     GitHub
                                 </a>
                             </li>
@@ -137,11 +137,11 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 sm:flex-row">
-                    <p className="text-sm text-gray-400">© {currentYear} MRSA SRL. All rights reserved.</p>
-                    <div className="flex items-center gap-2 text-sm text-gray-400">
-                        <span>🇪🇺 EU Data Residency</span>
-                        <span className="text-white/10">•</span>
+                <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 sm:flex-row" style={{ borderColor: 'var(--border-subtle)' }}>
+                    <p className="text-sm" style={{ color: 'var(--fg-secondary)' }}>© {currentYear} MRSA SRL. All rights reserved.</p>
+                    <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-secondary)' }}>
+                        <span>EU Data Residency</span>
+                        <span style={{ color: 'var(--border-default)' }}>•</span>
                         <span>GDPR Compliant</span>
                     </div>
                 </div>

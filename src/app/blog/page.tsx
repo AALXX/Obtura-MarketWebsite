@@ -28,14 +28,7 @@ export const metadata: Metadata = {
         title: 'Obtura Blog | Deploy Any Tech Stack in Europe',
         description: 'Expert guides on deploying 15+ frameworks. Learn autonomous deployment, GDPR compliance, and German hosting.',
         type: 'website',
-        images: [
-            {
-                url: 'https://obtura.dev/Logo2.png',
-                width: 1200,
-                height: 630,
-                alt: 'Obtura Blog - Deploy Any Tech Stack'
-            }
-        ]
+        images: [{ url: 'https://obtura.dev/Logo2.png', width: 1200, height: 630, alt: 'Obtura Blog - Deploy Any Tech Stack' }]
     },
     twitter: {
         card: 'summary_large_image',
@@ -43,9 +36,7 @@ export const metadata: Metadata = {
         description: 'Expert guides on deploying 15+ frameworks autonomously with GDPR-compliant German hosting.',
         images: ['https://obtura.dev/Logo2.png']
     },
-    alternates: {
-        canonical: 'https://obtura.dev/blog'
-    }
+    alternates: { canonical: 'https://obtura.dev/blog' }
 }
 
 function formatDate(dateString: string) {
@@ -70,10 +61,7 @@ export default function BlogPage() {
         publisher: {
             '@type': 'Organization',
             name: 'Obtura',
-            logo: {
-                '@type': 'ImageObject',
-                url: 'https://obtura.dev/Logo2.png'
-            }
+            logo: { '@type': 'ImageObject', url: 'https://obtura.dev/Logo2.png' }
         },
         blogPost: posts.map(post => ({
             '@type': 'BlogPosting',
@@ -82,11 +70,7 @@ export default function BlogPage() {
             url: `https://obtura.dev/blog/${post.slug}`,
             datePublished: post.date,
             dateModified: post.dateModified || post.date,
-            author: {
-                '@type': 'Person',
-                name: post.author,
-                url: 'https://obtura.dev/about'
-            },
+            author: { '@type': 'Person', name: post.author, url: 'https://obtura.dev/about' },
             keywords: post.tags.join(', ')
         }))
     }
@@ -95,98 +79,102 @@ export default function BlogPage() {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-            <div className="min-h-screen bg-[#0a0a0a] font-sans text-white">
-                {/* Hero Section */}
-                <section className="relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#ff6b35]/5 to-transparent" />
+            <div className="min-h-screen pt-16" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
 
-                    <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-16 sm:px-6 lg:px-8">
-                        <div className="mx-auto max-w-3xl text-center">
-                            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-[#ff6b35]/10 px-4 py-2 text-sm font-medium text-[#ff6b35]">
-                                <span className="h-2 w-2 animate-pulse rounded-full bg-[#ff6b35]" />
-                                DevOps Insights
+                {/* Header */}
+                <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12">
+                    <div className="mx-auto max-w-6xl">
+
+                        <nav aria-label="Breadcrumb" className="mb-10">
+                            <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
+                                <li><a href="/" className="transition-colors hover:text-[#ff6b35]">Home</a></li>
+                                <li>/</li>
+                                <li>Blog</li>
+                            </ol>
+                        </nav>
+
+                        <div className="mb-10">
+                            <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— DevOps insights</p>
+                            <h1 className="mb-6 text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl" style={{ fontFamily: 'var(--font-display)' }}>
+                                DevOps Blog.
+                            </h1>
+                            <p className="max-w-xl text-lg leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
+                                Expert guides and insights for European SMEs. Deploy smarter, ship faster, stay compliant.
+                            </p>
+                        </div>
+
+                        <div className="flex items-baseline gap-8">
+                            <div>
+                                <span className="text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>{posts.length}</span>
+                                <span className="ml-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>Articles</span>
                             </div>
-
-                            <h1 className="mb-6 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">DevOps Blog</h1>
-
-                            <p className="mb-4 text-xl text-gray-400">Expert guides and insights for European SMEs</p>
-
-                            <p className="mb-8 text-lg text-gray-500">Learn about zero-DevOps deployment, GDPR compliance, cost savings, and shipping code without a DevOps team.</p>
-
-                            {/* Stats */}
-                            <div className="flex flex-wrap justify-center gap-8 text-sm">
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold text-white">{posts.length}</div>
-                                    <div className="text-gray-500">Articles</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold text-white">{categories.length}</div>
-                                    <div className="text-gray-500">Categories</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold text-white">{allTags.length}</div>
-                                    <div className="text-gray-500">Topics</div>
-                                </div>
+                            <div>
+                                <span className="text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>{categories.length}</span>
+                                <span className="ml-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>Categories</span>
+                            </div>
+                            <div>
+                                <span className="text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>{allTags.length}</span>
+                                <span className="ml-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>Topics</span>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Categories */}
-                <section className="border-y border-white/10">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        <div className="flex flex-wrap justify-center gap-3">
-                            <span className="mr-2 self-center text-sm text-gray-500">Filter by category:</span>
-                            {categories.map(category => (
-                                <button key={category} className="rounded-full bg-white/5 px-4 py-2 text-sm text-gray-400 transition-all hover:bg-white/10 hover:text-white">
-                                    {category}
-                                </button>
-                            ))}
-                        </div>
+                {/* Categories filter */}
+                <section className="border-y px-6 py-5 sm:px-8 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
+                    <div className="mx-auto max-w-6xl flex flex-wrap items-center gap-3">
+                        <span className="text-xs font-mono uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>Filter:</span>
+                        {categories.map(category => (
+                            <button key={category} className="border px-3 py-1 text-sm transition-colors hover:text-[#ff6b35]"
+                                style={{ borderColor: 'var(--border-default)', color: 'var(--fg-secondary)', background: 'transparent' }}>
+                                {category}
+                            </button>
+                        ))}
                     </div>
                 </section>
 
-                {/* Blog Posts Grid */}
-                <section className="py-16">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="grid gap-8">
-                            {posts.map((post, index) => (
-                                <article key={post.slug} className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-all duration-300 hover:border-[#ff6b35]/30">
+                {/* Blog Posts */}
+                <section className="px-6 py-16 sm:px-8 sm:py-20 lg:px-12">
+                    <div className="mx-auto max-w-6xl">
+                        <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+                            {posts.map((post) => (
+                                <article key={post.slug} className="group border-b py-10" style={{ borderColor: 'var(--border-subtle)' }}>
                                     <Link href={`/blog/${post.slug}`} className="block">
-                                        <div className="p-8 sm:p-10">
-                                            <div className="mb-4 flex flex-wrap items-center gap-4">
-                                                <span className="rounded-full bg-[#ff6b35]/10 px-3 py-1 text-sm font-medium text-[#ff6b35]">{post.category}</span>
-                                                <div className="flex items-center gap-4 text-sm text-gray-500">
-                                                    <span className="flex items-center">
-                                                        <Calendar className="mr-1 h-4 w-4" />
-                                                        {formatDate(post.date)}
-                                                    </span>
-                                                    <span className="flex items-center">
-                                                        <Clock className="mr-1 h-4 w-4" />
-                                                        {post.readTime}
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <h2 className="mb-4 text-2xl font-bold text-white transition-colors group-hover:text-[#ff6b35] sm:text-3xl">{post.title}</h2>
-
-                                            <p className="mb-6 text-lg leading-relaxed text-gray-400">{post.excerpt}</p>
-
-                                            <div className="flex flex-wrap items-center justify-between gap-4">
-                                                <div className="flex flex-wrap gap-2">
-                                                    {post.tags.slice(0, 4).map(tag => (
-                                                        <span key={tag} className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-sm text-gray-400">
-                                                            <Tag className="mr-1 h-3 w-3" />
-                                                            {tag}
-                                                        </span>
-                                                    ))}
-                                                </div>
-
-                                                <span className="inline-flex items-center font-medium text-[#ff6b35] transition-transform group-hover:translate-x-2">
-                                                    Read Article
-                                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                        <div className="mb-3 flex flex-wrap items-center gap-4">
+                                            <span className="font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)' }}>{post.category}</span>
+                                            <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--fg-tertiary)' }}>
+                                                <span className="flex items-center gap-1">
+                                                    <Calendar className="h-3 w-3" />
+                                                    {formatDate(post.date)}
+                                                </span>
+                                                <span className="flex items-center gap-1">
+                                                    <Clock className="h-3 w-3" />
+                                                    {post.readTime}
                                                 </span>
                                             </div>
+                                        </div>
+
+                                        <h2 className="mb-3 text-2xl font-black leading-tight tracking-tight transition-colors group-hover:text-[#ff6b35] sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
+                                            {post.title}
+                                        </h2>
+
+                                        <p className="mb-5 max-w-2xl leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>{post.excerpt}</p>
+
+                                        <div className="flex flex-wrap items-center justify-between gap-4">
+                                            <div className="flex flex-wrap gap-2">
+                                                {post.tags.slice(0, 4).map(tag => (
+                                                    <span key={tag} className="inline-flex items-center gap-1 border px-2 py-0.5 text-xs"
+                                                        style={{ borderColor: 'var(--border-subtle)', color: 'var(--fg-tertiary)' }}>
+                                                        <Tag className="h-3 w-3" />
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+
+                                            <span className="inline-flex items-center gap-2 text-sm font-medium transition-transform group-hover:translate-x-1" style={{ color: 'var(--brand)' }}>
+                                                Read Article
+                                                <ArrowRight className="h-4 w-4" />
+                                            </span>
                                         </div>
                                     </Link>
                                 </article>
@@ -195,13 +183,15 @@ export default function BlogPage() {
                     </div>
                 </section>
 
-                {/* All Tags */}
-                <section className="border-t border-white/10">
-                    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-                        <h2 className="mb-6 text-center text-2xl font-bold text-white">Popular Topics</h2>
-                        <div className="flex flex-wrap justify-center gap-3">
+                {/* Popular Topics */}
+                <section className="border-t px-6 py-16 sm:px-8 sm:py-20 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
+                    <div className="mx-auto max-w-6xl">
+                        <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Topics</p>
+                        <h2 className="mb-8 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Popular Topics</h2>
+                        <div className="flex flex-wrap gap-2">
                             {allTags.map(tag => (
-                                <span key={tag} className="cursor-pointer rounded-full bg-white/5 px-4 py-2 text-sm text-gray-400 transition-all hover:bg-white/10 hover:text-white">
+                                <span key={tag} className="cursor-pointer border px-3 py-1 text-sm transition-colors hover:text-[#ff6b35]"
+                                    style={{ borderColor: 'var(--border-default)', color: 'var(--fg-secondary)' }}>
                                     #{tag}
                                 </span>
                             ))}
@@ -209,12 +199,15 @@ export default function BlogPage() {
                     </div>
                 </section>
 
-                {/* Newsletter CTA */}
-                <section className="border-t border-white/10">
-                    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-                        <div className="rounded-2xl bg-gradient-to-r from-[#ff6b35]/10 via-[#ff6b35]/5 to-transparent p-8 text-center sm:p-12">
-                            <h2 className="mb-4 text-3xl font-bold text-white">Get DevOps Tips in Your Inbox</h2>
-                            <p className="mx-auto mb-8 max-w-xl text-gray-400">Join European developers receiving insights on zero-DevOps deployment, GDPR compliance, and scaling without the overhead.</p>
+                {/* Newsletter */}
+                <section className="border-t px-6 py-20 sm:px-8 sm:py-24 lg:px-12" style={{ borderColor: 'var(--border-subtle)' }}>
+                    <div className="mx-auto max-w-6xl">
+                        <div className="border p-8 sm:p-12" style={{ borderColor: 'var(--brand-border)', background: 'var(--brand-dim)' }}>
+                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Newsletter</p>
+                            <h2 className="mb-3 text-3xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Get DevOps Tips in Your Inbox</h2>
+                            <p className="mb-8 max-w-xl" style={{ color: 'var(--fg-secondary)' }}>
+                                Join European developers receiving insights on zero-DevOps deployment, GDPR compliance, and scaling without the overhead.
+                            </p>
                             <NewsletterForm />
                         </div>
                     </div>
