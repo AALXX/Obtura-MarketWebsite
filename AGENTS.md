@@ -458,3 +458,4 @@ When starting a new session on this repo:
 | Role | Name | Contact |
 |---|---|---|
 | Technical lead (architecture decisions) | Alexandru-Nicolae Șerban | alexserbwork@gmail.com |
+

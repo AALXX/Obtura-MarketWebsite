@@ -1,10 +1,10 @@
 'use client'
-// Full homepage — editorial / confident direction
+// Full homepage — enterprise industrial direction
 // Hero → Terminal → Problem → Features → Calculator → Trust → Pricing → CTA
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, Zap, Users, Clock, AlertTriangle, TrendingDown, Rocket, BarChart3, GitBranch, Shield, UserCheck, Lock, HardDrive, ClipboardCheck, Globe, Calendar, Terminal as TerminalIcon, Sparkles } from 'lucide-react'
+import { ArrowRight, Check, Users, Clock, AlertTriangle, TrendingDown, Rocket, BarChart3, GitBranch, Shield, UserCheck, Lock, HardDrive, ClipboardCheck, Globe, Calendar, Terminal as TerminalIcon, Sparkles } from 'lucide-react'
 
 interface TerminalLine {
     text: string
@@ -70,6 +70,7 @@ export default function HomeClient() {
     const [projects, setProjects] = useState<number>(5)
     const [setup, setSetup] = useState<string>('manual')
     const [terminalLines, setTerminalLines] = useState<TerminalLine[]>([])
+    const [hoveredFeature, setHoveredFeature] = useState<number | null>(null)
     const terminalBodyRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -127,16 +128,27 @@ export default function HomeClient() {
 
     return (
         <div className="overflow-x-hidden" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
+            {/* ── 1. Hero — precision engineering grid ── */}
+            <section className="relative mt-16 overflow-hidden px-6 pt-24 pb-20 sm:px-8 sm:pt-32 sm:pb-24 lg:mt-0 lg:px-12 lg:pt-44 lg:pb-32" style={{ background: 'var(--bg-base)' }}>
+                {/* Precision engineering grid background */}
+                <div
+                    aria-hidden="true"
+                    style={{
+                        position: 'absolute',
+                        inset: 0,
+                        pointerEvents: 'none',
+                        backgroundImage: 'linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px)',
+                        backgroundSize: '80px 80px',
+                        WebkitMaskImage: 'radial-gradient(ellipse 75% 65% at 8% 35%, black 15%, transparent 75%)',
+                        maskImage: 'radial-gradient(ellipse 75% 65% at 8% 35%, black 15%, transparent 75%)',
+                        opacity: 0.65
+                    }}
+                />
 
-            {/* ── 1. Hero — editorial left-aligned ── */}
-            <section className="mt-16 px-6 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-32 lg:mt-0 lg:px-12 lg:pb-32 lg:pt-44" style={{ background: 'var(--bg-base)' }}>
-                <div className="mx-auto max-w-6xl">
-
- 
-
+                <div className="relative mx-auto max-w-6xl">
                     {/* Display headline */}
                     <h1
-                        className="mb-8 text-6xl font-black leading-none tracking-tight sm:text-7xl lg:text-9xl"
+                        className="mb-8 text-6xl leading-none font-black tracking-tight sm:text-7xl lg:text-[clamp(5rem,11vw,9rem)]"
                         style={{
                             fontFamily: 'var(--font-display)',
                             animation: 'heroReveal 0.6s ease-out 80ms both'
@@ -147,12 +159,12 @@ export default function HomeClient() {
                         <span style={{ color: 'var(--brand)' }}>Not infrastructure.</span>
                     </h1>
 
-                    {/* Horizontal rule — editorial separator */}
+                    {/* Orange structural rule — wider, more commanding */}
                     <div
                         className="mb-8"
                         style={{
-                            height: '2px',
-                            width: '48px',
+                            height: '3px',
+                            width: 'min(360px, 60vw)',
                             background: 'var(--brand)',
                             animation: 'heroReveal 0.5s ease-out 160ms both'
                         }}
@@ -170,15 +182,12 @@ export default function HomeClient() {
                     </p>
 
                     {/* CTAs */}
-                    <div
-                        className="mb-16 flex flex-wrap items-center gap-5"
-                        style={{ animation: 'heroReveal 0.6s ease-out 260ms both' }}
-                    >
-                        <Link href="/contact" className="inline-flex h-12 items-center gap-2 bg-brand px-8 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
+                    <div className="mb-16 flex flex-wrap items-center gap-5" style={{ animation: 'heroReveal 0.6s ease-out 260ms both' }}>
+                        <Link href="/contact" className="bg-brand hover:bg-brand-hover inline-flex h-12 items-center gap-2 px-8 text-sm font-semibold text-black transition-colors">
                             Join Waitlist
                             <ArrowRight className="h-4 w-4" />
                         </Link>
-                        <Link href="/contact" className="text-sm font-medium transition-colors hover:text-brand" style={{ color: 'var(--fg-secondary)' }}>
+                        <Link href="/contact" className="hover:text-brand text-sm font-medium transition-colors" style={{ color: 'var(--fg-secondary)' }}>
                             Book a demo →
                         </Link>
                     </div>
@@ -193,7 +202,7 @@ export default function HomeClient() {
                     >
                         {['5-minute deploy', 'Built-in observability', 'GDPR compliant', '€71K/year savings'].map(f => (
                             <div key={f} className="flex items-center gap-2 text-xs" style={{ color: 'var(--fg-secondary)' }}>
-                                <Check className="h-3 w-3 text-brand" />
+                                <Check className="text-brand h-3 w-3" />
                                 {f}
                             </div>
                         ))}
@@ -204,7 +213,7 @@ export default function HomeClient() {
             {/* ── 2. Terminal ── */}
             <section className="px-6 pb-24 sm:px-8 sm:pb-28 lg:px-12 lg:pb-32" style={{ background: 'var(--bg-base)' }}>
                 <div className="mx-auto max-w-6xl">
-                    <p className="mb-6 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                    <p className="mb-6 font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
                         — See it work
                     </p>
                     <div className="overflow-hidden border" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-elevated)' }}>
@@ -219,11 +228,7 @@ export default function HomeClient() {
                                 <span>user — zsh — 80×24</span>
                             </div>
                         </div>
-                        <div
-                            ref={terminalBodyRef}
-                            className="h-[300px] space-y-1.5 overflow-y-auto p-4 text-xs sm:h-[340px] sm:p-6 sm:text-sm"
-                            style={{ color: '#ccc8c2', fontFamily: 'var(--font-mono)' }}
-                        >
+                        <div ref={terminalBodyRef} className="h-[300px] space-y-1.5 overflow-y-auto p-4 text-xs sm:h-[340px] sm:p-6 sm:text-sm" style={{ color: '#ccc8c2', fontFamily: 'var(--font-mono)' }}>
                             {terminalLines.map((line, index) => {
                                 if (!line) return null
                                 const isCommand = line.type === 'command'
@@ -231,13 +236,15 @@ export default function HomeClient() {
                                 return (
                                     <div key={index} className="flex items-start" style={{ animation: 'terminalLine 0.15s ease-out forwards', opacity: 0 }}>
                                         <span className={`mr-2 font-bold ${isCommand ? 'text-brand' : isSuccess ? 'text-[#4ade80]' : 'text-(--brand-secondary)'}`}>{line.prefix || '>'}</span>
-                                        <span className={`${isCommand ? 'font-semibold' : isSuccess ? 'text-[#86efac]' : ''}`} style={isCommand ? { color: 'var(--fg-primary)' } : {}}>{line.text}</span>
+                                        <span className={`${isCommand ? 'font-semibold' : isSuccess ? 'text-[#86efac]' : ''}`} style={isCommand ? { color: 'var(--fg-primary)' } : {}}>
+                                            {line.text}
+                                        </span>
                                     </div>
                                 )
                             })}
                             {terminalLines.length > 0 && (
                                 <div className="mt-2 flex items-center" style={{ animation: 'terminalLine 0.15s ease-out forwards', opacity: 0 }}>
-                                    <span className="mr-2 font-bold text-brand">$</span>
+                                    <span className="text-brand mr-2 font-bold">$</span>
                                     <div className="h-4 w-2 opacity-70" style={{ background: 'var(--fg-secondary)' }} />
                                 </div>
                             )}
@@ -249,39 +256,37 @@ export default function HomeClient() {
             {/* ── 3. Problem — editorial stat layout ── */}
             <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32" style={{ background: 'var(--bg-subtle)' }}>
                 <div className="mx-auto max-w-6xl">
-
                     <div className="mb-16">
-                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— The problem</p>
-                        <h2
-                            className="text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl"
-                            style={{ fontFamily: 'var(--font-display)' }}
-                        >
-                            The €76K<br />
-                            <span style={{ color: 'var(--brand)' }}>DevOps Tax</span><br />
+                        <p className="mb-5 font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                            — The problem
+                        </p>
+                        <h2 className="text-5xl leading-none font-black tracking-tight sm:text-6xl lg:text-7xl" style={{ fontFamily: 'var(--font-display)' }}>
+                            The €76K
+                            <br />
+                            <span style={{ color: 'var(--brand)' }}>DevOps Tax</span>
+                            <br />
                             on SMEs.
                         </h2>
                     </div>
 
-                    {/* Stats grid — editorial numbers as focal point */}
-                    <div
-                        className="mb-20 grid gap-px sm:grid-cols-2 lg:grid-cols-4"
-                        style={{ background: 'var(--border-subtle)' }}
-                    >
+                    {/* Stats grid — numbers as the primary focal point */}
+                    <div className="mb-20 grid gap-px sm:grid-cols-2 lg:grid-cols-4" style={{ background: 'var(--border-default)' }}>
                         {[
                             { stat: '€60–85K', label: '/year', description: "Cost of a DevOps engineer in Western Europe. Most SMEs can't justify this for 5–15 developers." },
                             { stat: '40+', label: 'hours', description: 'Setup time per project for CI/CD, monitoring, and logging. Repeated for every new project.' },
                             { stat: '20–30%', label: 'of dev time', description: 'Wasted on infrastructure instead of features that actually ship.' },
                             { stat: '∞', label: 'surprises', description: 'Usage-based platforms like Replit report $350+ daily spikes. No budget certainty.' }
                         ].map(item => (
-                            <div key={item.stat} className="p-8" style={{ background: 'var(--bg-subtle)' }}>
-                                <div
-                                    className="mb-1 text-4xl font-black leading-none tracking-tight lg:text-5xl"
-                                    style={{ fontFamily: 'var(--font-display)' }}
-                                >
+                            <div key={item.stat} className="group p-8 transition-colors duration-200 hover:bg-[var(--bg-elevated)]" style={{ background: 'var(--bg-subtle)' }}>
+                                <div className="group-hover:text-brand mb-1 text-3xl leading-none font-black tracking-tight transition-colors duration-200 lg:text-4xl" style={{ fontFamily: 'var(--font-display)' }}>
                                     {item.stat}
                                 </div>
-                                <div className="mb-3 text-xs font-medium" style={{ color: 'var(--brand)' }}>{item.label}</div>
-                                <p className="text-sm leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>{item.description}</p>
+                                <div className="mb-3 text-xs font-semibold tracking-wide uppercase" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)' }}>
+                                    {item.label}
+                                </div>
+                                <p className="text-sm leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
+                                    {item.description}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -289,74 +294,111 @@ export default function HomeClient() {
                     {/* Cost comparison — split editorial */}
                     <div className="grid gap-16 border-t pt-16 lg:grid-cols-2" style={{ borderColor: 'var(--border-subtle)' }}>
                         <div>
-                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>Without Obtura — 10 person team</p>
-                            <div
-                                className="text-6xl font-black leading-none tracking-tight lg:text-7xl"
-                                style={{ fontFamily: 'var(--font-display)', color: 'var(--fg-tertiary)' }}
-                            >
+                            <p className="mb-3 font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                                Without Obtura — 10 person team
+                            </p>
+                            <div className="text-6xl leading-none font-black tracking-tight lg:text-7xl" style={{ fontFamily: 'var(--font-display)', color: 'var(--fg-tertiary)' }}>
                                 €76,300
                             </div>
-                            <p className="mt-3 text-sm" style={{ color: 'var(--fg-tertiary)' }}>per year</p>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
+                                per year
+                            </p>
                         </div>
                         <div>
-                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>With Obtura Business plan</p>
-                            <div
-                                className="text-6xl font-black leading-none tracking-tight lg:text-7xl"
-                                style={{ fontFamily: 'var(--font-display)', color: 'var(--brand)' }}
-                            >
+                            <p className="mb-3 font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                                With Obtura Business plan
+                            </p>
+                            <div className="text-6xl leading-none font-black tracking-tight lg:text-7xl" style={{ fontFamily: 'var(--font-display)', color: 'var(--brand)' }}>
                                 €4,788
                             </div>
                             <p className="mt-3 text-sm" style={{ color: 'var(--fg-secondary)' }}>
-                                per year — <span className="font-semibold" style={{ color: 'var(--brand)' }}>94% less</span>. That's €71,512 back in your budget.
+                                per year —{' '}
+                                <span className="font-semibold" style={{ color: 'var(--brand)' }}>
+                                    94% less
+                                </span>
+                                . That&apos;s €71,512 back in your budget.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ── 4. Features — numbered editorial index ── */}
+            {/* ── 4. Features — numbered editorial with hover drama ── */}
             <section id="features" className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32" style={{ background: 'var(--bg-base)' }}>
                 <div className="mx-auto max-w-6xl">
-
                     <div className="mb-16">
-                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— The platform</p>
-                        <h2
-                            className="text-5xl font-black leading-none tracking-tight sm:text-6xl"
-                            style={{ fontFamily: 'var(--font-display)' }}
-                        >
-                            True Zero-DevOps<br />
+                        <p className="mb-5 font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                            — The platform
+                        </p>
+                        <h2 className="text-5xl leading-none font-black tracking-tight sm:text-6xl" style={{ fontFamily: 'var(--font-display)' }}>
+                            True Zero-DevOps
+                            <br />
                             <span style={{ color: 'var(--brand)' }}>Platform.</span>
                         </h2>
                     </div>
 
-                    {/* Numbered feature list */}
+                    {/* Numbered feature list with hover drama */}
                     <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
                         {FEATURES.map((feature, i) => (
                             <div
                                 key={feature.title}
-                                className="grid grid-cols-[2.5rem_1fr] gap-6 border-b py-8 sm:grid-cols-[2.5rem_1fr_1fr] sm:gap-10"
-                                style={{ borderColor: 'var(--border-subtle)' }}
+                                className="relative grid grid-cols-[2.5rem_1fr] gap-6 overflow-hidden border-b py-8 transition-all duration-200 sm:grid-cols-[2.5rem_1fr_1fr] sm:gap-10"
+                                style={{
+                                    borderColor: 'var(--border-subtle)',
+                                    borderLeft: `3px solid ${hoveredFeature === i ? 'var(--brand)' : 'transparent'}`,
+                                    paddingLeft: hoveredFeature === i ? '1.25rem' : '0',
+                                    transition: 'border-color 0.18s ease, padding-left 0.18s ease, background-color 0.18s ease',
+                                    background: hoveredFeature === i ? 'var(--bg-subtle)' : 'transparent'
+                                }}
+                                onMouseEnter={() => setHoveredFeature(i)}
+                                onMouseLeave={() => setHoveredFeature(null)}
                             >
-                                {/* Number */}
+                                {/* Ghost index number — decorative background element */}
+                                <div
+                                    aria-hidden="true"
+                                    style={{
+                                        position: 'absolute',
+                                        right: '-0.5rem',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        fontSize: 'clamp(5rem, 10vw, 8rem)',
+                                        fontWeight: 900,
+                                        fontFamily: 'var(--font-display)',
+                                        color: 'var(--fg-primary)',
+                                        opacity: hoveredFeature === i ? 0.04 : 0.025,
+                                        lineHeight: 1,
+                                        pointerEvents: 'none',
+                                        transition: 'opacity 0.18s ease',
+                                        userSelect: 'none'
+                                    }}
+                                >
+                                    {String(i + 1).padStart(2, '0')}
+                                </div>
+
+                                {/* Index number */}
                                 <span
-                                    className="pt-0.5 text-sm font-semibold tabular-nums"
-                                    style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)' }}
+                                    className="pt-0.5 text-sm font-semibold tabular-nums transition-colors duration-200"
+                                    style={{
+                                        color: hoveredFeature === i ? 'var(--brand)' : 'var(--fg-tertiary)',
+                                        fontFamily: 'var(--font-mono)'
+                                    }}
                                 >
                                     0{i + 1}
                                 </span>
 
                                 {/* Title + description */}
                                 <div>
-                                    <div className="mb-1.5 flex items-center gap-2" style={{ color: 'var(--brand)' }}>
-                                        {feature.icon}
-                                    </div>
-                                    <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
-                                    <p className="text-sm leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>{feature.description}</p>
+                                    <h3 className="mb-2 text-xl font-semibold transition-colors duration-200" style={{ color: hoveredFeature === i ? 'var(--fg-primary)' : 'var(--fg-primary)' }}>
+                                        {feature.title}
+                                    </h3>
+                                    <p className="text-sm leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
+                                        {feature.description}
+                                    </p>
                                     {/* Sub-features on mobile */}
                                     <ul className="mt-4 space-y-1.5 sm:hidden">
                                         {feature.items.map(item => (
                                             <li key={item} className="flex items-start gap-2 text-xs" style={{ color: 'var(--fg-secondary)' }}>
-                                                <Check className="mt-0.5 h-3 w-3 shrink-0 text-brand" />
+                                                <Check className="text-brand mt-0.5 h-3 w-3 shrink-0" />
                                                 {item}
                                             </li>
                                         ))}
@@ -367,7 +409,7 @@ export default function HomeClient() {
                                 <ul className="hidden space-y-1.5 sm:block">
                                     {feature.items.map(item => (
                                         <li key={item} className="flex items-start gap-2 text-sm" style={{ color: 'var(--fg-secondary)' }}>
-                                            <Check className="mt-0.5 h-3 w-3 shrink-0 text-brand" />
+                                            <Check className="text-brand mt-0.5 h-3 w-3 shrink-0" />
                                             {item}
                                         </li>
                                     ))}
@@ -381,14 +423,13 @@ export default function HomeClient() {
             {/* ── 5. Calculator ── */}
             <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32" style={{ background: 'var(--bg-subtle)' }}>
                 <div className="mx-auto max-w-6xl">
-
                     <div className="mb-16">
-                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Your numbers</p>
-                        <h2
-                            className="text-5xl font-black leading-none tracking-tight sm:text-6xl"
-                            style={{ fontFamily: 'var(--font-display)' }}
-                        >
-                            Calculate your<br />
+                        <p className="mb-5 font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                            — Your numbers
+                        </p>
+                        <h2 className="text-5xl leading-none font-black tracking-tight sm:text-6xl" style={{ fontFamily: 'var(--font-display)' }}>
+                            Calculate your
+                            <br />
                             <span style={{ color: 'var(--brand)' }}>DevOps savings.</span>
                         </h2>
                     </div>
@@ -398,13 +439,18 @@ export default function HomeClient() {
                         <div className="space-y-8">
                             <div>
                                 <div className="mb-3 flex justify-between">
-                                    <label className="text-sm" style={{ color: 'var(--fg-secondary)' }}>Developers on your team</label>
-                                    <span className="text-sm font-semibold text-brand">{developers}</span>
+                                    <label className="text-sm" style={{ color: 'var(--fg-secondary)' }}>
+                                        Developers on your team
+                                    </label>
+                                    <span className="text-brand text-sm font-semibold">{developers}</span>
                                 </div>
                                 <input
-                                    type="range" min="1" max="50" value={developers}
+                                    type="range"
+                                    min="1"
+                                    max="50"
+                                    value={developers}
                                     onChange={e => setDevelopers(Number(e.target.value))}
-                                    className="h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand"
+                                    className="[&::-webkit-slider-thumb]:bg-brand h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
                                     style={{ background: 'var(--border-default)' }}
                                     aria-label="Number of developers"
                                 />
@@ -412,25 +458,28 @@ export default function HomeClient() {
 
                             <div>
                                 <div className="mb-3 flex justify-between">
-                                    <label className="text-sm" style={{ color: 'var(--fg-secondary)' }}>Active projects</label>
-                                    <span className="text-sm font-semibold text-brand">{projects}</span>
+                                    <label className="text-sm" style={{ color: 'var(--fg-secondary)' }}>
+                                        Active projects
+                                    </label>
+                                    <span className="text-brand text-sm font-semibold">{projects}</span>
                                 </div>
                                 <input
-                                    type="range" min="1" max="20" value={projects}
+                                    type="range"
+                                    min="1"
+                                    max="20"
+                                    value={projects}
                                     onChange={e => setProjects(Number(e.target.value))}
-                                    className="h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand"
+                                    className="[&::-webkit-slider-thumb]:bg-brand h-px w-full cursor-pointer appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
                                     style={{ background: 'var(--border-default)' }}
                                     aria-label="Number of active projects"
                                 />
                             </div>
 
                             <div>
-                                <label className="mb-3 block text-sm" style={{ color: 'var(--fg-secondary)' }}>Current DevOps setup</label>
-                                <select
-                                    value={setup} onChange={e => setSetup(e.target.value)}
-                                    className="h-11 w-full border px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand"
-                                    style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)', color: 'var(--fg-primary)' }}
-                                >
+                                <label className="mb-3 block text-sm" style={{ color: 'var(--fg-secondary)' }}>
+                                    Current DevOps setup
+                                </label>
+                                <select value={setup} onChange={e => setSetup(e.target.value)} className="focus:ring-brand h-11 w-full border px-4 text-sm focus:ring-1 focus:outline-none" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)', color: 'var(--fg-primary)' }}>
                                     <option value="manual">Manual DevOps</option>
                                     <option value="vercel">Vercel / Netlify</option>
                                     <option value="aws">AWS / GCP / Azure</option>
@@ -440,13 +489,15 @@ export default function HomeClient() {
 
                             {/* Cost breakdown */}
                             <div className="border-t pt-6" style={{ borderColor: 'var(--border-subtle)' }}>
-                                <p className="mb-3 text-xs" style={{ color: 'var(--fg-tertiary)' }}>Current annual spend:</p>
+                                <p className="mb-3 text-xs" style={{ color: 'var(--fg-tertiary)' }}>
+                                    Current annual spend:
+                                </p>
                                 <div className="space-y-2">
                                     {[
                                         { icon: <Users className="h-3 w-3" />, label: 'DevOps salary', value: currentSetup.devopsSalary },
                                         { icon: <Clock className="h-3 w-3" />, label: 'Setup time', value: currentSetup.setupTime },
                                         { icon: <TrendingDown className="h-3 w-3" />, label: 'Tools', value: currentSetup.tools },
-                                        { icon: <AlertTriangle className="h-3 w-3" />, label: 'Dev time on infra', value: currentSetup.devTime },
+                                        { icon: <AlertTriangle className="h-3 w-3" />, label: 'Dev time on infra', value: currentSetup.devTime }
                                     ].map(row => (
                                         <div key={row.label} className="flex items-center justify-between text-sm">
                                             <span className="flex items-center gap-2" style={{ color: 'var(--fg-secondary)' }}>
@@ -466,17 +517,17 @@ export default function HomeClient() {
                         {/* Right: Savings — editorial focal point */}
                         <div className="flex flex-col justify-between">
                             <div>
-                                <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                                <p className="mb-2 font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
                                     With Obtura {planName}
                                 </p>
-                                <div
-                                    className="text-7xl font-black leading-none tracking-tight sm:text-8xl"
-                                    style={{ fontFamily: 'var(--font-display)', color: 'var(--brand)' }}
-                                >
+                                <div className="text-7xl leading-none font-black tracking-tight sm:text-8xl" style={{ fontFamily: 'var(--font-display)', color: 'var(--brand)' }}>
                                     €{savings.toLocaleString()}
                                 </div>
                                 <p className="mt-4 text-lg" style={{ color: 'var(--fg-secondary)' }}>
-                                    saved per year — <span className="font-semibold" style={{ color: 'var(--fg-primary)' }}>{savingsPercent}% reduction</span>
+                                    saved per year —{' '}
+                                    <span className="font-semibold" style={{ color: 'var(--fg-primary)' }}>
+                                        {savingsPercent}% reduction
+                                    </span>
                                 </p>
                                 <p className="mt-1 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
                                     vs. €{obturaCost.toLocaleString()}/yr with Obtura
@@ -485,7 +536,7 @@ export default function HomeClient() {
 
                             <div className="mt-10">
                                 <div className="mb-4 h-px" style={{ background: 'var(--border-subtle)' }} />
-                                <Link href="/contact" className="inline-flex h-12 items-center gap-2 bg-brand px-8 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
+                                <Link href="/contact" className="bg-brand hover:bg-brand-hover inline-flex h-12 items-center gap-2 px-8 text-sm font-semibold text-black transition-colors">
                                     Contact Sales
                                     <ArrowRight className="h-4 w-4" />
                                 </Link>
@@ -505,10 +556,14 @@ export default function HomeClient() {
                             { icon: <HardDrive className="h-4 w-4" />, title: 'Daily Backups', description: '30-day retention with tested recovery' }
                         ].map(badge => (
                             <div key={badge.title} className="flex items-start gap-4">
-                                <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand-secondary)' }}>{badge.icon}</div>
+                                <div className="mt-0.5 shrink-0" style={{ color: 'var(--brand-secondary)' }}>
+                                    {badge.icon}
+                                </div>
                                 <div>
                                     <h3 className="text-sm font-semibold">{badge.title}</h3>
-                                    <p className="mt-0.5 text-sm" style={{ color: 'var(--fg-secondary)' }}>{badge.description}</p>
+                                    <p className="mt-0.5 text-sm" style={{ color: 'var(--fg-secondary)' }}>
+                                        {badge.description}
+                                    </p>
                                 </div>
                             </div>
                         ))}
@@ -516,81 +571,95 @@ export default function HomeClient() {
                 </div>
             </section>
 
-            {/* ── 7. Pricing ── */}
+            {/* ── 7. Pricing — asymmetric with featured plan breakout ── */}
             <section id="pricing" className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32" style={{ background: 'var(--bg-base)' }}>
                 <div className="mx-auto max-w-6xl">
-
                     <div className="mb-16">
-                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Pricing</p>
-                        <h2
-                            className="text-5xl font-black leading-none tracking-tight sm:text-6xl"
-                            style={{ fontFamily: 'var(--font-display)' }}
-                        >
-                            Predictable<br />
+                        <p className="mb-5 font-mono text-xs tracking-widest uppercase" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>
+                            — Pricing
+                        </p>
+                        <h2 className="text-5xl leading-none font-black tracking-tight sm:text-6xl" style={{ fontFamily: 'var(--font-display)' }}>
+                            Predictable
+                            <br />
                             <span style={{ color: 'var(--brand)' }}>flat pricing.</span>
                         </h2>
-                        <p className="mt-5 max-w-md text-base" style={{ color: 'var(--fg-secondary)' }}>No usage surprises. No hidden fees. Scales with your team.</p>
+                        <p className="mt-5 max-w-md text-base" style={{ color: 'var(--fg-secondary)' }}>
+                            No usage surprises. No hidden fees. Scales with your team.
+                        </p>
                     </div>
 
-                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+                    {/* Asymmetric pricing layout */}
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         {[
                             {
-                                name: 'Starter', price: '€79', period: '/month',
+                                name: 'Starter',
+                                price: '€79',
+                                period: '/month',
                                 description: '1–3 devs · 3 services',
                                 features: ['Zero-config deployment', 'AI DevOps Agent', 'Error tracking & alerts', 'Custom domains + SSL', '3 team seats', '7-day log retention'],
                                 highlighted: false
                             },
                             {
-                                name: 'Team', price: '€199', period: '/month',
+                                name: 'Team',
+                                price: '€199',
+                                period: '/month',
                                 description: '5–10 devs · 15 services',
                                 features: ['Everything in Starter', 'Preview environments per PR', 'APM + uptime monitoring', '10 team seats · full RBAC', '30-day log retention', 'Onboarding call included'],
                                 highlighted: false
                             },
                             {
-                                name: 'Business', price: '€499', period: '/month',
+                                name: 'Business',
+                                price: '€499',
+                                period: '/month',
                                 description: '10–25 devs · unlimited services',
                                 features: ['Everything in Team', 'Deployment approval workflows', 'Distributed tracing', 'Live chat support', '25 team seats', '90-day log retention'],
-                                highlighted: true, badge: 'Most popular'
+                                highlighted: true,
+                                badge: 'Most popular'
                             },
                             {
-                                name: 'Enterprise', price: '€899', period: '/month',
+                                name: 'Enterprise',
+                                price: '€899',
+                                period: '/month',
                                 description: '25–50 devs · unlimited everything',
                                 features: ['Everything in Business', 'Custom AI remediation playbooks', 'Unlimited team seats', '1-year log retention', 'Dedicated account manager', 'Phone/WhatsApp for P1s'],
                                 highlighted: false
                             }
                         ].map(plan => (
-                            <div
-                                key={plan.name}
-                                className="flex flex-col border p-5 sm:p-6"
-                                style={plan.highlighted
-                                    ? { borderColor: 'var(--brand-border)', background: 'var(--bg-elevated)' }
-                                    : { borderColor: 'var(--border-subtle)', background: 'var(--bg-surface)' }
-                                }
-                            >
+                            <div key={plan.name} className="flex flex-col p-5 sm:p-6" style={plan.highlighted ? { background: 'var(--brand)', border: 'none' } : { borderColor: 'var(--border-subtle)', background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)' }}>
                                 {plan.badge && (
-                                    <div className="mb-3 text-xs font-medium" style={{ color: 'var(--brand)' }}>{plan.badge}</div>
+                                    <div
+                                        className="mb-4 inline-flex items-center text-xs font-semibold tracking-widest uppercase"
+                                        style={{
+                                            fontFamily: 'var(--font-mono)',
+                                            color: plan.highlighted ? 'rgba(13,12,11,0.7)' : 'var(--brand)'
+                                        }}
+                                    >
+                                        {plan.badge}
+                                    </div>
                                 )}
-                                <h3 className="mb-1 text-lg font-semibold">{plan.name}</h3>
+                                <h3 className="mb-1 text-lg font-semibold" style={{ color: plan.highlighted ? '#0d0c0b' : 'var(--fg-primary)' }}>
+                                    {plan.name}
+                                </h3>
                                 <div className="mb-2 flex items-baseline gap-1">
-                                    <span
-                                        className="text-3xl font-black leading-none"
-                                        style={{ fontFamily: 'var(--font-display)', color: plan.highlighted ? 'var(--brand)' : 'var(--fg-primary)' }}
-                                    >{plan.price}</span>
-                                    <span className="text-sm" style={{ color: 'var(--fg-secondary)' }}>{plan.period}</span>
+                                    <span className="text-3xl leading-none font-black" style={{ fontFamily: 'var(--font-display)', color: plan.highlighted ? '#0d0c0b' : 'var(--fg-primary)' }}>
+                                        {plan.price}
+                                    </span>
+                                    <span className="text-sm" style={{ color: plan.highlighted ? 'rgba(13,12,11,0.6)' : 'var(--fg-secondary)' }}>
+                                        {plan.period}
+                                    </span>
                                 </div>
-                                <p className="mb-5 text-xs" style={{ color: 'var(--fg-secondary)' }}>{plan.description}</p>
+                                <p className="mb-5 text-xs" style={{ color: plan.highlighted ? 'rgba(13,12,11,0.65)' : 'var(--fg-secondary)' }}>
+                                    {plan.description}
+                                </p>
                                 <ul className="mb-5 flex flex-col gap-2">
                                     {plan.features.map(feature => (
-                                        <li key={feature} className="flex items-center gap-2 text-xs" style={{ color: 'var(--fg-secondary)' }}>
-                                            <Check className="h-3 w-3 shrink-0 text-brand" />
+                                        <li key={feature} className="flex items-center gap-2 text-xs" style={{ color: plan.highlighted ? 'rgba(13,12,11,0.8)' : 'var(--fg-secondary)' }}>
+                                            <Check className="h-3 w-3 shrink-0" style={{ color: plan.highlighted ? '#0d0c0b' : 'var(--brand)' }} />
                                             {feature}
                                         </li>
                                     ))}
                                 </ul>
-                                <Link href="/contact"
-                                    className={`mt-auto inline-flex h-10 w-full items-center justify-center text-sm font-medium transition-colors ${plan.highlighted ? 'bg-brand text-black hover:bg-brand-hover' : 'border hover:bg-white/6'}`}
-                                    style={plan.highlighted ? {} : { borderColor: 'var(--border-default)', color: 'var(--fg-primary)' }}
-                                >
+                                <Link href="/contact" className="mt-auto inline-flex h-10 w-full items-center justify-center text-sm font-semibold transition-colors" style={plan.highlighted ? { background: '#0d0c0b', color: 'var(--brand)' } : { border: '1px solid var(--border-default)', color: 'var(--fg-primary)', background: 'transparent' }}>
                                     Contact Sales
                                 </Link>
                             </div>
@@ -599,38 +668,55 @@ export default function HomeClient() {
                 </div>
             </section>
 
-            {/* ── 8. CTA — editorial statement ── */}
-            <section className="px-6 py-32 sm:px-8 sm:py-40 lg:px-12 lg:py-52" style={{ background: 'var(--bg-subtle)' }}>
-                <div className="mx-auto max-w-6xl">
+            {/* ── 8. CTA — full-bleed orange, maximum contrast ── */}
+            <section className="relative overflow-hidden px-6 py-32 sm:px-8 sm:py-40 lg:px-12 lg:py-52" style={{ background: 'var(--brand)' }}>
+                {/* Structural grid on orange */}
+                <div
+                    aria-hidden="true"
+                    style={{
+                        position: 'absolute',
+                        inset: 0,
+                        pointerEvents: 'none',
+                        backgroundImage: 'linear-gradient(rgba(13,12,11,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(13,12,11,0.08) 1px, transparent 1px)',
+                        backgroundSize: '80px 80px'
+                    }}
+                />
+
+                <div className="relative mx-auto max-w-6xl">
                     <div className="max-w-5xl">
-                        <p className="mb-8 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Get started</p>
-                        <h2
-                            className="mb-10 text-6xl font-black leading-none tracking-tight sm:text-7xl lg:text-9xl"
-                            style={{ fontFamily: 'var(--font-display)' }}
-                        >
-                            Eliminate your<br />
-                            <span style={{ color: 'var(--brand)' }}>DevOps bottleneck.</span>
+                        <p className="mb-8 font-mono text-xs tracking-widest uppercase" style={{ color: 'rgba(13,12,11,0.55)', fontFamily: 'var(--font-mono)' }}>
+                            — Get started
+                        </p>
+                        <h2 className="mb-10 text-6xl leading-none font-black tracking-tight sm:text-7xl lg:text-[clamp(5rem,11vw,9rem)]" style={{ fontFamily: 'var(--font-display)', color: '#0d0c0b' }}>
+                            Eliminate your
+                            <br />
+                            DevOps bottleneck.
                         </h2>
 
-                        <p className="mb-12 max-w-lg text-lg" style={{ color: 'var(--fg-secondary)' }}>
+                        <p className="mb-12 max-w-lg text-lg" style={{ color: 'rgba(13,12,11,0.7)' }}>
                             Join European SMEs saving €71K+ per year. Get early access when we launch.
                         </p>
 
                         <div className="flex flex-wrap items-center gap-5">
-                            <Link href="/contact" className="inline-flex h-12 items-center gap-2 bg-brand px-8 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
+                            <Link href="/contact" className="inline-flex h-12 items-center gap-2 px-8 text-sm font-semibold transition-opacity hover:opacity-80" style={{ background: '#0d0c0b', color: 'var(--brand)' }}>
                                 <Calendar className="h-4 w-4" />
                                 Book a Demo
                             </Link>
-                            <div className="flex flex-wrap items-center gap-4 text-xs" style={{ color: 'var(--fg-tertiary)' }}>
-                                <span className="flex items-center gap-1.5"><Globe className="h-3 w-3" /> EU-first platform</span>
-                                <span className="flex items-center gap-1.5"><Shield className="h-3 w-3" /> GDPR compliant</span>
-                                <span className="flex items-center gap-1.5"><ClipboardCheck className="h-3 w-3" /> No credit card</span>
+                            <div className="flex flex-wrap items-center gap-4 text-xs" style={{ color: 'rgba(13,12,11,0.6)' }}>
+                                <span className="flex items-center gap-1.5">
+                                    <Globe className="h-3 w-3" /> EU-first platform
+                                </span>
+                                <span className="flex items-center gap-1.5">
+                                    <Shield className="h-3 w-3" /> GDPR compliant
+                                </span>
+                                <span className="flex items-center gap-1.5">
+                                    <ClipboardCheck className="h-3 w-3" /> No credit card
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
         </div>
     )
 }

@@ -10,16 +10,16 @@ export default function NotFound() {
                 </div>
 
                 <div className="mb-8 space-y-4">
-                    <h2 className="text-3xl font-bold sm:text-4xl">Page Not Found</h2>
+                    <h2 className="text-3xl font-black leading-none tracking-tight sm:text-4xl" style={{ fontFamily: 'var(--font-display)' }}>Page Not Found</h2>
                     <p className="text-lg" style={{ color: 'var(--fg-secondary)' }}>The page you&apos;re looking for doesn&apos;t exist or has been moved.</p>
                 </div>
 
                 <div className="mx-auto mb-10 max-w-lg">
                     <div className="overflow-hidden border" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
                         <div className="flex items-center gap-2 border-b px-4 py-3" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
-                            <div className="h-3 w-3 rounded-full bg-red-500" />
-                            <div className="h-3 w-3 rounded-full bg-yellow-500" />
-                            <div className="h-3 w-3 rounded-full bg-green-500" />
+                            <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
+                            <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
+                            <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
                             <span className="ml-3 font-mono text-sm" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>terminal</span>
                         </div>
                         <div className="space-y-1 p-6 text-left font-mono text-sm" style={{ fontFamily: 'var(--font-mono)' }}>
@@ -37,11 +37,11 @@ export default function NotFound() {
                 </div>
 
                 <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                    <Link href="/" className="inline-flex h-12 items-center justify-center gap-2 bg-brand px-6 font-semibold text-black transition-colors hover:bg-brand-hover">
+                    <Link href="/" className="inline-flex h-12 items-center justify-center gap-2 bg-brand px-6 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
                         <Home className="h-4 w-4" />
                         Go Home
                     </Link>
-                    <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 border px-6 font-semibold transition-colors hover:text-brand" style={{ borderColor: 'var(--border-default)', color: 'var(--fg-primary)' }}>
+                    <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 border px-6 text-sm font-semibold transition-colors hover:text-brand" style={{ borderColor: 'var(--border-default)', color: 'var(--fg-primary)' }}>
                         Contact Support
                         <ArrowRight className="h-4 w-4" />
                     </Link>

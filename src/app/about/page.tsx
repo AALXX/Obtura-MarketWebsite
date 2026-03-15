@@ -96,8 +96,20 @@ export default function About() {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <div className="min-h-screen pt-16" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
-                <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32">
-                    <div className="mx-auto max-w-4xl">
+                <section className="relative overflow-hidden px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32">
+                    {/* Precision grid background */}
+                    <div
+                        aria-hidden="true"
+                        style={{
+                            position: 'absolute', inset: 0, pointerEvents: 'none',
+                            backgroundImage: 'linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px)',
+                            backgroundSize: '80px 80px',
+                            WebkitMaskImage: 'radial-gradient(ellipse 60% 80% at 5% 20%, black 10%, transparent 70%)',
+                            maskImage: 'radial-gradient(ellipse 60% 80% at 5% 20%, black 10%, transparent 70%)',
+                            opacity: 0.5
+                        }}
+                    />
+                    <div className="relative mx-auto max-w-4xl">
 
                         <nav aria-label="Breadcrumb" className="mb-10">
                             <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
@@ -112,6 +124,7 @@ export default function About() {
                             <h1 className="mb-6 text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl" style={{ fontFamily: 'var(--font-display)' }}>
                                 About <span style={{ color: 'var(--brand)' }}>Obtura.</span>
                             </h1>
+                            <div style={{ width: '3rem', height: '3px', background: 'var(--brand)', marginBottom: '1.5rem' }} />
                             <p className="max-w-xl text-lg leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
                                 We&apos;re building the DevOps platform European SMEs deserve. Ship software 3x faster with zero DevOps overhead — and save €71K+ per year.
                             </p>

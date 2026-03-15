@@ -212,8 +212,19 @@ export default function TechStacksPage() {
             <div className="min-h-screen pt-16" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
 
                 {/* Header */}
-                <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12">
-                    <div className="mx-auto max-w-6xl">
+                <section className="relative overflow-hidden px-6 py-24 sm:px-8 sm:py-28 lg:px-12">
+                    <div
+                        aria-hidden="true"
+                        style={{
+                            position: 'absolute', inset: 0, pointerEvents: 'none',
+                            backgroundImage: 'linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px)',
+                            backgroundSize: '80px 80px',
+                            WebkitMaskImage: 'radial-gradient(ellipse 60% 80% at 5% 20%, black 10%, transparent 70%)',
+                            maskImage: 'radial-gradient(ellipse 60% 80% at 5% 20%, black 10%, transparent 70%)',
+                            opacity: 0.5
+                        }}
+                    />
+                    <div className="relative mx-auto max-w-6xl">
 
                         <nav aria-label="Breadcrumb" className="mb-10">
                             <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
@@ -229,6 +240,7 @@ export default function TechStacksPage() {
                                 Deploy any<br />
                                 <span style={{ color: 'var(--brand)' }}>tech stack.</span>
                             </h1>
+                            <div style={{ width: '3rem', height: '3px', background: 'var(--brand)', marginBottom: '1.5rem' }} />
                             <p className="mb-8 max-w-xl text-lg leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
                                 Zero configuration required. Push your code — we auto-detect your framework, provision the right infrastructure, and deploy to GDPR-compliant EU servers in Germany.
                             </p>
@@ -257,7 +269,7 @@ export default function TechStacksPage() {
                 <section className="border-y px-6 py-16 sm:px-8 sm:py-20 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
                     <div className="mx-auto max-w-6xl">
                         <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— How it works</p>
-                        <h2 className="mb-10 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Autonomous Deployment</h2>
+                        <h2 className="mb-10 text-2xl font-black leading-none tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Autonomous Deployment</h2>
                         <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
                             {[
                                 { step: '01', title: 'Push Code', desc: 'Push to your Git repository as usual.' },
@@ -281,7 +293,7 @@ export default function TechStacksPage() {
                 <section className="px-6 py-16 sm:px-8 sm:py-20 lg:px-12">
                     <div className="mx-auto max-w-6xl">
                         <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Supported stacks</p>
-                        <h2 className="mb-10 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Every Framework You Need</h2>
+                        <h2 className="mb-10 text-2xl font-black leading-none tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Every Framework You Need</h2>
 
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             {techStacks.map(stack => {
@@ -309,18 +321,16 @@ export default function TechStacksPage() {
                 </section>
 
                 {/* CTA */}
-                <section className="border-y px-6 py-20 sm:px-8 sm:py-24 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
+                <section className="px-6 py-20 sm:px-8 sm:py-24 lg:px-12" style={{ background: 'var(--brand)' }}>
                     <div className="mx-auto max-w-6xl">
-                        <div className="border p-8 sm:p-12" style={{ borderColor: 'var(--brand-border)', background: 'var(--brand-dim)' }}>
-                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Get started</p>
-                            <h2 className="mb-3 text-3xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Ready to deploy your stack?</h2>
-                            <p className="mb-8 max-w-xl" style={{ color: 'var(--fg-secondary)' }}>
-                                Join European teams shipping code without DevOps overhead.
-                            </p>
-                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 bg-brand px-8 text-sm font-semibold text-black transition-colors hover:bg-brand-hover">
-                                Get Early Access
-                            </Link>
-                        </div>
+                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'rgba(13,12,11,0.55)', fontFamily: 'var(--font-mono)' }}>— Get started</p>
+                        <h2 className="mb-4 text-3xl font-black leading-none tracking-tight sm:text-4xl" style={{ fontFamily: 'var(--font-display)', color: '#0d0c0b' }}>Ready to deploy your stack?</h2>
+                        <p className="mb-8 max-w-xl" style={{ color: 'rgba(13,12,11,0.7)' }}>
+                            Join European teams shipping code without DevOps overhead.
+                        </p>
+                        <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 px-8 text-sm font-semibold transition-opacity hover:opacity-80" style={{ background: '#0d0c0b', color: 'var(--brand)' }}>
+                            Get Early Access
+                        </Link>
                     </div>
                 </section>
 
@@ -328,7 +338,7 @@ export default function TechStacksPage() {
                 <section className="px-6 py-16 sm:px-8 sm:py-20 lg:px-12">
                     <div className="mx-auto max-w-6xl">
                         <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— FAQ</p>
-                        <h2 className="mb-8 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Frequently Asked Questions</h2>
+                        <h2 className="mb-8 text-2xl font-black leading-none tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Frequently Asked Questions</h2>
                         <FAQSchema faqs={faqData} />
                     </div>
                 </section>

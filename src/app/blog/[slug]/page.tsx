@@ -224,7 +224,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                     <div className="border-t" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-subtle)' }}>
                         <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 lg:px-12">
                             <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Continue Reading</p>
-                            <h2 className="mb-8 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Related Articles</h2>
+                            <h2 className="mb-8 text-2xl font-black leading-none tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Related Articles</h2>
                             <div className="grid gap-6 sm:grid-cols-3">
                                 {relatedPosts.map(related => (
                                     <Link key={related.slug} href={`/blog/${related.slug}`} className="group border p-5 transition-colors hover:border-brand" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
@@ -243,20 +243,18 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 )}
 
                 {/* CTA Section */}
-                <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+                <div className="border-t" style={{ borderColor: 'var(--border-subtle)', background: 'var(--brand)' }}>
                     <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 lg:px-12">
-                        <div className="border p-8 sm:p-12" style={{ borderColor: 'var(--brand-border)', background: 'var(--brand-dim)' }}>
-                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Get started</p>
-                            <h2 className="mb-4 text-2xl font-black sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>Ready to simplify your DevOps?</h2>
-                            <p className="mb-8 text-lg" style={{ color: 'var(--fg-secondary)' }}>Join European SMEs shipping code 3x faster with Obtura&apos;s zero-DevOps platform.</p>
-                            <div className="flex flex-col gap-4 sm:flex-row">
-                                <Link href="/contact" className="inline-flex h-12 items-center justify-center bg-brand px-8 font-semibold text-black transition-colors hover:bg-brand-hover">
-                                    Get Early Access
-                                </Link>
-                                <Link href="/tech-stacks" className="inline-flex h-12 items-center justify-center border px-8 font-semibold transition-colors hover:text-brand" style={{ borderColor: 'var(--border-default)', color: 'var(--fg-primary)' }}>
-                                    See Supported Stacks
-                                </Link>
-                            </div>
+                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'rgba(13,12,11,0.55)', fontFamily: 'var(--font-mono)' }}>— Get started</p>
+                        <h2 className="mb-4 text-3xl font-black leading-none tracking-tight sm:text-4xl" style={{ fontFamily: 'var(--font-display)', color: '#0d0c0b' }}>Ready to simplify your DevOps?</h2>
+                        <p className="mb-8 text-lg" style={{ color: 'rgba(13,12,11,0.7)' }}>Join European SMEs shipping code 3x faster with Obtura&apos;s zero-DevOps platform.</p>
+                        <div className="flex flex-col gap-4 sm:flex-row">
+                            <Link href="/contact" className="inline-flex h-12 items-center justify-center gap-2 px-8 text-sm font-semibold transition-opacity hover:opacity-80" style={{ background: '#0d0c0b', color: 'var(--brand)' }}>
+                                Get Early Access
+                            </Link>
+                            <Link href="/tech-stacks" className="inline-flex h-12 items-center justify-center gap-2 border px-8 text-sm font-semibold transition-colors" style={{ borderColor: 'rgba(13,12,11,0.3)', color: 'rgba(13,12,11,0.75)' }}>
+                                See Supported Stacks
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -104,8 +104,19 @@ export default function BlogPage() {
             <div className="min-h-screen pt-16" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
 
                 {/* Header */}
-                <section className="px-6 py-24 sm:px-8 sm:py-28 lg:px-12">
-                    <div className="mx-auto max-w-6xl">
+                <section className="relative overflow-hidden px-6 py-24 sm:px-8 sm:py-28 lg:px-12">
+                    <div
+                        aria-hidden="true"
+                        style={{
+                            position: 'absolute', inset: 0, pointerEvents: 'none',
+                            backgroundImage: 'linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px)',
+                            backgroundSize: '80px 80px',
+                            WebkitMaskImage: 'radial-gradient(ellipse 60% 80% at 5% 20%, black 10%, transparent 70%)',
+                            maskImage: 'radial-gradient(ellipse 60% 80% at 5% 20%, black 10%, transparent 70%)',
+                            opacity: 0.5
+                        }}
+                    />
+                    <div className="relative mx-auto max-w-6xl">
 
                         <nav aria-label="Breadcrumb" className="mb-10">
                             <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
@@ -120,6 +131,7 @@ export default function BlogPage() {
                             <h1 className="mb-6 text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl" style={{ fontFamily: 'var(--font-display)' }}>
                                 DevOps Blog.
                             </h1>
+                            <div style={{ width: '3rem', height: '3px', background: 'var(--brand)', marginBottom: '1.5rem' }} />
                             <p className="max-w-xl text-lg leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
                                 Expert guides and insights for European SMEs. Deploy smarter, ship faster, stay compliant.
                             </p>
@@ -209,7 +221,7 @@ export default function BlogPage() {
                 <section className="border-t px-6 py-16 sm:px-8 sm:py-20 lg:px-12" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-muted)' }}>
                     <div className="mx-auto max-w-6xl">
                         <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Topics</p>
-                        <h2 className="mb-8 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Popular Topics</h2>
+                        <h2 className="mb-8 text-2xl font-black leading-none tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Popular Topics</h2>
                         <div className="flex flex-wrap gap-2">
                             {allTags.map(tag => (
                                 <span key={tag} className="border px-3 py-1 text-sm"
@@ -222,16 +234,14 @@ export default function BlogPage() {
                 </section>
 
                 {/* Newsletter */}
-                <section className="border-t px-6 py-20 sm:px-8 sm:py-24 lg:px-12" style={{ borderColor: 'var(--border-subtle)' }}>
+                <section className="px-6 py-20 sm:px-8 sm:py-24 lg:px-12" style={{ background: 'var(--brand)' }}>
                     <div className="mx-auto max-w-6xl">
-                        <div className="border p-8 sm:p-12" style={{ borderColor: 'var(--brand-border)', background: 'var(--brand-dim)' }}>
-                            <p className="mb-3 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Newsletter</p>
-                            <h2 className="mb-3 text-3xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Get DevOps Tips in Your Inbox</h2>
-                            <p className="mb-8 max-w-xl" style={{ color: 'var(--fg-secondary)' }}>
-                                Join European developers receiving insights on zero-DevOps deployment, GDPR compliance, and scaling without the overhead.
-                            </p>
-                            <NewsletterForm />
-                        </div>
+                        <p className="mb-5 font-mono text-xs uppercase tracking-widest" style={{ color: 'rgba(13,12,11,0.55)', fontFamily: 'var(--font-mono)' }}>— Newsletter</p>
+                        <h2 className="mb-4 text-3xl font-black leading-none tracking-tight sm:text-4xl" style={{ fontFamily: 'var(--font-display)', color: '#0d0c0b' }}>Get DevOps Tips in Your Inbox</h2>
+                        <p className="mb-8 max-w-xl" style={{ color: 'rgba(13,12,11,0.7)' }}>
+                            Join European developers receiving insights on zero-DevOps deployment, GDPR compliance, and scaling without the overhead.
+                        </p>
+                        <NewsletterForm inverted />
                     </div>
                 </section>
             </div>
