@@ -53,6 +53,11 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li>
+                                <Link href="/tech-stacks" className="text-sm transition-colors hover:text-brand" style={{ color: 'var(--fg-secondary)' }}>
+                                    Tech Stacks
+                                </Link>
+                            </li>
+                            <li>
                                 <Link href="/#pricing" className="text-sm transition-colors hover:text-brand" style={{ color: 'var(--fg-secondary)' }}>
                                     Pricing
                                 </Link>
@@ -138,7 +143,7 @@ const Footer = () => {
                 </div>
 
                 <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 sm:flex-row" style={{ borderColor: 'var(--border-subtle)' }}>
-                    <p className="text-sm" style={{ color: 'var(--fg-secondary)' }}>© {currentYear} MRSA SRL. All rights reserved.</p>
+                    <p className="text-sm" style={{ color: 'var(--fg-secondary)' }}>© {currentYear} Obtura SRL. All rights reserved.</p>
                     <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-secondary)' }}>
                         <span>EU Data Residency</span>
                         <span style={{ color: 'var(--border-default)' }}>•</span>

@@ -2,43 +2,38 @@ import ContactPageClient from './ContactPageClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Contact | Deploy Any Tech Stack in Europe | Obtura',
-    description: "Book a demo of Obtura's autonomous deployment platform. Deploy Node.js, Python, Go, PHP, React, Django & 15+ frameworks. 85%+ coverage. GDPR-compliant German hosting. No DevOps needed.",
+    title: 'Book a Demo or Join Waitlist | Obtura',
+    description: "Book a personalized demo of Obtura's zero-DevOps deployment platform. See how European SMEs save €71K+/year. Deploy 15+ frameworks with GDPR-compliant EU hosting in Germany.",
     keywords: [
-        'contact obtura',
-        'book demo',
+        'book obtura demo',
+        'join obtura waitlist',
         'autonomous deployment demo',
-        'deploy nextjs demo',
-        'deploy python app demo',
+        'european devops platform demo',
         'gdpr hosting demo germany',
         'zero config deployment demo',
-        'deploy any tech stack demo',
-        'obtura waitlist',
-        'european deployment platform',
-        'german hosting provider',
-        'eu data residency demo',
-        'no devops deployment demo',
-        'autonomous platform demo',
-        'bucharest tech company'
+        'obtura early access',
+        'european sme deployment waitlist',
+        'devops platform europe demo',
+        'no devops deployment contact'
     ],
     openGraph: {
-        title: 'Contact Obtura | Deploy Any Tech Stack in Europe',
-        description: "Book a demo of Obtura's autonomous deployment platform. 85%+ framework coverage with GDPR-compliant German hosting. No DevOps needed.",
+        title: 'Book a Demo or Join the Waitlist | Obtura',
+        description: "See how European SMEs save €71K+/year with Obtura's zero-DevOps platform. GDPR-compliant EU hosting, 15+ frameworks, no DevOps needed.",
         type: 'website',
         images: [
             {
-                url: 'https://obtura.dev/Logo2.png',
+                url: 'https://obtura.dev/og-image.png',
                 width: 1200,
                 height: 630,
-                alt: 'Contact Obtura - Deploy Any Tech Stack'
+                alt: 'Contact Obtura - Book a Demo or Join the Waitlist'
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Contact Obtura | Deploy Any Tech Stack in Europe',
-        description: "Book a demo of Obtura's autonomous deployment platform. 85%+ framework coverage.",
-        images: ['https://obtura.dev/Logo2.png']
+        title: 'Book a Demo or Join the Waitlist | Obtura',
+        description: "Book a demo of Obtura's zero-DevOps platform. European SMEs save €71K+/year. GDPR-compliant EU hosting.",
+        images: ['https://obtura.dev/og-image.png']
     },
     alternates: {
         canonical: 'https://obtura.dev/contact'
@@ -54,11 +49,14 @@ export default function Contact() {
                     __html: JSON.stringify({
                         '@context': 'https://schema.org',
                         '@type': 'ContactPage',
+                        '@id': 'https://obtura.dev/contact#webpage',
                         name: 'Contact Obtura',
                         description: "Book a demo or join the waitlist for Obtura's zero-DevOps platform",
                         url: 'https://obtura.dev/contact',
+                        isPartOf: { '@id': 'https://obtura.dev/#website' },
                         mainEntity: {
                             '@type': 'Organization',
+                            '@id': 'https://obtura.dev/#organization',
                             name: 'Obtura',
                             contactPoint: {
                                 '@type': 'ContactPoint',

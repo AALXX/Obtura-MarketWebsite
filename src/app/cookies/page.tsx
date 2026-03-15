@@ -4,6 +4,18 @@ export const metadata: Metadata = {
     title: 'Cookie Policy | Obtura',
     description: 'Obtura Cookie Policy - How we use cookies and tracking technologies on our DevOps automation platform. GDPR-compliant cookie usage for European users.',
     keywords: ['cookies', 'cookie policy', 'tracking', 'GDPR cookies', 'devops platform', 'EU data privacy'],
+    openGraph: {
+        title: 'Cookie Policy | Obtura',
+        description: 'How Obtura uses cookies and tracking technologies. GDPR-compliant cookie usage for European users.',
+        type: 'website',
+        images: [{ url: 'https://obtura.dev/og-image.png', width: 1200, height: 630, alt: 'Obtura Cookie Policy - GDPR Compliant' }]
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Cookie Policy | Obtura',
+        description: 'GDPR-compliant cookie policy for the Obtura DevOps platform.',
+        images: ['https://obtura.dev/og-image.png']
+    },
     alternates: {
         canonical: 'https://obtura.dev/cookies'
     }

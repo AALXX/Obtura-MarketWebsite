@@ -1,9 +1,21 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Security | Obtura - DevOps Automation Platform',
-    description: 'Obtura Security Overview - Enterprise-grade security for autonomous deployment. SOC 2 Type II, GDPR compliance, encryption at rest and in transit, EU data residency.',
+    title: 'Security Overview | SOC 2 & GDPR Infrastructure | Obtura',
+    description: 'Obtura security overview — SOC 2 Type II infrastructure, GDPR compliance, 256-bit AES encryption at rest, TLS 1.3 in transit, and EU data residency in Germany.',
     keywords: ['security', 'devops security', 'deployment security', 'SOC 2', 'GDPR security', 'EU data residency', 'encryption', 'infrastructure security'],
+    openGraph: {
+        title: 'Security Overview | Obtura',
+        description: 'Enterprise-grade security for autonomous deployment. SOC 2 Type II, GDPR compliance, encryption at rest and in transit, EU data residency.',
+        type: 'website',
+        images: [{ url: 'https://obtura.dev/og-image.png', width: 1200, height: 630, alt: 'Obtura Security - SOC 2 Type II, GDPR Compliant' }]
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Security Overview | Obtura',
+        description: 'SOC 2 Type II, GDPR compliance, and enterprise-grade encryption for autonomous deployments.',
+        images: ['https://obtura.dev/og-image.png']
+    },
     alternates: {
         canonical: 'https://obtura.dev/security'
     }

@@ -537,7 +537,7 @@ export default function HomeClient() {
                             {
                                 name: 'Starter', price: '€79', period: '/month',
                                 description: '1–3 devs · 3 services',
-                                features: ['Zero-config deployment', 'AI DevOps Agent', 'Error tracking & alerts', 'Custom domains + SSL', '2 team seats', '7-day log retention'],
+                                features: ['Zero-config deployment', 'AI DevOps Agent', 'Error tracking & alerts', 'Custom domains + SSL', '3 team seats', '7-day log retention'],
                                 highlighted: false
                             },
                             {

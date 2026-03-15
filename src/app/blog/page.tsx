@@ -5,36 +5,36 @@ import type { Metadata } from 'next'
 import NewsletterForm from '@/components/NewsletterForm'
 
 export const metadata: Metadata = {
-    title: 'Blog | Deploy Any Tech Stack in Europe | Obtura',
-    description: 'Expert guides on deploying Next.js, Django, React, Python, Go & 15+ frameworks. Learn autonomous deployment, GDPR compliance, German hosting, and shipping without DevOps.',
+    title: 'DevOps Blog for European SMEs | Obtura',
+    description: 'Expert guides on zero-DevOps deployment, GDPR-compliant EU hosting, and shipping code faster. Deploy Next.js, Django, Python, Go, Rust & 15+ frameworks without a DevOps team.',
     keywords: [
-        'deploy nextjs guide',
-        'deploy django tutorial',
-        'deploy react app europe',
-        'deploy python app germany',
+        'devops blog european smes',
+        'zero devops deployment guides',
+        'deploy nextjs guide europe',
+        'deploy django tutorial germany',
+        'deploy python app europe',
         'autonomous deployment blog',
-        'gdpr compliant hosting',
-        'german hosting guide',
-        'zero config deployment',
-        'deploy any framework',
-        'european deployment tips',
-        'no devops deployment',
-        'deploy nodejs eu',
-        'deploy golang app guide',
-        'framework deployment blog',
-        'eu data residency guide'
+        'gdpr compliant hosting guide',
+        'german hosting setup',
+        'zero config deployment tutorial',
+        'deploy nodejs eu guide',
+        'deploy golang app europe',
+        'eu data residency guide',
+        'ship code without devops',
+        'european sme devops tips',
+        'deployment automation guides'
     ],
     openGraph: {
-        title: 'Obtura Blog | Deploy Any Tech Stack in Europe',
-        description: 'Expert guides on deploying 15+ frameworks. Learn autonomous deployment, GDPR compliance, and German hosting.',
+        title: 'Obtura DevOps Blog | Guides for European SMEs',
+        description: 'Expert guides on zero-DevOps deployment, GDPR hosting, and shipping code faster. Next.js, Django, Python, Go & 15+ frameworks covered.',
         type: 'website',
-        images: [{ url: 'https://obtura.dev/Logo2.png', width: 1200, height: 630, alt: 'Obtura Blog - Deploy Any Tech Stack' }]
+        images: [{ url: 'https://obtura.dev/og-image.png', width: 1200, height: 630, alt: 'Obtura Blog - DevOps Guides for European SMEs' }]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Obtura Blog | Deploy Any Tech Stack in Europe',
-        description: 'Expert guides on deploying 15+ frameworks autonomously with GDPR-compliant German hosting.',
-        images: ['https://obtura.dev/Logo2.png']
+        title: 'Obtura DevOps Blog | Guides for European SMEs',
+        description: 'Expert guides on zero-DevOps deployment and GDPR-compliant EU hosting for 15+ frameworks.',
+        images: ['https://obtura.dev/og-image.png']
     },
     alternates: { canonical: 'https://obtura.dev/blog' }
 }
@@ -54,24 +54,46 @@ export default function BlogPage() {
 
     const jsonLd = {
         '@context': 'https://schema.org',
-        '@type': 'Blog',
+        '@type': ['Blog', 'CollectionPage'],
+        '@id': 'https://obtura.dev/blog#blog',
         name: 'Obtura DevOps Blog',
-        description: 'Expert DevOps articles for European SMEs. Learn about zero-DevOps deployment, GDPR compliance, and shipping code without a DevOps team.',
+        description: 'Expert guides on zero-DevOps deployment, GDPR-compliant EU hosting, and shipping code faster without a DevOps team. Covers 15+ frameworks including Next.js, Django, Python, Go, and Rust.',
         url: 'https://obtura.dev/blog',
+        inLanguage: 'en',
+        isPartOf: { '@id': 'https://obtura.dev/#website' },
+        breadcrumb: {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://obtura.dev' },
+                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://obtura.dev/blog' }
+            ]
+        },
         publisher: {
-            '@type': 'Organization',
-            name: 'Obtura',
-            logo: { '@type': 'ImageObject', url: 'https://obtura.dev/Logo2.png' }
+            '@id': 'https://obtura.dev/#organization'
         },
         blogPost: posts.map(post => ({
             '@type': 'BlogPosting',
+            '@id': `https://obtura.dev/blog/${post.slug}#article`,
             headline: post.title,
             description: post.excerpt,
             url: `https://obtura.dev/blog/${post.slug}`,
             datePublished: post.date,
             dateModified: post.dateModified || post.date,
-            author: { '@type': 'Person', name: post.author, url: 'https://obtura.dev/about' },
-            keywords: post.tags.join(', ')
+            inLanguage: 'en',
+            author: {
+                '@type': 'Person',
+                name: post.author,
+                url: 'https://obtura.dev/about'
+            },
+            publisher: { '@id': 'https://obtura.dev/#organization' },
+            image: {
+                '@type': 'ImageObject',
+                url: post.image ? `https://obtura.dev${post.image}` : 'https://obtura.dev/og-image.png',
+                width: 1200,
+                height: 630
+            },
+            keywords: post.tags.join(', '),
+            articleSection: post.category
         }))
     }
 
@@ -87,9 +109,9 @@ export default function BlogPage() {
 
                         <nav aria-label="Breadcrumb" className="mb-10">
                             <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
-                                <li><a href="/" className="transition-colors hover:text-brand">Home</a></li>
+                                <li><Link href="/" className="transition-colors hover:text-brand">Home</Link></li>
                                 <li>/</li>
-                                <li>Blog</li>
+                                <li aria-current="page">Blog</li>
                             </ol>
                         </nav>
 

@@ -1,10 +1,31 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Privacy Policy | Obtura',
-    description: 'Obtura Privacy Policy - How we collect, process, and protect your personal data in full compliance with GDPR and EU data residency requirements.',
+    title: 'Privacy Policy | GDPR-Compliant Data Practices | Obtura',
+    description: 'Obtura Privacy Policy — GDPR-compliant data processing with EU data residency in Germany. Your data never leaves Europe. Last updated February 2026.',
+    openGraph: {
+        title: 'Privacy Policy | Obtura',
+        description: 'GDPR-compliant data processing with EU data residency. All data stored exclusively in European data centers. Last updated February 2026.',
+        type: 'website',
+        images: [{ url: 'https://obtura.dev/og-image.png', width: 1200, height: 630, alt: 'Obtura Privacy Policy - GDPR Compliant EU Data Residency' }]
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Privacy Policy | Obtura',
+        description: 'GDPR-compliant data practices with EU data residency. Your data stays in Europe.',
+        images: ['https://obtura.dev/og-image.png']
+    },
     alternates: {
         canonical: 'https://obtura.dev/privacy'
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': 160
+        }
     }
 }
 

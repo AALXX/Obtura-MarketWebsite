@@ -41,13 +41,13 @@ export const metadata: Metadata = {
         title: 'Deploy Any Tech Stack Autonomously | Obtura',
         description: 'Autonomous deployment for 15+ tech stacks. Zero configuration required. GDPR-compliant EU hosting.',
         type: 'website',
-        images: [{ url: 'https://obtura.dev/Logo2.png', width: 1200, height: 630, alt: 'Obtura - Deploy Any Tech Stack Autonomously' }]
+        images: [{ url: 'https://obtura.dev/og-image.png', width: 1200, height: 630, alt: 'Obtura - Deploy Any Tech Stack Autonomously in Europe' }]
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Deploy Any Tech Stack Autonomously | Obtura',
         description: 'Autonomous deployment for 15+ tech stacks with zero configuration.',
-        images: ['https://obtura.dev/Logo2.png']
+        images: ['https://obtura.dev/og-image.png']
     },
     alternates: { canonical: 'https://obtura.dev/tech-stacks' }
 }
@@ -176,16 +176,33 @@ export default function TechStacksPage() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        name: 'Tech Stack Deployment - Obtura',
-        description: 'Autonomous deployment platform supporting 15+ tech stacks with zero configuration',
+        '@id': 'https://obtura.dev/tech-stacks#webpage',
+        name: 'Deploy Any Tech Stack Autonomously | Obtura',
+        description:
+            'Obtura supports autonomous deployment for 15+ tech stacks including Node.js, Python, Go, Rust, PHP, Ruby, and Java — all with zero configuration and GDPR-compliant EU hosting.',
         url: 'https://obtura.dev/tech-stacks',
+        inLanguage: 'en',
+        isPartOf: { '@id': 'https://obtura.dev/#website' },
+        breadcrumb: {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://obtura.dev' },
+                { '@type': 'ListItem', position: 2, name: 'Tech Stacks', item: 'https://obtura.dev/tech-stacks' }
+            ]
+        },
         mainEntity: {
-            '@type': 'SoftwareApplication',
-            name: 'Obtura Deployment Platform',
-            applicationCategory: 'DeveloperApplication',
-            applicationSubCategory: 'Deployment Platform',
-            featureList: techStacks.flatMap(stack => stack.frameworks.map(f => f.name)),
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }
+            '@type': 'ItemList',
+            name: 'Supported Tech Stacks',
+            description: 'Tech stacks and frameworks supported by the Obtura autonomous deployment platform',
+            numberOfItems: techStacks.reduce((acc, stack) => acc + stack.frameworks.length, 0),
+            itemListElement: techStacks.flatMap((stack, si) =>
+                stack.frameworks.map((f, fi) => ({
+                    '@type': 'ListItem',
+                    position: si * 10 + fi + 1,
+                    name: f.name,
+                    description: f.description
+                }))
+            )
         }
     }
 
@@ -200,9 +217,9 @@ export default function TechStacksPage() {
 
                         <nav aria-label="Breadcrumb" className="mb-10">
                             <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
-                                <li><a href="/" className="transition-colors hover:text-brand">Home</a></li>
+                                <li><Link href="/" className="transition-colors hover:text-brand">Home</Link></li>
                                 <li>/</li>
-                                <li>Tech Stacks</li>
+                                <li aria-current="page">Tech Stacks</li>
                             </ol>
                         </nav>
 

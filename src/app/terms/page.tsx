@@ -2,9 +2,30 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Terms of Service | Obtura',
-    description: 'Obtura Terms of Service - The complete terms and conditions governing use of the Obtura autonomous DevOps platform.',
+    description: 'Obtura Terms of Service — governing use of the autonomous DevOps deployment platform for European SMEs. Romanian & EU law. GDPR-compliant. Last updated February 2026.',
+    openGraph: {
+        title: 'Terms of Service | Obtura',
+        description: 'Terms governing use of the Obtura autonomous DevOps deployment platform. Governed by Romanian & EU law. Last updated February 2026.',
+        type: 'website',
+        images: [{ url: 'https://obtura.dev/og-image.png', width: 1200, height: 630, alt: 'Obtura Terms of Service' }]
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Terms of Service | Obtura',
+        description: 'Terms governing use of the Obtura autonomous DevOps platform. Romanian & EU law.',
+        images: ['https://obtura.dev/og-image.png']
+    },
     alternates: {
         canonical: 'https://obtura.dev/terms'
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': 160
+        }
     }
 }
 

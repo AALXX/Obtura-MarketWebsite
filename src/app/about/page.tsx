@@ -1,37 +1,36 @@
 import type { Metadata } from 'next'
 import { Check } from 'lucide-react'
+import Link from 'next/link'
 import FAQSchema from '@/components/FAQSchema'
 
 export const metadata: Metadata = {
-    title: 'About Us | Autonomous Deployment Platform Team | Obtura',
-    description: "Meet the team behind Obtura. We're building the autonomous deployment platform that lets European SMEs deploy any tech stack with zero DevOps. 85%+ framework coverage with GDPR-compliant EU hosting in Germany.",
+    title: 'About Obtura | Zero-DevOps Deployment for European SMEs',
+    description: "Obtura is a Romanian tech startup building the DevOps platform European SMEs deserve — zero-config deployment for 15+ frameworks, GDPR-compliant EU hosting, and €71K+/year in savings.",
     keywords: [
         'about obtura',
         'obtura team',
         'autonomous deployment company',
         'zero devops platform',
         'european sme deployment',
-        'GDPR company germany',
         'bucharest tech startup',
         'eu deployment company',
         'deploy any tech stack',
         'software deployment company europe',
         'eu data residency company',
-        'german hosting provider',
-        'tech stack deployment experts',
-        'european devops company'
+        'european devops company',
+        'GDPR compliant deployment company'
     ],
     openGraph: {
-        title: 'About Obtura | Autonomous Deployment Platform Team',
-        description: 'Meet the team building the autonomous deployment platform. 85%+ tech stack coverage with GDPR-compliant EU hosting.',
+        title: 'About Obtura | Zero-DevOps Deployment for European SMEs',
+        description: 'Romanian tech startup building zero-config deployment for European SMEs. 85%+ framework coverage, GDPR-compliant EU hosting, €71K+/year savings.',
         type: 'website',
-        images: [{ url: 'https://obtura.dev/Logo2.png', width: 1200, height: 630, alt: 'Obtura Team - Autonomous Deployment Platform' }]
+        images: [{ url: 'https://obtura.dev/og-image.png', width: 1200, height: 630, alt: 'About Obtura - Zero-DevOps Platform for European SMEs' }]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'About Obtura | Autonomous Deployment Platform Team',
-        description: 'Meet the team building the autonomous deployment platform with 85%+ tech stack coverage.',
-        images: ['https://obtura.dev/Logo2.png']
+        title: 'About Obtura | Zero-DevOps Deployment for European SMEs',
+        description: 'Romanian startup building zero-config deployment for European SMEs. 85%+ framework coverage, GDPR-compliant EU hosting.',
+        images: ['https://obtura.dev/og-image.png']
     },
     alternates: { canonical: 'https://obtura.dev/about' }
 }
@@ -59,15 +58,37 @@ export default function About() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
-        name: 'About Obtura',
-        description: "Meet the team behind Obtura. We're building the DevOps platform European SMEs deserve.",
+        '@id': 'https://obtura.dev/about#webpage',
+        name: 'About Obtura | Zero-DevOps Deployment for European SMEs',
+        description:
+            'Obtura is a Romanian tech startup building autonomous DevOps deployment for European SMEs. Zero-config, GDPR-compliant EU hosting, 15+ framework support.',
         url: 'https://obtura.dev/about',
+        isPartOf: { '@id': 'https://obtura.dev/#website' },
+        breadcrumb: {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://obtura.dev' },
+                { '@type': 'ListItem', position: 2, name: 'About', item: 'https://obtura.dev/about' }
+            ]
+        },
         mainEntity: {
             '@type': 'Organization',
+            '@id': 'https://obtura.dev/#organization',
             name: 'Obtura',
-            description: 'Zero DevOps platform for European SMEs',
-            founders: [{ '@type': 'Person', name: 'Alexandru-Nicolae Șerban', jobTitle: 'Founder & CEO' }],
-            address: { '@type': 'PostalAddress', addressCountry: 'RO', addressLocality: 'Bucharest' }
+            description:
+                'Autonomous DevOps deployment platform saving European SMEs €71,000+ per year. Supports 15+ frameworks with GDPR-compliant EU hosting in Germany.',
+            founders: [
+                {
+                    '@type': 'Person',
+                    name: 'Alexandru-Nicolae Șerban',
+                    jobTitle: 'Founder & CEO',
+                    worksFor: { '@id': 'https://obtura.dev/#organization' },
+                    knowsAbout: ['DevOps', 'Cloud Infrastructure', 'Software Deployment', 'GDPR Compliance']
+                }
+            ],
+            address: { '@type': 'PostalAddress', addressCountry: 'RO', addressLocality: 'Bucharest' },
+            foundingDate: '2026',
+            numberOfEmployees: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 10 }
         }
     }
 
@@ -80,9 +101,9 @@ export default function About() {
 
                         <nav aria-label="Breadcrumb" className="mb-10">
                             <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
-                                <li><a href="/" className="transition-colors hover:text-brand">Home</a></li>
+                                <li><Link href="/" className="transition-colors hover:text-brand">Home</Link></li>
                                 <li>/</li>
-                                <li>About</li>
+                                <li aria-current="page">About</li>
                             </ol>
                         </nav>
 
@@ -92,7 +113,7 @@ export default function About() {
                                 About <span style={{ color: 'var(--brand)' }}>Obtura.</span>
                             </h1>
                             <p className="max-w-xl text-lg leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
-                                We&apos;re building the DevOps platform European SMEs deserve. Ship software 3x faster with zero DevOps overhead.
+                                We&apos;re building the DevOps platform European SMEs deserve. Ship software 3x faster with zero DevOps overhead — and save €71K+ per year.
                             </p>
                         </header>
 
@@ -100,24 +121,56 @@ export default function About() {
                             <article className="border-b py-10" style={{ borderColor: 'var(--border-subtle)' }}>
                                 <h2 className="mb-4 text-xl font-semibold">Our Mission</h2>
                                 <p className="max-w-2xl leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
-                                    &ldquo;Ship code without a DevOps team&rdquo; &mdash; We eliminate the DevOps bottleneck for European SME development teams by automating infrastructure, deployment, monitoring, and compliance. Our platform saves companies{' '}
-                                    <strong style={{ color: 'var(--fg-primary)' }}>€71,000+ per year</strong> on DevOps costs while ensuring GDPR compliance.
+                                    &ldquo;Ship code without a DevOps team&rdquo; &mdash; We eliminate the DevOps bottleneck for European SME development teams by automating infrastructure, deployment, monitoring, and compliance. Our{' '}
+                                    <Link href="/tech-stacks" className="underline decoration-dotted hover:text-brand" style={{ color: 'var(--fg-primary)' }}>autonomous deployment platform</Link>{' '}
+                                    saves companies <strong style={{ color: 'var(--fg-primary)' }}>€71,000+ per year</strong> on DevOps costs while ensuring GDPR compliance.
                                 </p>
                             </article>
 
                             <article className="border-b py-10" style={{ borderColor: 'var(--border-subtle)' }}>
                                 <h2 className="mb-4 text-xl font-semibold">EU-First Philosophy</h2>
                                 <p className="mb-5 max-w-2xl leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
-                                    We prioritize <strong style={{ color: 'var(--fg-primary)' }}>EU compliance and GDPR-native design</strong>. Our European support team operates in your timezone. All pricing is in Euros with no FX risk. Your data never leaves European servers.
+                                    We prioritize <strong style={{ color: 'var(--fg-primary)' }}>EU compliance and GDPR-native design</strong>. Our European support team operates in your timezone. All pricing is in Euros with no FX risk. Your data never leaves European servers hosted in Germany.
                                 </p>
                                 <ul className="space-y-2">
-                                    {['GDPR compliant by design', 'EU data residency guaranteed', 'Local European support', 'Pricing in Euros'].map(item => (
+                                    {['GDPR compliant by design', 'EU data residency guaranteed — Frankfurt, Germany', 'Local European support in your timezone', 'Predictable flat pricing in Euros'].map(item => (
                                         <li key={item} className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-secondary)' }}>
                                             <Check className="h-3 w-3 shrink-0" style={{ color: 'var(--brand)' }} />
                                             {item}
                                         </li>
                                     ))}
                                 </ul>
+                            </article>
+
+                            <article className="border-b py-10" style={{ borderColor: 'var(--border-subtle)' }}>
+                                <h2 className="mb-4 text-xl font-semibold">What We Support</h2>
+                                <p className="mb-5 max-w-2xl leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
+                                    Obtura covers 85%+ of modern web applications with auto-detection for{' '}
+                                    <Link href="/tech-stacks" className="underline decoration-dotted hover:text-brand" style={{ color: 'var(--fg-primary)' }}>
+                                        15+ tech stacks
+                                    </Link>{' '}
+                                    including Node.js, Python, Go, Rust, PHP, Ruby on Rails, Java, and more — all deployed to GDPR-compliant EU infrastructure with zero configuration.
+                                </p>
+                                <Link
+                                    href="/tech-stacks"
+                                    className="inline-flex items-center gap-2 text-sm font-medium hover:text-brand"
+                                    style={{ color: 'var(--brand)' }}
+                                >
+                                    View all supported tech stacks →
+                                </Link>
+                            </article>
+
+                            <article className="border-b py-10" style={{ borderColor: 'var(--border-subtle)' }}>
+                                <h2 className="mb-4 text-xl font-semibold">Get Involved</h2>
+                                <p className="mb-5 max-w-2xl leading-relaxed" style={{ color: 'var(--fg-secondary)' }}>
+                                    Obtura is currently in the final stages of MVP development. Join our waitlist to get early access, exclusive pricing, and direct input on the platform roadmap.
+                                </p>
+                                <Link
+                                    href="/contact"
+                                    className="inline-flex h-11 items-center gap-2 bg-brand px-7 text-sm font-semibold text-black transition-colors hover:bg-brand-hover"
+                                >
+                                    Join the Waitlist
+                                </Link>
                             </article>
 
                             <section className="pt-10">

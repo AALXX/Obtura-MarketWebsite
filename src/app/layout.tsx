@@ -24,104 +24,31 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: {
-        default: 'Obtura | Autonomous Deployment Platform - Deploy Any Tech Stack in Europe',
+        default: 'Obtura | Autonomous Deployment Platform for European SMEs',
         template: '%s | Obtura'
     },
-    description: 'Deploy any tech stack autonomously with Obtura. Zero-config deployment for Node.js, Python, Go, Rust, PHP & 15+ frameworks. 85%+ app coverage. GDPR-compliant EU hosting in Germany. No DevOps team required. Ship code in minutes.',
+    description: 'Ship code without a DevOps team. Obtura auto-deploys 15+ frameworks — GDPR-compliant EU hosting in Germany. Flat pricing from €79/month. No DevOps required.',
     keywords: [
-        'Obtura',
-        'devops',
-        'devops automation',
-        'devops platform',
-        'autonomous deployment',
-        'automated deployment',
-        'zero devops',
-        'deployment platform',
-        'continuous deployment',
-        'CI/CD automation',
-        'CI/CD platform',
-        'devops tools',
-        'devops software',
-        'deployment automation',
-        'infrastructure automation',
-        'cloud deployment',
-        'application deployment',
-        'software deployment',
-        'kubernetes alternative',
-        'docker deployment',
-        'gitops',
-        'devops europe',
-        'devops SME',
-        'devops small business',
-        'devops startup',
-        'platform engineering',
-        'site reliability engineering',
-        'SRE tools',
-        'infrastructure as code',
-        'IaC',
-        'cloud native',
-        'microservices deployment',
-        'container deployment',
-        'serverless deployment',
-        'web deployment',
-        'app deployment',
-        'european smes',
-        'GDPR compliant',
-        'cloud development',
-        'hosting europe',
-        'EU data residency',
-        'GDPR hosting',
-        'GDPR devops',
-        'GDPR cloud',
-        'PaaS europe',
-        'cloud hosting',
-        // Long-tail keywords for tech stack deployment
-        'deploy nextjs app europe',
-        'deploy react app germany',
-        'deploy nodejs app eu',
-        'deploy python app europe',
-        'deploy django app germany',
-        'deploy flask app eu',
-        'deploy fastapi app europe',
-        'deploy golang app germany',
-        'deploy rust app eu',
-        'deploy php app europe',
-        'deploy laravel app germany',
-        'deploy ruby app eu',
-        'deploy rails app europe',
-        'deploy vue app germany',
-        'deploy svelte app eu',
-        'deploy angular app europe',
-        'deploy astro app germany',
-        'deploy remix app eu',
-        'deploy express app europe',
-        'deploy nestjs app germany',
         'autonomous deployment platform',
-        'auto deploy any tech stack',
-        'deploy without devops team',
-        'zero config deployment europe',
-        'git push deploy europe',
-        // GDPR and hosting specific
+        'devops automation europe',
+        'zero devops platform',
+        'deploy any tech stack europe',
         'GDPR compliant hosting germany',
-        'GDPR compliant hosting europe',
         'EU data residency hosting',
-        'GDPR cloud hosting germany',
-        'EU hosting for startups',
-        'GDPR compliant paas',
-        'european cloud hosting',
-        'EU based hosting',
-        'GDPR safe hosting',
-        'data residency germany',
-        'data residency europe',
-        // Tech stack coverage
-        'nodejs deployment europe',
-        'python deployment germany',
-        'go deployment eu',
-        'rust deployment europe',
-        'php deployment germany',
-        'java deployment eu',
-        'typescript deployment europe',
-        'javascript deployment germany'
+        'european sme deployment',
+        'deploy nodejs europe',
+        'deploy python django germany',
+        'deploy golang app eu',
+        'deploy php laravel germany',
+        'deploy nextjs germany',
+        'deploy react app eu',
+        'ship code without devops',
+        'git push deploy europe',
+        'zero config deployment',
+        'automated deployment platform',
+        'cloud hosting germany gdpr',
+        'PaaS europe GDPR',
+        'kubernetes alternative europe'
     ],
     authors: [{ name: 'Obtura' }],
     creator: 'Obtura',
@@ -142,21 +69,21 @@ export const metadata: Metadata = {
         locale: 'en_US',
         url: 'https://obtura.dev',
         siteName: 'Obtura',
-        title: 'Obtura | Zero DevOps Deployment Platform for European SMEs',
-        description: 'Obtura empowers European SMEs to ship software 3x faster through an all-in-one zero-DevOps platform. GDPR-compliant with EU data residency.',
+        title: 'Obtura | Zero-DevOps Deployment for European SMEs',
+        description: 'Obtura empowers European SMEs to ship software 3x faster. Zero-config deployment, GDPR-compliant EU hosting, and built-in monitoring. No DevOps team required.',
         images: [
             {
                 url: 'https://obtura.dev/og-image.png',
                 width: 1200,
                 height: 630,
-                alt: 'Obtura - Zero DevOps Deployment Platform for European SMEs'
+                alt: 'Obtura - Zero-DevOps Deployment Platform for European SMEs'
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Obtura | Zero DevOps Deployment Platform for European SMEs',
-        description: 'Obtura empowers European SMEs to ship software 3x faster through an all-in-one zero-DevOps platform. GDPR-compliant with EU data residency.',
+        title: 'Obtura | Zero-DevOps Deployment for European SMEs',
+        description: 'Obtura empowers European SMEs to ship software 3x faster. Zero-config deployment, GDPR-compliant EU hosting. No DevOps team required.',
         images: ['https://obtura.dev/og-image.png'],
         creator: '@obtura',
         site: '@obtura'
@@ -197,10 +124,16 @@ export default function RootLayout({
     const organizationJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'Organization',
+        '@id': 'https://obtura.dev/#organization',
         name: 'Obtura',
         alternateName: 'Obtura Platform',
         url: 'https://obtura.dev',
-        logo: 'https://obtura.dev/Logo2.png',
+        logo: {
+            '@type': 'ImageObject',
+            url: 'https://obtura.dev/Logo2.png',
+            width: 512,
+            height: 512
+        },
         description: 'Obtura empowers European SMEs to deploy any tech stack autonomously with zero DevOps overhead. Supports 15+ frameworks including Node.js, Python, Go, Rust, PHP with 85%+ app coverage. GDPR-compliant with EU data residency in Germany.',
         foundingDate: '2026',
         founders: [
@@ -218,23 +151,53 @@ export default function RootLayout({
         contactPoint: {
             '@type': 'ContactPoint',
             contactType: 'customer support',
-            email: 'contact@obtura.dev',
+            email: 'alexserbwork@gmail.com',
             availableLanguage: ['English', 'Romanian']
         },
         sameAs: ['https://twitter.com/obtura', 'https://linkedin.com/company/obtura', 'https://github.com/obtura'],
-        areaServed: 'Europe',
+        areaServed: {
+            '@type': 'GeoShape',
+            name: 'Europe',
+            description: 'European Union and European Economic Area'
+        },
         audience: {
             '@type': 'Audience',
             audienceType: 'European SMEs, Startups, Software Development Teams'
         },
-        serviceType: 'DevOps Platform, Cloud Hosting, Software Deployment'
+        serviceType: 'DevOps Platform, Cloud Hosting, Software Deployment',
+        knowsAbout: [
+            'DevOps automation',
+            'Continuous deployment',
+            'GDPR compliance',
+            'EU data residency',
+            'Cloud infrastructure',
+            'Node.js deployment',
+            'Python deployment',
+            'Go deployment',
+            'Rust deployment',
+            'PHP deployment'
+        ],
+        hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Obtura Subscription Plans',
+            itemListElement: [
+                { '@type': 'Offer', name: 'Starter', price: '79', priceCurrency: 'EUR' },
+                { '@type': 'Offer', name: 'Team', price: '199', priceCurrency: 'EUR' },
+                { '@type': 'Offer', name: 'Business', price: '499', priceCurrency: 'EUR' },
+                { '@type': 'Offer', name: 'Enterprise', price: '899', priceCurrency: 'EUR' }
+            ]
+        }
     }
 
     const websiteJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
+        '@id': 'https://obtura.dev/#website',
         name: 'Obtura',
         url: 'https://obtura.dev',
+        publisher: {
+            '@id': 'https://obtura.dev/#organization'
+        },
         potentialAction: {
             '@type': 'SearchAction',
             target: 'https://obtura.dev/blog?q={search_term_string}',
@@ -247,26 +210,64 @@ export default function RootLayout({
     const softwareApplicationJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
+        '@id': 'https://obtura.dev/#software',
         name: 'Obtura',
+        url: 'https://obtura.dev',
         applicationCategory: 'DeveloperApplication',
         applicationSubCategory: 'DevOps Platform',
-        description: 'All-in-one zero-DevOps platform for European SMEs with GDPR-compliant hosting and EU data residency',
-        operatingSystem: 'Cloud',
-        offers: {
-            '@type': 'Offer',
-            price: '0',
-            priceCurrency: 'EUR'
+        description:
+            'Autonomous DevOps deployment platform for European SMEs. Zero-config deployment for 15+ frameworks (Node.js, Python, Go, Rust, PHP) with GDPR-compliant EU hosting in Germany.',
+        operatingSystem: 'Web, Cloud',
+        publisher: {
+            '@id': 'https://obtura.dev/#organization'
         },
-        featureList: ['One-click deployment', 'GDPR compliant hosting', 'EU data residency', 'Automatic SSL', 'Git integration', 'CI/CD pipeline', 'Application monitoring'],
-        screenshot: 'https://obtura.dev/Logo2.png',
-        softwareVersion: '1.0'
+        offers: {
+            '@type': 'AggregateOffer',
+            priceCurrency: 'EUR',
+            lowPrice: '79',
+            highPrice: '899',
+            offerCount: '4',
+            availability: 'https://schema.org/PreOrder'
+        },
+        featureList: [
+            'Zero-config autonomous deployment',
+            'GDPR compliant EU hosting in Germany',
+            'EU data residency',
+            'Automatic SSL certificate management',
+            'Git push deployment',
+            'CI/CD pipeline automation',
+            'Built-in application performance monitoring',
+            'AI DevOps assistant',
+            'Preview environments per branch',
+            'Role-based access control',
+            'One-click rollback',
+            'Daily backups with 30-day retention'
+        ],
+        screenshot: {
+            '@type': 'ImageObject',
+            url: 'https://obtura.dev/og-image.png',
+            width: 1200,
+            height: 630,
+            description: 'Obtura autonomous deployment platform interface'
+        },
+        softwareVersion: '1.0',
+        releaseNotes: 'https://obtura.dev/blog',
+        inLanguage: 'en',
+        audience: {
+            '@type': 'Audience',
+            audienceType: 'European SMEs, Software Development Teams'
+        }
     }
 
     return (
-        <html lang="en" dir="ltr">
-            <head>
+        <html lang="en" dir="ltr" suppressHydrationWarning>
+            <head suppressHydrationWarning>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link rel="preconnect" href="https://www.googletagmanager.com" />
+                <link rel="dns-prefetch" href="https://www.google-analytics.com" />
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="shortcut icon" href="/favicon.ico" />
                 <link rel="apple-touch-icon" href="/Logo2.png" />
@@ -277,15 +278,24 @@ export default function RootLayout({
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="alternate" type="application/rss+xml" title="Obtura Blog" href="https://obtura.dev/rss.xml" />
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd) }} />
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-VPRPENGL4Z" />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-VPRPENGL4Z');`
+                    }}
+                />
             </head>
             <body className={`${fraunces.variable} ${dmSans.variable} ${geistMono.variable} antialiased`}>
                 <NavBar />
                 {children}
                 <Footer />
                 <BreadcrumbSchema />
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd) }} />
             </body>
         </html>
     )

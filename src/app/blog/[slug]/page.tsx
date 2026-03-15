@@ -1,7 +1,7 @@
 import { getAllPosts, getPostBySlug } from '@/lib/data/blog-posts'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Calendar, Clock, Tag } from 'lucide-react'
 
 export async function generateStaticParams() {
     const posts = getAllPosts()
@@ -21,10 +21,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         }
     }
 
+    // Keep meta title under 60 chars — truncate at word boundary if needed
+    const fullTitle = `${post.title} | Obtura`
+    const metaTitle = fullTitle.length <= 60 ? fullTitle : (() => {
+        const words = post.title.split(' ')
+        let truncated = ''
+        for (const word of words) {
+            if ((truncated + ' ' + word + ' | Obtura').length > 60) break
+            truncated = truncated ? truncated + ' ' + word : word
+        }
+        return `${truncated} | Obtura`
+    })()
+
     return {
-        title: `${post.title} | Obtura Blog`,
-        description: post.excerpt,
-        keywords: [...post.tags, 'devops', 'obtura', 'european smes', 'gdpr', 'deployment'],
+        title: metaTitle,
+        description: post.excerpt.length > 155 ? post.excerpt.slice(0, 152) + '...' : post.excerpt,
+        keywords: [...post.tags, 'devops europe', 'obtura', 'european smes', 'gdpr deployment', 'autonomous deployment'],
         openGraph: {
             title: post.title,
             description: post.excerpt,
@@ -64,9 +76,10 @@ function formatDate(dateString: string) {
 
 function renderMarkdown(content: string) {
     return content
-        .replace(/^# (.*$)/gim, '<h1 class="text-4xl font-bold mb-6 mt-8" style="color:var(--fg-primary)">$1</h1>')
-        .replace(/^## (.*$)/gim, '<h2 class="text-3xl font-bold mb-4 mt-8" style="color:var(--fg-primary)">$1</h2>')
-        .replace(/^### (.*$)/gim, '<h3 class="text-2xl font-bold mb-3 mt-6" style="color:var(--fg-primary)">$1</h3>')
+        // H1 in content becomes H2 — the page <h1> is already the article title
+        .replace(/^# (.*$)/gim, '<h2 class="text-3xl font-bold mb-4 mt-8" style="color:var(--fg-primary)">$1</h2>')
+        .replace(/^## (.*$)/gim, '<h3 class="text-2xl font-bold mb-4 mt-8" style="color:var(--fg-primary)">$1</h3>')
+        .replace(/^### (.*$)/gim, '<h4 class="text-xl font-bold mb-3 mt-6" style="color:var(--fg-primary)">$1</h4>')
         .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--fg-primary)">$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         .replace(/^\* (.*$)/gim, '<li class="ml-6 mb-2" style="color:var(--fg-secondary)">$1</li>')
@@ -74,6 +87,18 @@ function renderMarkdown(content: string) {
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="hover:underline" style="color:var(--brand)">$1</a>')
         .replace(/\n\n/g, `</p><p class="mb-4 leading-relaxed" style="color:var(--fg-secondary)">`)
         .replace(/^(.+)$/gim, `<p class="mb-4 leading-relaxed" style="color:var(--fg-secondary)">$1</p>`)
+}
+
+function getRelatedPosts(currentSlug: string, currentTags: string[], allPosts: ReturnType<typeof getAllPosts>, limit = 3) {
+    return allPosts
+        .filter(p => p.slug !== currentSlug)
+        .map(p => ({
+            post: p,
+            score: p.tags.filter(t => currentTags.includes(t)).length
+        }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit)
+        .map(item => item.post)
 }
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
@@ -84,14 +109,27 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         notFound()
     }
 
+    const allPosts = getAllPosts()
+    const relatedPosts = getRelatedPosts(post.slug, post.tags, allPosts)
+    const wordCount = post.content.trim().split(/\s+/).length
+
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
+        '@id': `https://obtura.dev/blog/${post.slug}#article`,
         headline: post.title,
         description: post.excerpt,
-        image: post.image || 'https://obtura.dev/og-image.png',
+        url: `https://obtura.dev/blog/${post.slug}`,
+        image: {
+            '@type': 'ImageObject',
+            url: post.image ? `https://obtura.dev${post.image}` : 'https://obtura.dev/og-image.png',
+            width: 1200,
+            height: 630
+        },
         datePublished: post.date,
         dateModified: post.dateModified || post.date,
+        inLanguage: 'en',
+        wordCount,
         author: {
             '@type': 'Person',
             name: post.author,
@@ -99,14 +137,18 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         },
         publisher: {
             '@type': 'Organization',
+            '@id': 'https://obtura.dev/#organization',
             name: 'Obtura',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://obtura.dev/Logo2.png'
+                url: 'https://obtura.dev/Logo2.png',
+                width: 512,
+                height: 512
             }
         },
         keywords: post.tags.join(', '),
         articleSection: post.category,
+        isPartOf: { '@id': 'https://obtura.dev/blog#blog' },
         mainEntityOfPage: {
             '@type': 'WebPage',
             '@id': `https://obtura.dev/blog/${post.slug}`
@@ -120,6 +162,16 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             <article className="min-h-screen pt-16" style={{ background: 'var(--bg-base)', color: 'var(--fg-primary)' }}>
                 {/* Header */}
                 <div className="mx-auto max-w-4xl px-6 pt-12 pb-16 sm:px-8 lg:px-12">
+                    <nav aria-label="Breadcrumb" className="mb-8">
+                        <ol className="flex items-center gap-2 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
+                            <li><Link href="/" className="transition-colors hover:text-brand">Home</Link></li>
+                            <li>/</li>
+                            <li><Link href="/blog" className="transition-colors hover:text-brand">Blog</Link></li>
+                            <li>/</li>
+                            <li style={{ color: 'var(--fg-secondary)' }} className="max-w-50 truncate">{post.title}</li>
+                        </ol>
+                    </nav>
+
                     <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm transition-colors hover:text-brand" style={{ color: 'var(--fg-secondary)' }}>
                         <ArrowLeft className="h-4 w-4" />
                         Back to Blog
@@ -140,7 +192,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                     <div className="mb-8 flex flex-wrap items-center gap-6 text-sm" style={{ color: 'var(--fg-tertiary)' }}>
                         <div className="flex items-center gap-2">
                             <Calendar className="h-4 w-4" />
-                            {formatDate(post.date)}
+                            <time dateTime={post.date}>{formatDate(post.date)}</time>
                         </div>
                         <div className="flex items-center gap-2">
                             <Clock className="h-4 w-4" />
@@ -167,6 +219,29 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                     </div>
                 </div>
 
+                {/* Related Posts */}
+                {relatedPosts.length > 0 && (
+                    <div className="border-t" style={{ borderColor: 'var(--border-subtle)', background: 'var(--bg-subtle)' }}>
+                        <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 lg:px-12">
+                            <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--fg-tertiary)', fontFamily: 'var(--font-mono)' }}>— Continue Reading</p>
+                            <h2 className="mb-8 text-2xl font-black" style={{ fontFamily: 'var(--font-display)' }}>Related Articles</h2>
+                            <div className="grid gap-6 sm:grid-cols-3">
+                                {relatedPosts.map(related => (
+                                    <Link key={related.slug} href={`/blog/${related.slug}`} className="group border p-5 transition-colors hover:border-brand" style={{ borderColor: 'var(--border-default)', background: 'var(--bg-surface)' }}>
+                                        <p className="mb-2 font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--brand)', fontFamily: 'var(--font-mono)' }}>{related.category}</p>
+                                        <h3 className="mb-3 text-sm font-semibold leading-snug transition-colors group-hover:text-brand">{related.title}</h3>
+                                        <p className="mb-4 text-xs leading-relaxed line-clamp-3" style={{ color: 'var(--fg-tertiary)' }}>{related.excerpt}</p>
+                                        <div className="flex items-center gap-1 text-xs" style={{ color: 'var(--brand)' }}>
+                                            Read
+                                            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* CTA Section */}
                 <div className="border-t" style={{ borderColor: 'var(--border-subtle)' }}>
                     <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 lg:px-12">
@@ -178,8 +253,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                                 <Link href="/contact" className="inline-flex h-12 items-center justify-center bg-brand px-8 font-semibold text-black transition-colors hover:bg-brand-hover">
                                     Get Early Access
                                 </Link>
-                                <Link href="/" className="inline-flex h-12 items-center justify-center border px-8 font-semibold transition-colors hover:text-brand" style={{ borderColor: 'var(--border-default)', color: 'var(--fg-primary)' }}>
-                                    Learn More
+                                <Link href="/tech-stacks" className="inline-flex h-12 items-center justify-center border px-8 font-semibold transition-colors hover:text-brand" style={{ borderColor: 'var(--border-default)', color: 'var(--fg-primary)' }}>
+                                    See Supported Stacks
                                 </Link>
                             </div>
                         </div>

@@ -3,6 +3,18 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
     title: 'GDPR Compliance | Obtura',
     description: 'Obtura GDPR compliance center — EU data residency, your rights, DPA, security certifications, and sub-processor information.',
+    openGraph: {
+        title: 'GDPR Compliance | Obtura',
+        description: 'Obtura GDPR compliance center: EU data residency guaranteed, full rights under GDPR, DPA included, SOC 2 Type II infrastructure.',
+        type: 'website',
+        images: [{ url: 'https://obtura.dev/og-image.png', width: 1200, height: 630, alt: 'Obtura GDPR Compliance - EU Data Residency' }]
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'GDPR Compliance | Obtura',
+        description: 'EU data residency, your GDPR rights, DPA, and SOC 2 Type II security at Obtura.',
+        images: ['https://obtura.dev/og-image.png']
+    },
     alternates: {
         canonical: 'https://obtura.dev/gdpr'
     }
